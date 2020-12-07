@@ -1,0 +1,1263 @@
+\documentclass{article}
+\usepackage{/Users/aligeisa/Desktop/desktop/aula/math_base/ali}
+
+\renewcommand{\thesection}{\Roman{section}}
+\renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
+% alternatives: \renewcommand{\thesubsection}{\thesection\Alph{subsection}} \renewcommand{\thesubsection}{\thesection\ \Alph{subsection}}
+
+\begin{document}
+
+\author{Ali Geisa}
+\tableofcontents
+
+\section{Linear Spaces}
+\subsection{Definition of Linear Spaces}
+  \begin{example}
+    $\F^\infty$ over $\F$ is defined to be the set of all sequences of elements of $\F$. That is,
+    \begin{align*}
+      F^{\infty} = \{(x_1, x_2, \dots): x_j \in \F for j \in \N\}
+    \end{align*}
+    is a vector space when we define vector addition and scalar multiplication as follows,
+    \begin{align*}
+      x + y & = (x_1, x_2, \dots) + (y_1, y_2, \dots) = (x_1 + y_1, x_2 + y_2, \dots) \\
+      \lambda x & = (\lambda x_1, \lambda x_2, \dots)
+    \end{align*}
+  \end{example}
+  \begin{example}
+    If $S$ is a set, then $\F^S$ will denote the set of functions from $S$ to $\F$. That is, $\F^S = \{f: f: S \to \F\}$. We define sums in $\F^S$ for $f, g \in \F^S$ as follow
+    for all $x \in \F$,
+    \begin{align*}
+      (f + g)(x) = f(x) + g(x)
+    \end{align*}
+    For $\lambda \in \F$ and $f \in \F^S$, the product $\lambda f \in \F^S$ is the function defined by,
+    \begin{align*}
+      (\lambda f)(x) = \lambda f(x)
+    \end{align*}
+    for all $\lambda \in \F$.
+  \end{example}
+  \begin{prop}
+    $F^S$ over $\F$ is a linear space.
+  \end{prop}
+  \begin{proof}
+    We have to check that the $F^S$ with the scalar multiplication and vector addition as we have defined them is a linear space. First we check it is an Abelian group under
+    vector addition. Let $f, g \in F^S$. Then, for all $x \in S$,
+    \begin{enumerate}[label=\roman*)]
+      \ii Associativity 
+      \begin{align*}
+        \big((f + g) + h\big)(x) = (f + g)(x) + h(x) = f(x) + g(x) + h(x) = f(x) + (g + h)(x) = \big(f + (g + h)\big)(x)
+      \end{align*}
+      Where we used the associativity of $\F$.
+      \ii Additive Identity $(f + 0)(x) = f(x) + 0(x) = f(x) + 0 = f(x)$. Where we defined the function $0: S \to \F$ as the additive identity function.
+      \ii Additive Inverse $(f + (-f))(x) = f(x) + -1*f(x) = 0 = 0(x)$. Where we defined the function $-f: S \to \F$ as the additive inverse function by doing $-f(x) = -1 \cdot
+      f(x)$ for $-1 \in \F$.
+      \ii Commutativity: $(f + g)(x) = f(x) + g(x) = g(x) + f(x) = (g + f)(x)$.
+    \end{enumerate}
+    Now we check the properties associated with scalar multiplication,
+    \begin{enumerate}[label=\arabic*)]
+      \ii Multiplicative Identity $1\cdot f := 1\cdot f(x) = f(x) = f$ for all $x \in S$, where $1$ is the multiplicative identity in $\F$.
+      \ii Scalar multiplication distributes over vector addition. 
+      \begin{align*}
+        \lambda\cdot(f + g) := \lambda\cdot(f + g)(x) = \lambda\cdot(f(x) + g(x)) = \lambda f(x) + \lambda g(x) = \lambda f + \lambda g
+      \end{align*}
+    \end{enumerate}
+  \end{proof}
+  We see thus that $\F^\infty = \F^{\N}$ and $\F^n = \F^{1, 2, \dots, n}$ are special cases of $\F^S$, and hence are vector spaces simply by the above proof.
+  \begin{prop}
+    Additive identities are unique,
+  \end{prop}
+  \begin{proof}
+    Let $0$ and $0^\prime$ be additive inverses. Then,
+    \begin{align*}
+      0 = 0 + 0^\prime = 0^\prime + 0 = 0^\prime
+    \end{align*}
+  \end{proof}
+  \begin{prop}
+    Additive inverses are unique
+  \end{prop}
+  \begin{proof}
+    Let $y$ and $z$ be inverses for $x$. Then,
+    \begin{align*}
+      y = y + 0 = y + (x + z) = (y + x) + z = 0 + z = z
+    \end{align*}
+  \end{proof}
+  \begin{prop}
+    $0_Fv = 0_V$.
+  \end{prop}
+  \begin{proof}
+    \begin{align*}
+      0_Fv = (0_F + 0_F)v = 0_Fv + 0_Fv
+    \end{align*}
+    Subtracting $0_Fv$ from both sides (that is, adding the additive inverse of $0_Fv$ to both sides), we get
+    \begin{align*}
+      0_V = 0_Fv
+    \end{align*}
+    As desired.
+  \end{proof}
+  \begin{prop}
+    $a0_V = 0_V$ for all $a \in \F$,
+  \end{prop}
+  \begin{proof}
+    \begin{align*}
+      a0_V = a(0_V + 0_V) = a0_V + a0_V
+    \end{align*}
+    Adding additive identity of $a0_V$ to both sides, we get $a0_V = 0_V$, as desired.
+  \end{proof}
+  \begin{prop}
+    $(-1)v = -v$
+  \end{prop}
+  \begin{proof}
+    We already know that $v + -v = v - v = 0_V$. We just need to show that $(-1)v + v = 0_V$.
+    \begin{align*}
+      (-1)v + v = (-1)v + 1v = (-1 + 1)v = 0_Fv = 0_V
+    \end{align*}
+  \end{proof}
+\subsection{Sums of Subspaces}
+  \begin{defn}
+    Sums of subsets. Suppose $U_1, \dots, U_m \subset V$. Then, their sum, denoted $\sum_{i = 1}^{m}U_i = \{\sum_{i = 1}^{m}u_i: u_i \in U_i, i \in [m]\}$.
+  \end{defn}
+  \begin{prop}
+    Suppose $U_1, \dots, U_m$ are subspaces of $V$. Then $U = \sum_{i = 1}^{m}U_i$ is the smallest subset of $V$ containing $U_1, \dots, U_m$.
+  \end{prop}
+  \begin{proof}
+    First, let us show it is a subspace. It is obvious that it closed under scalar multiplication, vector addition, and zero is in the subspace. Now let $W$ be such that $U_1,
+    \dots, U_m \subset W$, let us show that $U \subset W$. If $u \in U$, then $u = \sum_{i = 1}^{m}u_i$, where $u_i \in U_i$. Since $U_1, \dots, U_m \subset W$, we have that
+    $u_1, \dots, u_m \in W$, and thus their sum is also in $W$. Thus $U \subset W$. This implies then that
+    \begin{align*}
+      U \subset \bigcap_{W: U_1, \dots, U_m \in W}W
+    \end{align*}
+  \end{proof}
+  \begin{defn}
+    Let $U_1, \dots, U_m$ be subspaces of $V$.
+    \begin{enumerate}[label=\arabic*)]
+      \ii The sum $U_1 + \dots + U_m$ is called a direct sum if each element of $U_1 + \dots + U_m$ can be written in only one way as a sum $u_1 + u_2 + \dots + u_m$, where
+      each $u_j \in U_j$.
+      \ii Whenever $U_1 + \dots + U_m$ is a direct sum, then we will denote it by $U_1 \oplus U_2 \oplus \dots \oplus U_m$, or 
+      \begin{align*}
+        \bigoplus_{i = 1}^{m}U_i
+      \end{align*}
+    \end{enumerate}
+  \end{defn}
+  \begin{prop}\label{prop:direct_sum_condition}
+    Suppose $U_1, \dots, U_m$ are subspaces of $V$. Then $U_1 + \dots + U_m$ is a direct sum if and only if the only way to write $0$ as a sum $u_1 + \dots + u_m$, $u_j \in
+    U_j$, is by taking each $u_j$ equal to zero.
+  \end{prop}
+  \begin{proof}
+    Suppose $U = \bigoplus_{i = 1}^{m}U_i$ is a direct sum. Then there is only one way to write $0$, namely by taking each $u_i = 0$. Conversely, assume that the only way to
+    write $0$ as a sum $u_1 + \dots + u_m$ is to take each $u_i = 0$. Then for an arbitrary vector $v = u_1 + \dots + u_m$, $u_i \in U_i$, assume it has another representation
+    $v = v_1 + \dots + v_m$, $v_i \in U_i$. Then, $u - v = (u_1 - v_1) + (u_2 - v_2) + \dots + (u_n - v_n) = w_1 + w_2 + \dots + w_m = 0$. Now, $w_i \in U_i$ for $i \in [m]$.
+    Now, by suppositon, $0$ must be written uniquely by taking each $w_i$ equal to zero, we thus get that $u_1 = v_1$, $u_2 = v_2$, etc$\ldots$ 
+  \end{proof}
+  \begin{prop}
+    Suppose $U$ and $W$ are subspaces of $V$. Then $U + W$ is a direct sum if and only if $U \cap W = \{0\}$.
+  \end{prop}
+  \begin{proof}
+    Assume $U + W$ is a direct sum. Let $x \in U \cap W$. Then $0 = x + (-x)$, where $x \in U$ and $-x \in W$. Since $U + W$ is a direct sum, this implies that $0$ must be
+    written as a sum of zeros from each subspace, and so $x = -x = 0$. Conversely, if $U \cap W = \{0\}$, then the only way to write $0 = u + w$, where $u \in U$ and $w \in
+    W$, is by taking each to be $0$. This is because if $u \neq 0$, then $w = -u$, which implies that $w \in U$, which it is not.
+  \end{proof}
+\section{Finite-Dimensional Linear Spaces}
+\subsection{Span and Linear Independence}
+  \begin{prop}
+    The span of a list of vectors $\mathcal{V} = \{\sum_{i = 1}^{m}a_iv_i: v_1, \dots, v_m \in V\}$ in $V$ is the smallest subspace of $V$ containing all the vectors in the
+    list. 
+  \end{prop}
+  \begin{proof}
+    The smallest subspace of $V$ which contains all of the vectors in the list $\CV$, certainly contains the span as it is closed under linear combinations (scalar
+    multiplication and vector addition). Conversely, let us show that the span is the smallest subspace. First, it is certainly a subspace as it contains $0$ (let $a_1, \dots,
+    a_m = 0$ in the linear combination). It is also closed under scalar multiplication and vector addition as by definition all linear combinations are in the span. Now
+    consider all of the subspaces containing $v_1, \dots, v_m$. Let us denote this set by $\CS$. Every subspace in $\CS$ contains each $v_i$, and hence contains all of their
+    linear combinations as subspaces are closed under scalar multiplication and addition. Thus every subspace contains $\CS$ and so $\CV$ is the smallest subspace, as 
+    \begin{align*}
+      \CV \subset \bigcap_{S \in \CS}S
+    \end{align*}
+  \end{proof}
+  \begin{defn}
+    A linear space is called finite-dimensional if some finite list (redundant, lists are finite by definition) of vectors in the space span it.
+  \end{defn}
+  \begin{defn}
+    A function $p: \F \to \F$ is called a polynomial with coefficients in $\F$ if there exist $a_0, \dots, a_m \in \F$ such that
+    \begin{align*}
+      p(z) = \sum_{n = 0}^{m}a_nz^n
+    \end{align*}
+    For all $z \in \F$. $\CP(\F)$ is the set of all polynomials with coefficients in $\F$. 
+  \end{defn}
+  $\CP(\F)$ is a linear space over $\F$. That is, it is a subspace of $\F^\F$. If a polynomial (thought of as a function from $\F \to \F$) is represented by two sets of
+  coefficients, then subtracting one representation of the polynomial from the other produces a polynomial that is identically zero as a function on F and hence has all zero
+  coefficients (this will be proven later). Conclusion: the coefficients of a polynomial are uniquely determined by the polynomial. Thus the next definition uniquely defines
+  the degree of a polynomial.
+  \begin{defn}
+    A polynomial $p \in \CP(\F)$ is said to have degree $m$ if there exist scalars $a_0,a_1\dots,a_m \in \F$ with $a_m \neq 0$ such that 
+    \begin{align*}
+      p(z) = a_0 + a_1z + \dots + a_mz^m
+    \end{align*}
+    For all $z \in \F$. If $p$ has degree $m$, write deg $ p = m$. The zero polynomial is to have degree $-\infty$.
+  \end{defn}
+  \begin{defn}
+    For $m$ a nonnegative integer, $\CP_m(\F)$ denotes the set of all polynomials with coefficients in $\F$ and degree at most $m$.
+  \end{defn}
+  \begin{prop}
+    $\CP_m(\F)$ is a finite dimensional linear space for each nonnegative integer $m$. Note that $\CP_m(\F) = \text{span}(z_1, \dots, z^m)$. Here we are slightly abusing
+    notation by letting $z^k$ denote a function.
+  \end{prop}
+  \begin{defn}
+    A linear space is infinite dimensional if it is not finite dimensional.
+  \end{defn}
+  \begin{lemma}[Linear Dependence Lemma]\label{lem:lin.dep}
+    Suppose $v_1, \dots, v_m$ is a linearly dependent list in $V$. Then there exists $j \in [m]$ such that,
+    \begin{enumerate}[label=\alph*)]
+      \ii $v_j \in \Span(v_1, \dots, v_{j - 1})$
+      \ii If the $j$th term is removed from $v_1, \dots, v_m$, the span of the remaining list equals $\Span(v_1, \dots, v_m)$.
+    \end{enumerate}
+  \end{lemma}
+  \begin{proof}
+    Since $v_1, \dots, v_m$ is linearly dependent, there exist $a_1, \dots, a_m$, not all zero, such that
+    \begin{align*}
+      \sum_{i = 1}^{m}a_iv_i = 0
+    \end{align*}
+    Let $j$ be the largest index in $[m]$ such that $a_j$ is nonzero. This implies then that $a_{j + 1} = \dots = a_{m} = 0$. And so, reorganizing the equality above,
+    \begin{align}\label{eqn:v_j.rexpression}
+      v_j = -\frac{a_1}{a_j}v_1 - \dots - \frac{a_{j - 1}}{a_j}v_{j - 1} = \sum_{i = 1}^{j - 1}-\frac{a_i}{a_j}v_i
+    \end{align}
+    This shows the first condition. Now, let $v \in \Span(v_1, \dots, v_m)$ be arbitrary. Then there exist $b_1, \dots, b_m$ such that,
+    \begin{align*}
+      v = \sum_{i = 1}^{m}b_iv_i
+    \end{align*}
+    In the above sum, we simply rexpress $v_j$ by the expression in equation \eqref{eqn:v_j.rexpression}, which thus yields $v$ as a linear combination of $v_1, \dots, v_{j -
+    1}, v_{j + 1}, \dots, v_m$. Thus the spanning of the list remaining after removing $v_j$ is the same as the span of the original list, and so this shows the second
+    condition.
+  \end{proof}
+  \begin{prop}\label{prop:lin.ind.less.span}
+    In a finite dimensional linear space, the length of every linearly independent list of vectors is less than or equal to the length of every spanning list of vectors.
+  \end{prop}
+  \begin{proof}
+    Let $\CU = \{u_1, \dots, u_m\}$ be a linearly independent list in $V$. Let $\CW = \{w_1, \dots, w_n\}$ be a spanning list of $V$. Since $\CW$ spans $V$, we repeat the
+    following procedure,
+    \begin{enumerate}[label=\roman*)]
+      \ii The list $u_1 \cup \CW$ is linearly dependent (as $u_1 \in \Span(\CW)$). By \eqref{lem:lin.dep}, there exist some $w_k$ that we can remove from the list with
+      this new list still spanning $V$. We term this new list $\CU_1$.
+      \ii The list $u_i \cup \CU_{i - 1}$ is linearly dependent as $\CU_{i - 1}$ is a spanning list. Thus, there exist some vector in it that we can remove and the new list
+      will still span $V$. This vector cannot be $u_1, \dots, u_i$, as $u_i$ cannot be in the span of $u_1, \dots, u_{i - 1}$. thus it must be one of the $w$'s. We thus take
+      out that $w$ and we term the new list $\CU_{i}$.
+    \end{enumerate}
+    We repeat the process above for $i = 2, \dots, m$, until we have placed all of $\CU$ in a spanning list. By our logic, there is always some $w$ remaining at each step in
+    the process. Thus $m \leq n$, as desired.
+  \end{proof}
+  \begin{prop}\label{prop:subspace.fdls}
+    Every subspace of an FDLS is also an FDLS.
+  \end{prop}
+  \begin{proof}
+    Let $V$ be an FDLS and $U$ be a subspace of $V$. if $U = \{0\}$, then $U$ is an FDLS and we are done. Else, start with a vector $u_1 \in U$. if $u_1$ spans $U$, done.
+    Else, pick $u_j \in U$ such that $u_j \not\in \Span(u_1, \dots, u_{j - 1})$. Note that all the vectors in this list are linearly independent, and since every linearly
+    independent list has length less than or equal to the length of every spanning list, this list will have length less than or equal to a finite spanning list for $V$, and
+    so this process terminates with a spanning list for $U$.
+  \end{proof}
+\subsection{Basis}
+  \begin{defn}
+    A \textbf{basis} of $V$ is a list of vectors in $V$ that is linearly independent and spans $V$.
+  \end{defn}
+  \begin{prop}
+    A list $\CV = v_1, \dots, v_n$ in $V$ is a basis of $V$ if and only if every $v \in V$ can be written uniquely in the form,
+    \begin{align*}
+      v = \sum_{i = 1}^{n}a_iv_i
+    \end{align*}
+    $a_i \in \F$ for $i \in [n]$.
+  \end{prop}
+  \begin{proof}
+    First, suppose $\CV$ is a basis for $V$. Then there exist $\{a_i: i \in [n], a_i \in \F\}$ such that
+    \begin{align*}
+      v = \sum_{i = 1}^{n}a_iv_i
+    \end{align*}
+    Now assume there is another set of scalars $c_i$ such that $\sum_{i = 1}^{n}c_iv_i = v$, then subtracting the two representations,
+    \begin{align*}
+      0 = (a_1 - c_1)v_1 + \dots + (a_n - c_n)v_n
+    \end{align*}
+    Since $\CV$ is linearly independent, we must have that $a_1 - c_1 = \dots = a_n - c_n = 0$, and so $a_i = c_i$ for all $i$. Hence the representation is unique. Conversely,
+    if every $v \in V$ can be written uniquely as linear combination of vectors in $\CV$, then obviously they span $V$. Now, notice that,
+    \begin{align*}
+      0 = 0v_1 + \dots + 0v_n
+    \end{align*}
+    Hence we can get zero by doing a linear combination with all the scalars being zero. Because this representation is unique, this means that $\CV$ must be linearly
+    independent.
+  \end{proof}
+  \begin{prop}\label{prop:reduce.spanning.list.to.basis}
+    Every spanning list in a linear space can be reduced to a basis of the linear space.
+  \end{prop}
+  \begin{proof}
+    Start with a spanning list of vectors $\CV = \{v_1, \dots, v_n\}$. If $v_1 = 0$, then remove $v_1$ from the list. Else leave it be. Next, check if $v_j \in \Span(v_1,
+    \dots, v_{j - 1})$. If so, remove it. If not, keep it in the list. At step $n$, we have a new list, say $B$, of linearly independent vectors that span $V$ (by linear
+    dependence lemma and the fact that if a vector is not in the span of some linearly independent list, then the new list of that vector plus the old list is also linearly
+    independent).
+  \end{proof}
+  \begin{prop}
+    Every finite-dimensional linear space (FDLS) has a basis.
+  \end{prop}
+  \begin{proof}
+    Every FDLS has a spanning list by definition, and by the previous result, we can turn this spanning list into a basis.
+  \end{proof}
+  \begin{prop}\label{prop:expand.lin.ind.list.basis}
+    Every linearly independent list of vectors in a FDLS can be extended to a basis of the vector space.
+  \end{prop}
+  \begin{proof}
+    Let $u_1, \dots, u_m$ be a linearly independent list. Let $w_1, \dots, w_n$ be a basis for $V$. Then, the list $u_1, \dots, u_m, w_1, \dots, w_n$ spans $V$. Applying the 
+    procedure in proposition \eqref{prop:reduce.spanning.list.to.basis}, we end with a list of $u_1, \dots, u_m$ (none of the $u_i$ get removed since they are all linearly
+    independent) with a few additional $w_i$ vectors. This list spans $V$ as each step of the process ensures that we still span $V$.
+  \end{proof}
+  \begin{prop}
+    Suppose $V$ is an FDLS. Let $U$ be a subspace of $V$. Then there exists $W$ such that $V = U \oplus W$. Note that using the same ideas but more advanced tools, this can be
+    proven for infinite dimensional $V$.
+  \end{prop}
+  \begin{proof}
+    First, since $U$ is an FDLS by \eqref{prop:subspace.fdls}, it has a basis $u_1, \dots, u_m$. Extend this list to a basis of $V$, with some additional linearly independent
+    vectors $w_1, \dots, w_k$, by \eqref{prop:expand.lin.ind.list.basis}. Consider now $W = \Span(w_1, \dots, w_k)$. $W$ is certainly a subsapce of $V$. Furthermore, $W \cap V
+    = \{0\}$. Thus, their $U + W$ is a direct sum. Finally, this direct sum is obviously $V$, since each vector $v$ can be written uniquely as some linear combination of $u_1,
+    \dots, u_m = u \in U$ and $w_1, \dots, w_k = w \in W$ as they form a basis for $V$.
+  \end{proof}
+\subsection{Dimension}
+  \begin{prop}
+    Any two bases of a FDLS have the same length.
+  \end{prop}
+  \begin{proof}
+    Suppose $V$ is a FDLS with two basis $B_1$ and $B_2$. Since $B_1$ is a list of linearly independent vectors, and the length of any list of linearly independent vectors is
+    less than the length of any spanning list, we have thus that the length of $B_1$ is less than or equal to the length of $B_2$. By symmetry, the length of $B_2$ is the less
+    than or equal to the length of $B_1$. Hence their lengths are equal.
+  \end{proof}
+  \begin{defn}
+    The \tbf{dimension} of a FDLS is the length of any of its bases. This dimension is denoted by $\Dim V$ (if $V$ is FDLS).
+  \end{defn}
+  \begin{prop}
+    If $V$ is FDLS, and $U$ is a subspace of $V$, then $\dim U \leq dim V$.
+  \end{prop}
+  \begin{proof}
+    We know $U$ is FDLS by \eqref{prop:subspace.fdls}. Think of any basis of $U$, $\CU$, as a linearly independent list of vectors. Think of any basis of $V$, $\CV$, as a
+    spanning list. Then, by \eqref{prop:lin.ind.less.span}, $\dim \CU \leq \dim \CV$.
+  \end{proof}
+  \begin{prop}\label{prop:lin_ind_list_basis}
+    Suppose $V$ is FDLS. Then every linearly independent list $\CV$ of vectors in $V$ with length $\dim V$ is a basis of $V$.
+  \end{prop}
+  \begin{proof}
+    We know by \eqref{prop:expand.lin.ind.list.basis} that we can expand $\CV$ to be a basis of $V$. However, every basis of $V$ has length $\dim V$, but the expansion in this
+    case is trivial, and no vectors are adjoined to $\CV$. Hence, $\CV$ is a basis for $V$.
+
+    Alternatively, assume for the sake of contradiction that $\CV$ does not span $V$. Then there exists $v \in V$ such that $v \not\in \Span(\CV)$. Thus $\{v, \CV\}$ is a list
+    of length $\dim V + 1$ and linearly independent. But this contradicts \eqref{prop:lin.ind.less.span}, since the bases of $V$ have length $\dim V$. Hence, not such $v$
+    exists $\CV$ spans $V$, and so is a basis.
+  \end{proof}
+  \begin{prop}
+    Suppose $V$ is FDLS. Then every spanning list of vectors in $V$ with length $\dim V$ is a basis of $V$.
+  \end{prop}
+  \begin{proof}
+    Suppose $\CV$ is a spanning list of $V$ of length $\dim V$ that is not linearly independent. Then there exists vectors $v_1, \dots, v_k \in \CV$ that are linear
+    combinations of the others. Removing these vectors, we obtain a new list of linearly independent vectors $\CV^\prime$ of length $\dim V - k$, $k \geq 1$, that span $V$.
+    Thus $\CV^\prime$ is a basis of $V$. But this contradicts all bases being of the same length. Hence $\CV$ must be linearly independent.
+  \end{proof}
+  \begin{prop}
+    If $U_1$ and $U_2$ are subspaces of an FDLS, then,
+    \begin{align*}
+      \dim(U_1 + U_2) = \dim U_1 + \dim U_2 - \dim(U_1 \cap U_2)
+    \end{align*}
+  \end{prop}
+\section{Linear Maps}
+\subsection{The Linear Space of Linear Maps}
+  \begin{prop}[Linear maps and basis of domain]\label{prop:lin_map_defined_on_basis}
+    Suppose $v_1, \dots, v_n$ is a basis of $V$ and $w_1, \dots, w_n \in W$. Then there exists a unique linear map $T: V \to W$ such that,
+    \begin{align*}
+      Tv_j = w_j
+    \end{align*}
+    For each $j = 1, \dots, n$.
+  \end{prop}
+  \begin{remark}
+    Conversely, for any linear map $T$, we can characterize $T$ completely by its behavior for a given basis of $V$. E.g. once we know $Tv_i$ for $i = 1, \dots, n$, we know the values that
+    $T$ takes on for all $v \in V$.
+  \end{remark}
+  \begin{proof}
+    First existence. Define $T: V \to W$ by
+    \begin{align*}
+      T(\sum_{i = 1}^{n}c_iv_i) = \sum_{i = 1}^{n}c_iw_i
+    \end{align*}
+    Where $c_1, \dots, c_n \in \F$ are arbitrary. The list $v_1, \dots, v_n$ is a basis of $V$, and the equation above indeed defines a function from $V$ to $W$ (each element in $V$ can be
+    written uniquely as a linear combination of $v_1, \dots, v_n$.
+
+    For each $j$, take $c_j = 1$ and $c_i = 0$ for $i \neq j$, and this shows that $T(v_j) = w_j$.
+
+    Finally, if $u, v \in V$ and $\lambda_1, \lambda_2 \in \F$, and $u, v$ can be written in terms of $v_1, \dots, v_n$ respectively with constants $a_1, \dots, a_n$ and $b_1, \dots, b_n$,
+    then,
+    \begin{align*}
+      T(\lambda_1u + \lambda_2v) & = T(\sum_{i = 1}^{n}(\lambda_1a_i + \lambda_2b_i)v_i) \\
+      & = \sum_{i = 1}^{n}(\lambda_1a_i + \lambda_2b_i)w_i \\
+      & = \lambda_1\sum_{i = 1}^{n}a_iw_i + \lambda_2\sum_{i = 1}^{n}b_iw_i \\
+      & = \lambda_1Tu + \lambda_2Tv
+    \end{align*}
+    Thus $T$ is linear map from $V$ to $W$. Now let us show uniqueness. Suppose we are given $T$ as before. Then, for any $c_1, \cdots, c_n$,
+    \begin{align*}
+      T(\sum_{i = 1}^{n}c_iv_i) = \sum_{i = 1}^{n}c_iw_i
+    \end{align*}
+    Thus $T$ is uniquely determined on $\Span(v_1, \dots, v_n)$. That is, if there exists another map $S$ such that $Sv_j = w_j$, then it will satisfy the above property too, and hence takes
+    on the same values as $T$ on $V$. Thus $S$ and $T$ are the same function.
+  \end{proof}
+  \begin{prop}
+    Suppose $T: V \to W$ is a linear map. Then $T$ maps $0_V$ to $0_W$.
+  \end{prop}
+  \begin{proof}
+    \begin{align*}
+      T(0) = T(0 + 0) = T(0) + T(0)
+    \end{align*}
+    Adding the additive inverse of $T(0)$ to both sides yields $T(0) = 0$. As desired.
+  \end{proof}
+  \begin{defn}
+    Let $U$ be a linear space. If $T \in \CL(U, V)$ and $S \in \CL(V, W)$, then the product $ST \in \CL(U, W)$ is defined by $ST(u) = S(Tu)$, for $u \in U$. 
+  \end{defn}
+  In other words, $ST = S \circ T$. Note that $ST$ is a linear map (check) when $S$ and $T$ are both linear.
+\subsection{Null Spaces and Ranges}
+  \begin{defn}
+    For $T \in \CL(V, W)$, the \tbf{null space} of $T$, denoted null $ T$ is the subset of $V$ that $T$ maps to zero. That is,
+    \begin{align*}
+      \text{null }T = \{v \in V: Tv = 0\}
+    \end{align*}
+  \end{defn}
+  The null space is also sometimes called the kernel, denoted ker $ T$.
+  \begin{prop}
+    null $ T$ is a subspace of $V$.
+  \end{prop}
+  \begin{prop}
+    $T \in \CL(V, W)$ is injective if and only if $\nullspace T = \{0\}$.
+  \end{prop}
+  \begin{proof}
+    Let $\nullspace T = \{0\}$. Let $v, u \in V$. Let $Tu = Tv$. Then, $0 = Tu - Tv = T(u - v)$. Since $\nullspace T = \{0\}$, $u - v = 0$, and so $u = v$. Thus $T$ is injective. Conversely, if
+    $T$ is injective, then $Tv = 0$ implies $v = 0$ as $T0 = 0$ also.
+  \end{proof}
+  \begin{defn}
+    $\{Tv: v \in V\}$ is called the image or range of $T$.
+  \end{defn}
+  \begin{defn}
+    $T: V \to W$ is said to be surjective if for all $w \in W$, there exists $v \in V$ such that $Tv = w$, i.e. if $\Img T = W$ (image).
+  \end{defn}
+  \begin{prop}[Fundamental Theorem of Linear Maps]\label{prop:fund_thm_lin_maps}
+    Suppose $V$ is finite dimensional and $T: V \to W$. Then range $ T$ is finite dimensional and 
+    \begin{align*}
+      \dim V = \dim\nullspace T + \dim\ran T
+    \end{align*}
+  \end{prop}
+  \begin{remark}
+    Personal note: Here is the intuition that I have been lacking about this. Here is why this must be true. Any vector $v$ that $T$ maps can be decomposed into the basis of $V$. So
+    obviously anything in the range will be a range of the basis say $Tv_1, \cdots, Tv_n$. So right away we see that $\dim\ran T \leq \dim V$. You can't gain dimension with linear maps. You
+    only keep them or go down. Furthermore, whenever $Tv_1, \dots, Tv_n$ are linearly dependent, we have some nontrivial linear combination that yields zero. Thus, rearranging, then using
+    linearity of $T$, we get $T$ of some nonzero vector being zero. Hence $\dim\nullspace T > 0$.
+
+    What the proof below shows is that, obviously for any $w \in \ran T$, we have $w = Tv$ for some $v$. There exist some $w_1, \dots, w_k \in \ran T$ that are a basis for $\ran T$. There
+    exists furthermore some $v_1, \cdots, v_k$ such that $Tv_i = w_i$. We know that $v_1, \dots, v_k$ are linearly independent (done in exercise in 2.A.4). Say we extend this to a basis of
+    $V$, with vectors $u_1, \dots, u_m$. Now this MUST be the basis for $\nullspace T$ for the following reason: We already have all the vectors in $v$ whose span yields some subspace of $V$
+    which gets mapped onto $\ran T$. Another vectors we add in must get mapped to zero, else the image wouldn't be what we claimed it to be. Thus we MUST have that $Tu_1 = \dots = Tu_m = 0$.
+    In a phrase, what we are saying is basically that each dimension is either preserved or gets mapped to zero. For any given linear map, we can study its behavior simply by studying how it
+    behaves on the basis. If it is basis preserving, then $T$ maps each dimension (basis vector) to another dimension (basis vector). What if we map the first basis to zero? We just a lost a
+    dimension in the image but we just gained one in the nullity. What if we do so with the second basis? Same thing. It is very clear that any linear combination of the first two basis
+    vectors then is also in the nullity, and then continue onwards all the way down.
+
+    Another way to think about this theorem is as follows. There always exists some basis through whose perspective a map $T$ maps each dimension to either another dimension or zero. This is
+    exactly how this proof goes. Which basis is it? Well let's cheat and start with the solution! The dimensions that get mapped to zero are the nullity, and this is the basis we start out
+    with. The ones that are not mapped to zero are the rest (these other dimensions certainly get preserved, else they would be in the nullity. Furthermore, their output certainly spans the
+    range as by linearity all outputs are linear combinations of them, and so we get the theorem).
+  \end{remark}
+  \begin{proof}
+    Let $\CU = u_1, \dots, u_m$ be a basis for $\nullspace T$. Then $\dim\nullspace T = m$. $\CU$ can be extended to a basis of $V$, with the new basis being $u_1, \dots, u_m, v_1, \dots, v_n$.
+    We want to show that $\ran T$ is finite dimensional and $n = \dim\ran T$. We will do this by showing that $Tv_1, \dots, Tv_n$ is a basis for $\ran T$. Let $v \in V$ be arbitrary. Thus
+    there exists constants such that
+    \begin{align*}
+      v = \sum_{i = 1}^{m}a_iu_i + \sum_{j = 1}^{n}b_iv_i
+    \end{align*}
+    Then, applying $T$ to both sides,
+    \begin{align*}
+      Tv = \sum_{j = 1}^{n}b_iTv_i
+    \end{align*}
+    Thus every vector in $\ran T$ is in $\Span(\{Tv_1, \dots, Tv_n\})$. Now let us show that these vectors are linearly independent,
+    \begin{align*}
+      0 = \sum_{i = 1}^{n}c_iTv_i = T(\sum_{i = 1}^{n}c_iv_i)
+    \end{align*}
+    Thus $\sum_{i = 1}^{n}c_iv_i \in \nullspace T$. Since $u_1, \dots, u_m, v_1, \dots, v_n$ is a basis, it is linearly independent, and so 
+    \begin{align*}
+      \nullspace T \cap \Span(\{v_1, \dots, v_n\}) = \Span(\{u_1, \dots, u_m\}) \cap \Span(\{v_1, \dots, v_n\}) = \{0\}
+    \end{align*}
+    If they had nontrivial intersection, say with some vector $x$, then $x = \sum_{i = 1}^{n}d_iv_i = \sum_{j = 1}^{m}f_ju_j$, where not all the constants are zero as $x \neq 0$. If we were
+    to subtract both sides from one another, then we would get a nontrivial linear combination yielding zero, contradicting the linear independence. Thus $\sum_{i = 1}^{n}c_iv_i \in \nullspace
+    T$ and the only vector in the intersection is $\{0\}$. Thus $Tv_1, \dots, Tv_n$ is linearly independent, as desired.
+
+    Alternatively, $\sum_{i = 1}^{n}c_iv_i \in \nullspace T$ implies $\sum_{i = 1}^{n}c_iv_i \in \nullspace T = \sum_{j = 1}^{m}d_ju_j$. Thus all the $c_i$ and $d_j$ are zero as $u_1, \dots,
+    u_m, v_1, \dots, v_n$ is linearly independent.
+  \end{proof}
+  \begin{prop}
+    Suppose $V$ and $W$ are finite dimensional such that $\dim V > \dim W$. Then there does not exist a map $T \in \CL(V, W)$ such that $T$ is injective.
+  \end{prop}
+  \begin{proof}
+    \begin{align*}
+      \dim\nullspace T & = \dim V - \dim\ran T \\
+      & \geq \dim V - \dim W \\
+      & > 0
+    \end{align*}
+    And so $\nullspace T \neq \{0\}$. Thus $T$ is not injective.
+  \end{proof}
+  \begin{prop}
+    Suppose $V$ and $W$ are finite dimensional such that $\dim V > \dim W$. Then there does not exist a map $T \in \CL(V, W)$ such that $T$ is surjective.
+  \end{prop}
+  \begin{proof}
+    \begin{align*}
+      \dim W - \dim\ran T & = \dim W - (\dim V - \dim\nullspace T) \\
+      & = \dim W - \dim V + \dim\nullspace T
+      & > 0
+    \end{align*}
+  \end{proof}
+  \begin{prop}
+    A homogeneous system with more variables than equations has nonzero solutions.
+  \end{prop}
+  \begin{proof}
+    More variables than equations is simply saying that $T \in \CL(V, W)$ where $\dim V > \dim W$. Thus $T$ is not injective and so $\dim\nullspace T > 0$. Hence there are nonzero solutions to
+    the homogeneous system.
+  \end{proof}
+  \begin{prop}
+    An inhomogeneous system with more equations than variables has no solution for some choice of constant terms.
+  \end{prop}
+  \begin{proof}
+    More equations than variables is the same as saying $T \in \CL(V, W)$ with $\dim W > \dim V$. Hence $T$ is not surjective and so there exists $w \in W$ for which no $v \in V$ yields $Tv
+    = w$. $w$ then is our choice of constants.
+  \end{proof}
+\subsection{Matrices}
+  Let $V, W$ be finite dimensional linear spaces. Let $T: V \to W$. If $v_1, \dots, v_n$ are a basis for $V$, then $Tv_1, \dots, Tv_n$ determine all of the values of $T$ on $V$. A matrix is
+  an efficient way to encode the values of $Tv_i$ in terms of a basis of $W$.
+  \begin{defn}[Matrix of a Linear Map $\CM(T)$]
+    Let $T \in \CL(V, W)$ and $v_1, \dots, v_n$ and $w_1, \dots, w_m$ bases for $V$ and $W$ respectively. The matrix of $T$ with respect to these bases is the $m\times n$ matrix $\CM(T)$
+    whose entries $A_{jk}$ are defined such that,
+    \begin{align*}
+      Tv_k = A_{1k}w_1 + A_{2k}w_2 + \dots + A_{mk}w_m
+    \end{align*}
+    for $k \in [n]$. If the bases are not clear from the context, then the notation $\CM(T, (v_1, \dots, v_n), (w_1, \dots, w_m))$ is used.
+  \end{defn}
+  Thus the matrix $\CM(T)$ of a linear map $T \in \CL(V, W)$ depends on the bases specified for $V$ and $W$, as well as on $T$. The $k$th column thus of $\CM(T)$ is the coefficients required
+  to write $Tv_k$ as a linear combination of $w_1, \dots, w_m$, i.e. $Tv_k = \sum_{j = 1}^{m}A_{jk}w_j$. If $T: \F^n \to \F^m$, then assume the basis in question is the standard basis for
+  both spaces. If we think of elements of $\F^m$ as columns of $m$ numbers, then the $k$th column of $\CM(T)$ can be thought of as $T$ applied to the $k$th standard basis vector.
+  \begin{prop}[The matrix of the sum of linear maps]
+    Suppose $S, T \in \CL(V, W)$, then $\CM(S + T) = \CM(S) + \CM(T)$ (with respect to some bases of $V$ and $W$).
+  \end{prop}
+  \begin{prop}[The matrix of a scalar times a linear map]
+    Suppose $\lambda \in \F$ and $T \in \CL(V, W)$. Then $\CM(\lambda T) = \lambda\CM(T)$.
+  \end{prop}
+  \begin{defn}
+    For $m, n \in \N$, the set of all $m\times n$ matrices with entries in $\F$ is denoted by $\F^{m, n}$.
+  \end{defn}
+  \begin{prop}
+    Suppose $m, n \in \N$, then with addition and scalar multiplication defined as earlier, $\F^{m, n}$ is a linear space with dimension $mn$.
+  \end{prop}
+  \begin{proof}
+    The proof that $\F^{m, n}$ is a linear space with additive identity being the zero matrix. Notice that a basis for this space is also the set of matrices with one in entry $ij$ and zero
+    elsewhere, of which there are $mn$ many.
+  \end{proof}
+  Suppose $v_1, \dots, v_n$ is a basis of $V$, $w_1, \dots, w_m$ is a basis of $W$, and $u_1, \dots, u_p$ is a basis for $U$. Consider linear maps $T: U \to V$ and $S: V \to W$. The
+  composition is a linear map $ST$ from $U$ to $W$. Does $\CM(ST)$ equal $\CM(S)\CM(T)$? This question does not yet make sense, because we have not defined the product of two matrices. We
+  will choose a definition that forces the answer to this question to be yes.
+
+  Suppose $\CM(S) = A$ and $\CM(T) = C$. For $k \in [p]$,
+  \begin{align*}
+    (ST)u_k & = S(\sum_{i = 1}^{n}C_{ik}v_i) \\
+    & = \sum_{i = 1}^{n}C_{ik}S(v_i) \\
+    & = \sum_{i = 1}^{n}C_{ik}\sum_{j = 1}^{m}A_{ji}w_{j} \\
+    & = \sum_{j = 1}^{m}(\sum_{i = 1}^{n}A_{ji}C_{ik})w_j
+  \end{align*}
+  Thus $\CM(ST)$ is the $m\times p$ matrix whose $jk$th entry is
+  \begin{align*}
+    \sum_{i = 1}^{n}A_{ji}C_{ik}
+  \end{align*}
+  (Personal note - i.e. the dot product between row $j$ of $A$ and column $k$ of $S$). Now we see how to define matrix multiplication so that the desired equation $\CM(ST) = \CM(S)\CM(T)$
+  holds,
+  \begin{defn}
+    Let $A \in \F^{mn}$ and $C \in \F^{np}$. Then we define $AC$ to be the $m\times p$ matrix whose $ij$ entry is
+    \begin{align*}
+      (AC)_{ij} = \sum_{k = 1}^{n}A_{ik}C_{kj}
+    \end{align*}
+  \end{defn}
+  Obviously the definition above only holds when the first matrix has the same length row as the second matrix has length of column.
+\subsection{Invertibility and Isomorphic Linear Spaces}
+  \begin{defn}
+    A linear map $T \in \CL(V, W)$ is invertible if there exists another linear map $S \in \CL(W, V)$ such that $ST \in \CL(V, V) = \CL(V)$ is the identity map on $V$ and $TS \in \CL(W)$ is
+    the identity map on $W$. A linear map $S$ that satisfies the previous definition for a map $T$ is said to be the inverse of $T$, and the product is denoted by $I$, the identity map.
+  \end{defn}
+  \begin{prop}
+    An invertible linear map has a unique inverse.
+  \end{prop}
+  \begin{proof}
+    Let $S_1, S_2 \in \CL(W, V)$ be inverses for an invertible linear map $T \in \CL(V, W)$. Let $w \in W$ be arbitrary. If $S_1w \neq S_2w$, then $w = TS_1w \neq TS_2w = w$ since $TS_1 =
+    TS_2 = I$, the identity map on $W$. This is a contradiction, and so $S_1w = S_2w$ for all $w \in W$, and so $S_1 = S_2$.
+
+    Alternatively,
+    \begin{align*}
+      S_1 = S_1I = S_1(TS_2) = (S_1T)S_2 = IS_2 = S_2
+    \end{align*}
+  \end{proof}
+  We will denote the inverse of an invertible map by $T^{-1}$.
+  \begin{prop}
+    An linear map $T \in \CL(V, W)$ is invertible if and only if it is surjective and injective.
+  \end{prop}
+  \begin{proof}
+    Suppose $T$ is invertible. Let us show it is injective. If $v_1, v_2$ are such that $Tv_1 = Tv_2$, then $T^{-1}Tv_1 = T^{-1}Tv_2$, and so $v_1 = v_2$. Thus $T$ is injective. Furthermore,
+    let $w \in W$ be arbitrary. Then $T(T^{-1}w) = w$. Thus $T$ is surjective. 
+
+    Conversely, assume $T$ is injective and surjective. We need to construct a linear map $T^{-1} \in \CL(W, V)$ such that $T^{-1}T = I$ (identity on $V$) and $TT^{-1} = I$ (identity on
+    $W$). Consider the map $T^{-1} \in \CL(W, V)$ such that $T^{-1}w = v$ where $v$ is such that $Tv = w$. We know such a $v$ exists since $T$ is surjective. Furthermore, this $v$ is unique
+    since $T$ is injective. Thus $T^{-1}$ is also injective and surjective (for all $v \in V$, we have that $T^{-1}(Tv) = v$. Furthermore, if $T^{-1}$ were not injective, then there would
+    exist $w_1, w_2$, $w_1 \neq w_2$, such that $T^{-1}w_1 = T^{-1}w_2$. But then $T(T^{-1}w_1) = T(T^{-1}w_2) = w_1 = w_2$, since $T^{-1}w$ is defined such that $T^{-1}w = v$ where $Tv =
+    w$). 
+
+    $T^{-1}T = I$ by definition of $T^{-1}$, and so is $TT^{-1}$.
+
+    Let us show $T^{-1}$ is a linear map. Let $w_1, w_2 \in W$. There exist $v_1, v_2 \in V$ such that $Tv_1 = w_1$ and $Tv_2 = w_2$. Thus, $T^{-1}w_1 = v_1$ and $T^{-1}w_2 = v_2$.
+    Furthermore, since $T$ is linear, $T(v_1 + v_2) = w_1 + w_2$. Thus $T^{-1}(w_1 + w_2) = v_1 + v_2 = T^{-1}w_1 + T^{-1}w_2$. Thus $T^{-1}$ is additive. Next, let $\lambda \in \F$ and $w
+    \in W$ be arbitrary. Then there exist $v \in V$ such that $Tv = w$.  Thus, $T^{-1}(w) = v$. Furthermore, $T(\lambda v) = \lambda T(v) = \lambda w$. Thus, $T^{-1}(\lambda w) = \lambda v =
+    \lambda T^{-1}(w)$. Thus $T^{-1}$ is homogeneous. Thus $T^{-1}$ is linear.
+  \end{proof}
+  \begin{defn}
+    An isomorphism is an invertible linear map. Two linear spaces are isomorphic if there exists an isomorphism from one space onto the other.
+  \end{defn}
+  \begin{prop}
+    Two finite dimensional linear spaces are isomorphic if and only if they have the same dimension.
+  \end{prop}
+  \begin{proof}
+    Let $V, W$ have the same dimension. Let $v_1, \dots, v_n$ and $w_1, \dots, w_n$ be respectively bases for $V$ and $W$. Define $T: V \to W$ by $Tv_i = w_i$ for $i \in [n]$. Define also
+    the map $T^{-1}: W \to V$ by $Tw_i = v_i$ for $i \in [n]$. These maps are inverses of one another since $TT^{-1}(w_i) = Tv_i = w_i$, and $T^{-1}Tv_i = T^{-1}w_i = v_i$. This
+    characterizes the behavior of $T$ and $T^{-1}$ completely since we have specified their values on the bases. Furthermore, $T$ is surjective as we can obtain any linear combination of
+    $w_1, \dots, w_n$ through $T$, which span $W$. It is also injective since $T$ maps $v \in V$ to unique linear combinations of $w_1, \dots, w_n$, which are a basis and so those linear
+    combinations are also unique in $W$. Thus $T$ is an isomorphism.
+
+    Conversely, assume $V, W$ are isomorphic. Then there exists $T \in \CL(V, W)$ that is invertible. Let its inverse be $T^{-1} \in \CL(W, V)$. Let $v_1, \dots, v_n$ be a basis for $V$ and
+    $w_1, \dots, w_m$ be a basis for $W$. We want to show that $m = n$. Notice that $Tv_1, \dots, Tv_n$ spans $W$. Since the length of any linearly independent list is always less than or
+    equal to the length of any spanning list, we must have that $m \leq n$. Conversely, we also have that $T^{-1}w_1, \dots, T^{-1}w_m$ is a basis for $V$. By the same logic, $n \leq m$.
+    Thus $m = n$, and so $V, W$ have the same dimension. 
+
+    Alternatively, let $T: V \to W$ be an isomorphism from $T$. $T$ injective implies that $\dim\nullspace T = 0$. Furthermore, $T$ surjective implies that $\ran T = W$. Thus, by rank nullity,
+    \begin{align*}
+      \dim V & = \dim\ran T + \dim\nullspace T \\
+      & = \dim W + 0 \\
+      & = \dim W
+    \end{align*}
+  \end{proof}
+  \begin{prop}
+    Let $V$ and $W$ be finite dimensional with $\dim V = n$ and $\dim W = m$. Then $\CM$ is an isomorphism from $\CL(V, W)$ to $\F^{m, n}$.
+  \end{prop}
+  \begin{proof}
+    We already know that $\CM$ is linear. We only need to show it is invertible, which means we only need to show it is both injective and surjective. Let $v_1, \dots, v_n$ be a basis for
+    $V$ and $w_1, \dots, w_m$ be a basis for $W$. 
+
+    First injectivity. Let $T, S \in \CL(V, W)$ such that $\CM(T) = \CM(S)$. This implies then $Tv_i = Sv_i = \sum_{j = 1}^{m}c_{ji}w_j$ for $i \in [n]$. That is, $S$ and $T$ take the same
+    values on the basis of $V$, which means they take the same values on all of $V$. Thus $S = T$ and so $\CM$ is injective. Alternatively, $\CM(T) = 0$ implies that $Tv_i = 0$ for $i \in
+    [n]$. Thus $T = 0$. Thus $T$ is injective.
+
+    Conversely, for arbitrary $A \in \F^{m, n}$, note that the entries define a linear map $T: V \to W$ where $Tv_i = \sum_{j = 1}^{m}A_{ji}w_j$. This defines the behavior of $T$ on all of
+    $V$. Thus $T \in \CL(V, W)$ and by definition, $\CM(T) = A$. Hence $\CM$ is surjective.
+  \end{proof}
+  \begin{prop}\label{prop:dim_space_lin_maps}
+    If $\dim V = n$ and $\dim W = m$, then $\dim \CL(V, W) = (\dim V)(\dim W) = mn$. This follows from $\CL(V, W)$ and $\F^{m, n}$ being isomorphic, isomorphic spaces having the same
+    dimension, and the dimension of $\F^{m, n} = mn$.
+  \end{prop}
+  \begin{defn}
+    Let $v_1, \dots, v_n$ be a basis for $V$. Let $v \in V$ be arbitrary. We define
+    \begin{align*}
+      \CM(v) =
+      \begin{bmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_n
+      \end{bmatrix}
+    \end{align*}
+    Where $c_1, \dots, c_n$ are such that $v = \sum_{i = 1}^{n}c_iv_i$. Thus $\CM(v)$ obviously depends on the basis $v_1, \dots, v_n$.
+  \end{defn}
+  Sometimes we want to think of elements of $V$ as relabeled by $n$-by-$1$ matrices. Once a basis $v_1, \dots, v_n$ is chosen for $V$, the function $\CM$ that takes $v \in V$ to $\CM(V)$ is
+  an isomorphism from $V$ to $\F^{n, 1}$ that implements this relabeling.
+  \begin{prop}
+    Suppose $T \in \CL(V, W)$ and $v_1, \dots, v_n$ is a basis for $V$, $w_1, \dots, w_m$ is a basis for $W$. Let $k \in [n]$. Then the $k$th column of $\CM(T)$, denoted by $\CM(T)_{\cdot,
+    k}$, equals $\CM(Tv_k)$, where $\CM(Tv_k)$ is computed with respect to the basis $w_1, w_2, \dots, w_m$. This follows easily from the definitions of $\CM(T)$ and $\CM(Tv_k)$.
+  \end{prop}
+  \begin{prop}
+    Suppose $T \in \CL(V, W)$, and $v \in V$. Let $v_1, \dots, v_n$ be a basis for $V$ and $w_1, \dots, w_m$ be a basis for $W$. Then,
+    \begin{align*}
+      \CM(Tv) = \CM(T)\CM(v)
+    \end{align*}
+  \end{prop}
+  \begin{proof}
+    Let $v = \sum_{i = 1}^{n}c_iv_i$. Then,
+    \begin{align*}
+      Tv & = \sum_{i = 1}^{n}c_iTv_i
+    \end{align*}
+    Then applying $\CM$ to both sides,
+    \begin{align*}
+      \CM(Tv) & = \sum_{i = 1}^{n}c_i\CM(Tv_i) \\
+      & = \sum_{i = 1}^{n}c_i\CM(Tv)_{\cdot, i} \\
+      & = \CM(T)\CM(v)
+    \end{align*}
+    Where the first equality is by linearity, the second by the previous proposition, and the last by definition of matrix multiplication.
+  \end{proof}
+  Each $m\times n$ matrix $A$ induces a linear map from $\CF^{n, 1}$ to $\CF{m, 1}$, namely the matrix multiplication function that takes $x \in \CF^{n, 1}$ to $Ax \in \CF^{m , 1}$. The
+  result above can be used to think of every linear map from one finite dimensional linear space to another as a matrix multiplication map after suitable relabeling via the isomorphisms
+  given by $\CM$. Specifically if $T \in \CL(V, W)$ and we identify $v \in V$ with $\CM(v) \in \F^{n, 1}$, then the result above says that we can identify $Tv$ with $\CM(T)\CM(v)$.
+
+  Because the result above allows us to think (via isomorphisms) of each linear map as a multiplication on $\CF^{n, 1}$ by some matrix $A$, keep in mind that the specific matrix $A$ depends
+  on the linear map itself and the bases chosen.
+  \begin{defn}
+    A linear map from a linear space to itself is called an operator, and we denote the space of operators on $V$ as $\CV$.
+  \end{defn}
+  \begin{prop}
+    Suppose $V$ is finite dimensional and $T$ is an operator on $V$. Then the following are equivalent,
+    \begin{enumerate}[label=\roman*)]
+      \ii $T$ is invertible.
+      \ii $T$ is injective.
+      \ii $T$ is surjective.
+    \end{enumerate}
+  \end{prop}
+  \begin{proof}
+    Clearly $(i)$ implies $(ii)$. $T$ injective implies $\dim\nullspace T = 0$, and so $\dim V = \dim\ran T$, thus $T$ is surjective. Likewise, $T$ surjective implies $\dim\ran T = \dim V$,
+    which implies $\dim\nullspace T = 0$, and so $T$ is injective. Thus injectivity implies surjectivity which implies invertibility, and surjectivity implies injectivity which implies invertibility,
+  \end{proof}
+  % understanding example 3.70. We want to show T injective. So want to show its null space has dimension zero. Let's consider Tp = 0. By definition of T, p*(x^2 + 5x + 7) has second
+  % derivative zero. Now any polynomial that has second derivative zero is of the form ax + b. Hence px^2 = ax + b for some a and b only happens when p = 0. Thus null T = \{0\} and so T is
+  % injective.
+\subsection{Products and Quotients of Linear Spaces}
+\subsubsection{Products of Linear Spaces}
+  As usual when dealing with more than one linear space, all the vector spaces in use should be over the same field.
+  \begin{defn}
+    Suppose $V_1, \dots, V_m$ are linear spaces over $\F$.
+    \begin{itemize}
+      \ii The product (Cartestian) $V = V_1 \times \dots \times V_m$ is defined by 
+        \begin{align*}
+          V_1 \times \dots \times V_m = \{(v_1, \dots, v_m): v_1 \in V_1, \dots, v_m \in V_M\}
+        \end{align*}
+      \ii Addition on $V$ is defined by 
+      \begin{align*}
+        (u_1, \dots, u_m) + (v_1, \dots, v_m) = (u_1 + v_1, \dots, u_m + v_m)
+      \end{align*}
+      \ii Scalar multiplication on $V$ is defined by 
+      \begin{align*}
+        \lambda(v_1, \dots, v_m) = (\lambda v_1, \dots, \lambda v_m)
+      \end{align*}
+    \end{itemize}
+  \end{defn}
+  \begin{prop}
+    If $V_1, \dots, V_m$ are linear spaces over $\F$, then $V = V_1 \times \dots \times V_m$ is a linear space with the vector addition and scalar multiplication defined above.
+  \end{prop}
+  \begin{prop}[Dimension of a product is the sum of dimensions]
+    Suppose $V_1, \dots, V_m$ are finite dimensional linear spaces. Then $V = V_1 \times \dots V_m$ is finite dimensional and
+    \begin{align*}
+      \dim V = \sum_{i = 1}^{m}\dim V_i
+    \end{align*}
+  \end{prop}
+  \begin{proof}
+    For each space $V_j$, choose a basis. For each basis, consider the element of $V$ that equals the basis vector in the $j$th slot and $0$ in all other slots. The list of all such vectors
+    is linearly independent and spans $V$ Thus $V$ is finite dimensional. The length of this list if $\dim V_1 + \dots + \dim V_m$.
+  \end{proof}
+\subsubsection{Products and Direct Sums}
+  Note that since $\Gamma$ is surjective by definition of $U_1, \dots, U_m$, the word injective below could be replaced by invertible.
+  \begin{prop}\label{prop:direct_sum_iff_gamma_injective}
+    Suppose $U_1, \dots, U_m$ are subspaces of $V$. Define $\Gamma: U_1 \times \dots U_m \to U_1 + \dots U_m$ by
+    \begin{align*}
+      \Gamma(u_1, \dots, u_m) = u_1 + \dots + u_m
+    \end{align*}
+    Then $U_1 + \dots + U_m$ is a direct sum if and only if $\Gamma$ is injective.
+  \end{prop}
+  \begin{proof}
+    If $\Gamma$ is injective, then certainly $U = U_1 + \dots + U_m$ is a direct sum as then there would only be one way to write a vector $u \in U$ as a sum of vectors from $U_1, \dots,
+    U_m$. Conversely, if $U$ is a direct sum, then there is only one way to write any vector $u \in U$ as a sum of vectors from $U_1, \dots, U_m$. Thus each sum $u_1 + \dots + u_m$ leads to
+    a unique vector, and hence $\Gamma$ maps $(u_1, \dots, u_m)$ to a unique vector each time. Thus $\Gamma$ is injective.
+
+    Alternatively, $\Gamma$ is injective if and only if the only way to write zero as a sum $u_1 + \dots + u_m$ is by taking each $u_j \in U_j$ to be zero. Now we fulfill this condition if
+    and only if we have a direct sum by \eqref{prop:direct_sum_condition}. Hence we have the desired result.
+  \end{proof}
+  \begin{prop}[A sum is a direct sum if and only if dimensions add up]
+    Suppose $V$ is finite dimensional and $U_1, \dots, U_m$ are subspaces of $V$. Then $U = U_1 + \dots + U_m$ is a direct sum if and only if
+    \begin{align*}
+      \dim(U_1 + \dots + U_m) = \dim U_1 + \dots + \dim U_m
+    \end{align*}
+  \end{prop}
+  \begin{proof}
+    If $U$ is a direct sum, then $\Gamma$ is an isomorphism. Since isomorphic spaces have the same dimension, we thus get that $\dim U = \dim(U_1 + \dots + U_m) = \dim(U_1 \times \dots
+    \times U_m) = \dim U_1 + \dots + \dim U_m$. Conversely, if the sum and the product spaces have the same dimension, then since $\Gamma$ is by definition surjective, it is also injective
+    (use rank nullity). Thus by \eqref{prop:direct_sum_iff_gamma_injective}, $U$ is a direct sum.
+  \end{proof}
+\subsubsection{Quotients of Linear Spaces}
+  We first define the sum of a vector and a linear space.
+  \begin{defn}
+    Suppose $v \in V$ and $U$ is a subspace of $V$. Then $v + U$ is a subset of $V$ defined by
+    \begin{align*}
+      v + U = \{v + u: u \in U\}
+    \end{align*}
+  \end{defn}
+  \begin{defn}
+    An \textbf{affine subset} of $V$ is a subset of $V$ of the form $v + U$ for some $v \in V$ and subspace $U$ of $V$.
+  \end{defn}
+  \begin{defn}
+    For $v \in V$ and $U$ a subspace of $V$, the affine subset $v + U$ is said to be \textbf{parallel} to $U$.
+  \end{defn}
+  \begin{defn}
+    Suppose $U$ is a subspace of $V$. Then the quotient space $V/U$ is the set of all affine subsets of $V$ parallel to $U$. That is,
+    \begin{align*}
+      V/U = \{v + U: v \in V\}
+    \end{align*}
+  \end{defn}
+  Our next goal is to make $V/U$ into a linear space. To do this, we will need the following result.
+  \begin{prop}[Two affine subsets parallel to $U$ are equal or disjoint]\label{prop:quotient_space_properties}
+    Suppose $U$ is a subspace of $V$ and $v, w \in V$. The following are equivalent,
+    \begin{enumerate}[label=\alph*)]
+      \ii $v - w \in U$
+      \ii $v + U = w + U$
+      \ii $(v + U)\cap(w + U) \neq \varnothing$
+    \end{enumerate}
+    The above just says that the relation $v \sim w$ if $v - w \in U$ is an equivalence relation. It is common to think of elements of $V/U$ simply as elements of $V$, but with a different
+    definition of “$=$”: we can no longer distinguish elements that differ by $U$. Two vectors $v, w$ in $V$ are considered the same if they differ only by an element in $U$, namely $v - w$.
+    This makes the second statement very clear now: if $U$ is the set of all differences, then obviously adding $v$ back to the difference yields the original vector. 
+  \end{prop}
+  \begin{proof}
+    Suppose (a) holds. Then 
+    \begin{align*}
+      v + u = w + ( (v - w) + u) \in w + U
+    \end{align*}
+    since $v - w \in U$. Thus $v + U \subset w + U$. Similarly, $w + U \subset v + U$. Thus $v + U = w + U$. Thus (a) implies (b). (b) certainly implies (c). Now suppose (c) holds. Then
+    there exist $u_1, u_2 \in U$ such that $v + u_1 = w + u_2$. Thus $v - w = u_2 - u_1 \in U$. Thus (c) implies (a). Thus we have the desired result.
+  \end{proof}
+  \begin{defn}[Addition and scalar multiplication on $V/U$]
+    Suppose $U$ is a subspace of $V$ then addition and scalar multiplication on $V/U$ are defined by
+    \begin{enumerate}[label=\alph*)]
+      \ii $(v + U) + (w + U) = (v + w) + U$
+      \ii $\lambda(v + U) = (\lambda v) + U$
+    \end{enumerate}
+    For $v, w \in V$, $\lambda \in \F$.
+  \end{defn}
+  \begin{prop}[Quotient space is a linear space]
+    Suppose $U$ is a subspace of $V$. Then $V/U$, with the operations of addition and scalar multiplication as defined above, is a linear space.
+  \end{prop}
+  \begin{proof}
+    The potential problem with the definitions above of addition and scalar multiplication on V=U is that the representation of an affine subset parallel to U is not unique. Specifically,
+    suppose $v, w \in V$. Suppose also that $\hat{v}, \hat{w} \in V$ are such that $v + U = \hat{v} + U$ and $w + U = \hat{w} + U$. To show that the definition of addition on $V/U$ given above
+    makes sense, we must show that $(v + w) + U = (\hat{v} + \hat{w}) + U$. 
+
+    By \eqref{prop:quotient_space_properties}, $v - \hat{v} \in U$, and $w - \hat{w} \in U$. Since $U$ is a subspace of $V$ and closed under addition, $(v - \hat{v}) + (w - \hat{w}) \in U$. Thus
+    $(v + w) - (\hat{v} + \hat{w}) \in U$. Using \eqref{prop:quotient_space_properties} again, we thus get that $(v + w) + U = (\hat{v} + \hat{w}) + U$. Thus the definition of addition on
+    $V/U$ makes sense. 
+
+    Similarly, suppose $\lambda \in \F$. Then since $U$ is a subspace of $V$ and closed under scalar multiplication, $\lambda(v - \hat{v}) \in U$. Thus $\lambda v - \lambda\hat{v} \in U$. By
+    \eqref{prop:quotient_space_properties}, $(\lambda v) + U = (\lambda\hat{v}) + U$. Thus scalar multiplication also makes sense on $V/U$. The remainder now of checking $V/U$ is a linear
+    space is a routine exercise.
+  \end{proof}
+  \begin{defn}[quotient map, $\pi$]
+    Suppose $U$ is a subspace of $V$. The quotient map $\pi$ is the linear map $\pi: V \to V/U$ defined by
+    \begin{align*}
+      \pi(v) = v + U
+    \end{align*}
+    For $v \in V$. It is a linear map since, for $a, b \in \F$, $v, w \in V$, 
+    \begin{align*}
+      \pi(av + bw) & = (ab + vw) + U \\
+      & = a\pi(v) + b\pi(w)
+    \end{align*}
+    Since $V/U$ being a linear space with addition and scalar multiplication as defined before implies that $(v + U) + (w + U) = (v + w) + U$, and $\lambda(v + U) = (\lambda v) + U$.
+
+    The quotient map maps a vector $v \in V$ to its equivalence class, with the equivalence class being $v \sim w$ if $v - w \in U$. That is, $v$ and $w$ only differ by $U$.
+  \end{defn}
+  Although $\pi$ depends on $V$ and $U$, they are left out of the notation as they are usually clear from the context.
+  \begin{prop}[Dimension of a quotient space]
+    Suppose $V$ is finite dimensional and $U$ is a subspace of $V$. Then,
+    \begin{align*}
+      \dim V/U = \dim V - \dim U
+    \end{align*}
+  \end{prop}
+  \begin{proof}
+    By \eqref{prop:fund_thm_lin_maps}, 
+    \begin{align*}
+      \dim V = \dim\ran\pi + \dim\nullspace\pi
+    \end{align*}
+    By definition of $\pi$, it is obviously surjective and so $\ran\pi = V/U$. Next, $\nullspace\pi$ is the space of all vectors $v \in V$ that get mapped to zero in $V/U$, which is just $U$.
+    By \eqref{prop:quotient_space_properties}, $v - w \in U$ is the same $v + U = w + U$. Thus letting $w = 0$, we get that $v \in U$ is the same as $v + U = U$. Thus $\nullspace\pi = U$. Thus,
+    \begin{align*}
+      \dim V = \dim\ran\pi + \dim\nullspace\pi = \dim V/U + \dim U
+    \end{align*}
+    Which is the desired result.
+  \end{proof}
+  Each linear map $T$ on $V$ induces a linear map $\tilde{T}$ on $V/(\null T)$, which we now define.
+  \begin{defn}[$\tilde{T}$]
+    Suppose $T \in \CL(V, W)$. Define $\tilde{T}: V/(\nullspace T) \to W$ by
+    \begin{align*}
+      \tilde{T}(v + \nullspace T) = Tv
+    \end{align*}
+    What does this say? It says the equivalence class is differing only by some vector in the nullspace of $T$. In other words, the equivalence classes are vectors that take on the same
+    value in $W$ when mapped by $T$.
+  \end{defn}
+  To show that the definition of $\tilde{T}$ makes sense. Suppose $u, v \in V$ are such that $u + \nullspace T = v + \nullspace T$. This implies that $u - v \in \nullspace T$. Thus $T(u - v)
+  = 0$, or $Tu = Tv$. Hence the definition makes sense indeed.
+  \begin{prop}
+    Suppose $T \in \CL(V, W)$. Then,
+    \begin{enumerate}[label=\alph*)]
+      \ii $\tilde{T}$ is a linear map from $V/(\nullspace T)$ to $W$.
+      \ii $\tilde{T}$ is injective.
+      \ii $\ran\tilde{T} = \ran T$.
+      \ii $V/(\nullspace{T})$ is isomorphic to $\ran T$.
+    \end{enumerate}
+  \end{prop}
+  All the above properties make sense. By squishing down all the vectors that take on the same value into one point, of course $\tilde{T}$ becomes injective, as by definition all the points
+  that took on the same value (and hence differed only by an element in the null space), were squished into one. So now only point gets mapped to any specific value in $\ran T$. This takes us
+  to the next point, $\ran\tilde{T} = \ran T$. All points that were mapped to before are still mapped to, just more efficiently in a sense by only one point now. The last point again makes
+  sense. This squishing process has made a one to one correspondence between things that we map from and points in $\ran T$, so of course they are isomorphic: it's a simple relabeling with
+  the relabeling being done by $\tilde{T}$.
+  \begin{proof}
+    \begin{enumerate}[label=\alph*)]
+      \ii This was shown in the definition
+      \ii $\tilde{T}(v + \nullspace T) = \tilde{T}(u + \nullspace T)$, then $Tv = Tu$ by definition of $\tilde{T}$. Thus $T(v - u) = 0$. Thus $v - u \in \nullspace T$, and so $v + \nullspace
+      T = u + \nullspace T$ by \eqref{prop:quotient_space_properties}.
+      \ii It is clear from the definition that $\ran\tilde{T} = \ran T$. For all $w \in \ran T$, there exists $v \in V$ such that $Tv = w$. Then by definition, $\tilde{T}(v + \nullspace T) =
+      Tv = w$.
+      \ii Parts (b) and (c) imply that if we think of $\tilde{T}$ as mapping into $\ran{T}$, then $\tilde{T}$ is an isomorphism from $V/(\nullspace{T})$ onto $\ran{T}$.
+    \end{enumerate}
+  \end{proof}
+  Combining things, we get what is known as the first isomorphism theorem in other areas of algebra,
+  \begin{prop}
+    Let $T \in \CL(V, W)$. Then there is a natural isomorphism $\tilde{T}: V/(\nullspace T) \to W$ such that $T = \tilde{T}\circ\pi$.
+  \end{prop}
+  We see what we are doing now with $\tilde{T}\circ\pi$. First send a point to its equivalence class of points that take on the same value in $W$, then map them to their value in $W$. 
+\subsection{Duality}
+\subsubsection{The Dual Space the Dual Map}
+  \begin{defn}[Linear Functional]
+    A linear functional on $V$ is a map $\varphi \in \CL(V, \F)$.
+  \end{defn}
+  \begin{defn}[Dual Space]
+    The dual space of $V$, $V^\prime$, is $\CL(V, \F)$, i.e. the space of all linear functionals.
+  \end{defn}
+  \begin{prop}
+    Suppose $V$ is finite dimensional. Then $V^\prime$ is also finite dimensional and $\dim V^\prime = \dim V$. In other words, they are isomorphic.
+  \end{prop}
+  \begin{proof}
+    $V^\prime = \CL(V, \F)$. Since $V$ and $\F$ are finite dimensional, then by \ref{prop:dim_space_lin_maps}, $\dim(V, \F) = \dim V\dim\F = \dim V$.
+  \end{proof}
+  \begin{defn}[Dual Basis]
+    If $v_1, \dots, v_n$ is a basis of $V$, then the dual basis of $v_1, \dots, v_n$ is the list $\varphi_1, \dots, \varphi_n$ of elements in $V^\prime$ where $\varphi_j$ is such that,
+    \begin{align*}
+      \varphi_j(v_k) = 
+        \begin{cases}
+          1 \quad k = j \\
+          0 \quad k \neq j
+        \end{cases}
+    \end{align*}
+    By \ref{prop:lin_map_defined_on_basis}, this implies that each $\varphi_j$ is well defined.
+  \end{defn}
+  \begin{prop}
+    Suppose $V$ is finite dimensional, then the dual basis of a basis of $V$ is a basis of $V^\prime$.
+  \end{prop}
+  \begin{proof}
+    Let $v_1, \dots, v_n$ be a basis of $V$, and $\varphi_1, \dots, \varphi_n$ be its corresponding dual basis. $\varphi_1, \dots, \varphi_n$ is a list with the same length as the dimension
+    of $V^\prime$. If we can show it is linearly independent, we are done. Thus, let $a_1, \dots, a_n \in \F$. Then if we want,
+    \begin{align*}
+      \varphi = \sum_{i = 1}^{n}a_i\varphi_i = 0
+    \end{align*}
+    Then by definition of each $\varphi_i$, notice that $\varphi(v_i) = a_i\varphi_i(v_i) = a_i = 0$. Thus since $i = 1, \dots, n$ is arbitrary, we must take $a_1 = \dots = a_n = 0$. This
+    implies that the dual basis is a linearly independent list (by \eqref{prop:lin_ind_list_basis}), and hence a basis for $V^\prime$.
+  \end{proof}
+  \begin{defn}[Dual map]
+    If $T \in \CL(V, W)$, then the dual map of $T$ is the linear map $T^\prime \in \CL(W^\prime, V^\prime)$, defined by
+    \begin{align*}
+      T^\prime(\varphi) = \varphi \circ T
+    \end{align*}
+    Where $\varphi \in W^\prime$.
+  \end{defn}
+  $T^\prime$ is indeed a linear map as it is the composition of two linear maps, $T \in \CL(V, W)$ and $\varphi \in W^\prime$. $T^\prime(\varphi)$ is thus indeed a map in $V^\prime$ as it
+  maps $V$ to $\F$. In other words, $T^\prime(\varphi) \in V^\prime$.
+  \begin{prop}[Algebraic properties of dual maps]
+    \begin{enumerate}[label=\alph*)]
+      \ii 
+        $(S + T)^\prime = S^\prime + T^\prime$ for all $S, T \in \CL(V, W)$.
+      \ii 
+        $(\lambda T)^\prime = \lambda T^\prime$ for all $\lambda \in \F$ and $T \in \CL(V, W)$.
+      \ii 
+        $(ST)^\prime = T^\prime S^\prime$ for all $T \in \CL(U, V)$ and all $S \in \CL(V, W)$.
+    \end{enumerate}
+  \end{prop}
+  The first two properties above imply that the map that maps $T$ to $T^\prime$ is linear. That is, the dualization/prime map such that $R(T) = T^\prime$ is a linear map from $\CL(V, W)$ to
+  $\CL(W^\prime, V^\prime)$. Let us prove these,
+  \begin{proof}
+    \begin{enumerate}[label=\alph*)]
+      \ii 
+        \begin{align*}
+          (S + T)^\prime(\varphi) & = \varphi \circ (S + T) \\
+          & = \varphi \circ S + \varphi \circ T \\
+          & = S^\prime(\varphi) + T^\prime(\varphi)
+        \end{align*}
+      \ii
+        \begin{align*}
+          (\lambda T)^\prime(\varphi) & = \varphi \circ (\lambda T) \\
+          & = \lambda(\varphi \circ T) \\
+          & = \lambda T^\prime
+        \end{align*}
+      \ii
+        Let $\varphi \in W^\prime = \CL(W, \F)$. Notice that $\varphi \circ S \in \CL(V, \F)$. Thus,
+        \begin{align*}
+          (ST)^\prime(\varphi) = \varphi \circ (S \circ T) \\
+          & = (\varphi \circ S) \circ T \\
+          & = T^\prime(\varphi \circ S) \\
+          & = T^\prime(S^\prime(\varphi)) \\
+          & = T^\prime S^\prime(\varphi)
+        \end{align*}
+        Since $\varphi \in W^\prime$ is arbitrary, we thus get that $(ST)^\prime = T^\prime S^\prime$, as desired.
+    \end{enumerate}
+  \end{proof}
+\subsubsection{The Null Space and Range of the Dual of a Linear Map}
+  \begin{defn}[Annihilator, $U^0$]
+    For $U \subset V$, the annihilator of $U$, denoted $U^0$, is defined by
+    \begin{align*}
+      U^0 = \{\varphi \in V: \varphi(u) = 0, u \in U\}
+    \end{align*}
+  \end{defn}
+  In other words, the annihilator $U^0$ is the subset of all linear functionals of $V^\prime = \CL(V, \F)$ that map all elements of $U$ to zero. The annihilator $U^0$ depends on the
+  containing space $V$, so $U^0_V$ is more precise, however, $V$ will be clear from the context and hence omitted.
+  \begin{prop}[The annihilator is a subspace]
+    Suppose $U \subset V$, then $U^0$ is a subspace of $V^\prime$.
+  \end{prop}
+  \begin{proof}
+    Clearly $0 \in U^0$ (i.e. the zero linear functional). Let $\varphi, \psi \in U^0$. Thus $\varphi, \psi \in V^{\prime}$, $a, b \in \F$. Thus,
+    \begin{align*}
+      (a\varphi + b\psi)(u) = a\varphi(u) + b\psi(u) = 0
+    \end{align*}
+    And so $a\varphi + b\psi \in U^0$. Thus $U^0$ is a subspace of $V^\prime$.
+  \end{proof}
+  \begin{prop}[Dimension of the annihilator]\label{prop:dim_annihilator}
+    Suppose $V$ is finite dimensional, and $U$ is a subspace of $V$. Then,
+    \begin{align*}
+      \dim U + \dim U^0 = \dim V
+    \end{align*}
+  \end{prop}
+  \begin{proof}
+    Since $U$ is a subspace of $V$, and $V$ is finite dimensional, then so is $U$. Let $u_1, \dots, u_m$ be a basis for $U$. Extend $U$ to a basis of $V$ by adding vectors $v_1, \dots, v_n$.
+    Consider the dual basis of $u_1, \dots, u_m, v_1, \dots, v_n$, $\varphi_1, \dots, \varphi_m, \psi_1, \dots, \psi_n$, which is a basis of $V^\prime$. Now, we only need to show that
+    $\psi_1, \dots, \psi_n$ is a basis for $U^0$ and we are done. Let $\psi \in U^0$. Then there exist $\lambda_1, \dots, \lambda_m, \eta_1, \dots, \eta_n$ such that
+    \begin{align*}
+      \psi = \sum_{i = 1}^{m}\lambda_i\varphi_i + \sum_{j = 1}^{n}\eta_j\psi_j
+    \end{align*}
+    Now, let $v \in V$ be arbitrary, then $v = \sum_{i = 1}^{m}a_iu_i + \sum_{j = 1}^{n}b_iv_i$ for some $a_1, \dots, a_m, b_1, \dots, b_m \in \F$. In that case,
+    \begin{align*}
+      \psi(v) & = \psi(\sum_{i = 1}^{m}a_iu_i + \sum_{j = 1}^{n}b_iv_i) \\
+      & = \sum_{j = 1}^{n}b_i\psi(v_i)
+    \end{align*}
+    Since $\psi \in U^0$ and so $\psi(u_i) = 0$ for $i \in [m]$. Then,
+    \begin{align*}
+      \sum_{k = 1}^{n}b_k\psi(v_k) & = \sum_{k = 1}^{n}(\sum_{i = 1}^{m}\lambda_i\varphi_i + \sum_{j = 1}^{n}\eta_j\psi_j)(v_k) \\
+      & = \sum_{k = 1}^{n}b_k\eta_k
+    \end{align*}
+    Since by definition of dual basis, $\varphi_i(v_k) = 0$ for all $i \in [m]$ and all $k \in [n]$, and $\psi_j(v_k) = 1$ if and only if $j = k$. Thus for arbitrary $v \in V$,
+    \begin{align*}
+      \psi(v) & = \sum_{j = 1}^{n}\eta_j\psi_j(v) \\
+      & = \sum_{j = 1}^{n}b_j\eta_j
+    \end{align*}
+    Or
+    \begin{align*}
+      \psi = \sum_{j = 1}^{n}\eta_j\psi_j
+    \end{align*}
+    Thus arbitrary $\psi \in U^0$ is in the span of $\psi_1, \dots, \psi_n$, and so $U^0$ is a subset of the span of $\psi_1, \dots, \psi_n$. 
+
+    Conversely, any element in the span of $\psi_1, \dots, \psi_n$ is in $U^0$ since $\psi_j(u_i) = 0$ for $i \in [m]$ and $j \in [n]$. Thus $\psi_1, \dots, \psi_n$ is a linearly independent
+    list whose span equals $U^0$. Thus they form a basis for it, and so $\dim U^0 = n$.
+
+  \end{proof}
+  Here is another proof.
+  \begin{proof}
+    Let $i \in \CL(U, V)$ be the inclusion map defined by $i(u) = u$ for all $u \in U$. Thus $i^{\prime} \in \CL(V^{\prime}, U^{\prime})$. This implies by the fundamental theorem of linear
+    maps that
+    \begin{align*}
+      \dim V^{\prime} = \dim\nullspace{i^{\prime}} + \dim\ran{i^{\prime}}
+    \end{align*}
+    However, $\nullspace{i^{\prime}} = U^0$ (think about the definitions - the null space of $i^{\prime}$ is the set of linear functionals in $V^{\prime}$ that get mapped to zero in
+    $U^{\prime}$, i.e. they always output zero. Any linear functional $\varphi$ not in $U^0$ will not be in the null space, since then there exist such that $i(u) = u$, and then $\varphi(u)
+    \neq 0$. Thus we need all the linear functionals to be in $U^0$, and vice versa since all linear functionals in $U^0$ are in the null space). Also recall that $V$ and $V^\prime$ are
+    isomorphic when $V$ is finite dimensional. Thus we can write,
+    \begin{align*}
+      \dim V = \dim U^0 + \dim\ran{i^{\prime}}
+    \end{align*}
+    Let $\varphi \in U^{\prime}$. $\varphi$ can be extended to a linear functional $\psi \in V^{\prime}$, by for example exercise 11 in 3.A. Note then that $i^{\prime}(\psi) = \psi \circ i =
+    \varphi$. Thus for arbitrary $\varphi \in U^{\prime}$, we have that $i^{\prime}(\psi) = \varphi$, and so $i^{\prime}$ is surjective, and $\ran{i^{\prime}} = U^{\prime}$. Since $\dim
+    U^{\prime} = \dim U$, we finally get that
+    \begin{align*}
+      \dim V = \dim U^0 + \dim U
+    \end{align*}
+    As desired.
+  \end{proof}
+  \begin{prop}[Null space of $T^{\prime}$]
+    Suppose $V$, $W$ are finite dimensional $T \in \CL(V, W)$. Then,
+    \begin{enumerate}[label=\alph*)]
+        \ii 
+          $\nullspace{T^{\prime}} = (\ran{T})^{0}$
+        \ii 
+          $\dim\nullspace{T^{\prime}} = \dim\nullspace{T} + \dim W - \dim V$
+    \end{enumerate}
+  \end{prop}
+  \begin{proof}
+    \begin{enumerate}[label=\alph*)]
+      \ii 
+        Suppose $\varphi \in \nullspace{T^{\prime}}$, then $0 = T^{\prime}(\varphi) = \varphi \circ T$. Thus,
+        \begin{align*}
+          0 = (\varphi \circ T)(v) = \varphi(Tv)
+        \end{align*}
+        For all $v \in V$. Thus $\nullspace{T^{\prime}} \subset (\ran{T})^0$. Conversely, let $\varphi \in (\ran{T})^0$. Thus $\varphi(Tv) = 0$ for every $v \in V$. That is, $(\varphi \circ
+        T)(v) = 0$ for all $v \in V$, and so $\varphi \circ T = 0$.  But $0 = \varphi \circ T = T^{\prime}(\varphi)$. Thus $\varphi \in \nullspace{T^{\prime}}$. This implies that
+        $(\ran{T})^0 \subset \nullspace{T^{\prime}}$, and so we get that $(\ran{T})^0 = \nullspace{T^{\prime}}$, as desired.
+      \ii 
+        From part (a), we have that,
+        \begin{align*}
+          \dim\nullspace{T^{\prime}} & = \dim(\ran{T})^0 \\
+          & = \dim W - \dim\ran{T} \\
+          & = \dim W - (\dim V - \dim\nullspace{T}) \\
+          & = \dim W - \dim V + \dim\nullspace{T}) \\
+        \end{align*}
+    \end{enumerate}
+    Note that part (a) did not rely on $V$ or $W$ being finite dimensional. 
+  \end{proof}
+  \begin{prop}
+    Suppose $V$ and $W$ are finite dimensional and $T \in \CL(V, W)$. Then $T$ is surjective if and only if $T^{\prime}$ is injective.
+  \end{prop}
+  \begin{proof}
+    \begin{enumerate}[label=\alph*)]
+      \ii 
+        Assume $T$ is surjective. Then $\dim W = \dim\ran{T}$. Thus, from part (b) of the previous theorem,
+        \begin{align*}
+          \dim\nullspace{T^{\prime}} & = \dim W - \dim V + \dim\nullspace{T}) \\
+          & = \dim\ran{T} + \dim\nullspace{T} - \dim V\\
+          & = \dim V - \dim V \\
+          & = 0
+        \end{align*}
+        And so $T^{\prime}$ is injective since it is linear and has a null space of only $0$.
+      \ii 
+        Assume $T^{\prime}$ is injective. Then $\dim\nullspace{T^{\prime}} = 0$. Thus,
+        \begin{align*}
+          0 & = \dim\nullspace{T^{\prime}} \\
+          & = \dim W - \dim V + \dim\nullspace{T}) \\
+        \end{align*}
+        And so 
+        \begin{align*}
+          \dim V & = \dim W + \dim\nullspace{T} \\
+          & = \dim\ran{T} + \dim\nullspace{T}
+        \end{align*}
+        Thus $\dim W = \dim\ran{T}$, and so $T$ is surjective.
+    \end{enumerate}
+  \end{proof}
+  \begin{prop}[Range of $T^{\prime}$]
+    Suppose $V$, $W$ are finite dimensional $T \in \CL(V, W)$. Then,
+    \begin{enumerate}[label=\alph*)]
+        \ii 
+          $\dim\ran{T^{\prime}} = \dim\ran{T}$
+        \ii 
+          $\ran{T^{\prime}} = (\nullspace{T})^0$
+    \end{enumerate}
+  \end{prop}
+  \begin{proof}
+    \begin{enumerate}[label=\alph*)]
+      \ii 
+        \begin{align*}
+          \dim{\ran{T^{\prime}}} & = \dim{W^{\prime}} - \dim{\nullspace{T^{\prime}}} \\
+          & = \dim{W} - (\dim{W} - \dim{V} + \dim{\nullspace{T}}) \\
+          & = \dim{V} - \dim{\nullspace{T}} \\
+          & = \ran{T}
+        \end{align*}
+        As desired.
+      \ii
+        Let $\varphi \in \ran{T^{\prime}}$. Then there exist $\psi \in W^{\prime}$ such that $T^{\prime}(\psi) = \varphi$. Thus $\varphi = \psi \circ T$. Now let $v \in \nullspace{T}$ be in
+        $\nullspace{T}$. Then $\varphi(v) = \psi(Tv) = \psi(0) = 0$. Thus $\ran{T^{\prime}} \subset (\nullspace{T})^0$. To show the other direction, we simply need to show that
+        $\dim\ran{T^{\prime}} = \dim{(\nullspace{T})^0}$. In that effort,
+        \begin{align*}
+          \dim\ran{T^{\prime}} & = \dim\ran{T} \\
+          & = \dim{V} - \dim{\nullspace{T}} \\
+          & = \dim{(\nullspace{T})^0}
+        \end{align*}
+        Where the second equality was by \eqref{prop:dim_annihilator}
+    \end{enumerate}
+  \end{proof}
+  \begin{prop}[$T$ injective is equivalent to $T^{\prime}$ surjective]
+    Suppose $V, W$ finite dimensional and $T \in \CL(V, W)$. Then $T$ is injective if and only if $T^{\prime}$ is surjective.
+  \end{prop}
+  \begin{proof}
+      Suppose $T$ is injective, this holds if and only if $(\nullspace{T})^0 = \{0\}$, and so it has dimension zero. This is true if and only if $\dim\ran{T^{\prime}} = \dim\ran{T} = \dim
+      V$, which is true if and only if $T^{\prime}$ is surjective, and hence the desired result.
+  \end{proof}
+\subsubsection{The Matrix of the Dual of a Linear map}
+  \begin{defn}
+    The transpose of a matrix $A$, $A^T$ is obtained by interchanging the rows and columns. So $A_{jk} = A^T_{kj}$.
+  \end{defn}
+  The transpose has nice algebraic properties such as $(A + B)^T = A^T + B^T$ and $(\lambda A)^T = \lambda A^T$.
+  \begin{prop}
+    If $A \in \F^{m, n}$ and $C \in \F^{n, p}$, then $(AC)^T = C^TA^T$.
+  \end{prop}
+  \begin{proof}
+    Let $k \in [p]$ and $j \in [m]$. Then,
+    \begin{align*}
+      (AC)^T_{kj} & = (AC)_{jk} \\
+      & = \sum_{i = 1}^{n}A_{ji}C_{ik} \\
+      & = \sum_{i = 1}^{n}C^T_{ki}A^T_{ij} \\
+      & = (C^TA^T)_{kj}
+    \end{align*}
+    And so $(AC)^T = C^TA^T$, as desired.
+  \end{proof} 
+  \begin{prop}[The matrix of $T^{\prime}$ is the transpose of the matrix of $T$]
+    Let $V, W$ be finite dimensional. Let $v_1, \dots, v_n$ be a basis for $V$, $\varphi_1, \dots, \varphi_n$ the corresponding dual basis of $V^{\prime}$, $w_1, \dots, w_m$ a basis for $W$,
+    and $\psi_1, \dots, \psi_m$ the corresponding dual basis of $W^{\prime}$. Let $T \in \CL(V, W)$, then $\CM(T^{\prime}) = \CM(T)^T$.
+  \end{prop}
+  \begin{proof}
+    Let $A = \CM(T)$, and $C = \CM(T^{\prime})$. Notice that $A \in \F^{m, n}$ and $C \in \F^{n, m}$. We want to show that $A^T = C$. Let $j \in [m]$ and $k \in [n]$. Then,
+    \begin{align*}
+      T^{\prime}(\psi_j) = \sum_{i = 1}^{n}C_{ij}\varphi_i
+    \end{align*}
+    Note that $T^{\prime}(\psi_j) = \psi_j \circ T$. Applying $v_k$ to both sides,
+    \begin{align*}
+      (\psi_j \circ T)(v_k) & = \sum_{i = 1}^{n}C_{ij}\varphi_i(v_k)
+      & = C_{kj}
+    \end{align*}
+    By definition of dual basis. But also notice that,
+    \begin{align*}
+      (\psi_j \circ T)(v_k) & = \psi_j(Tv_k) \\
+      & = \psi_j(\sum_{r = 1}^{m}A_{rk}w_r) \\
+      & = \sum_{r = 1}^{m}A_{rk}\psi_j(w_r) \\
+      & = A_{jk}
+    \end{align*}
+    Thus we get that $C_{kj} = A_{jk} = A_{kj}^{T}$. That is, $A^T = C$, and so $\CM(T)^T = \CM(T^{\prime})$, as desired.
+  \end{proof}
+\subsubsection{The Rank of a Matrix}
+  \begin{defn}
+    Let $A \in \F^{m, n}$. Then,
+    \begin{enumerate}[label=\alph*)]
+      \ii 
+        The row rank of $A$ is the dimension of the span of its rows in $\F^{n, 1}$.
+      \ii 
+        The column rank of $A$ is the dimension of the span of its columns in $\F^{m, 1}$.
+    \end{enumerate}
+  \end{defn}
+  \begin{prop}[Dimension of the range of a map is equal to the column rank of the corresponding matrix]
+    Suppose $V$ and $W$ are finite dimensional and $T \in \CL(V, W)$. Then $\dim{\ran{T}}$ is equal to the column rank of $\CM(T)$.
+  \end{prop}
+  \begin{proof}
+    Let $v_1, \dots, v_n$ be a basis for $V$ and $w_1, \dots, w_m$ be a basis for $W$. Consider the space $\Span(Tv_1, \dots, Tv_n)$. This space has a basis, say without loss of generality
+    $w_1, \dots, w_k$, $k \leq m$, by rearranging indices. 
+
+    Consider also the space $\Span(\CM(Tv_1), \dots, \CM(Tv_n))$. Let us show that $\CM(w_1), \dots, \CM(w_k)$ is a basis for this space. The vectors are certainly linearly independent (as
+    $\CM(w_j) = e_j$ since the basis of $w_1, \dots, w_m$ is the basis of $W$). Let $v \in V$ be arbitrary, then consider $\CM(Tv) \in \Span(\CM(Tv_1), \dots, \CM(Tv_n))$, we have that
+    \begin{align*}
+      \CM(Tv) & = \CM(T(\sum_{i = 1}^{n}a_iv_i)) \\
+      & = \CM(\sum_{i = 1}^{n}a_iT(v_i)) \\
+      & = \CM(\sum_{j = 1}^{k}b_jw_j) \\
+      & = \sum_{j = 1}^{k}b_j\CM(w_j) \\
+    \end{align*}
+    Since $\CM$ is linear and $w_1, \dots, w_k$ span $\Span(Tv_1, \dots, Tv_n)$. Thus $\CM(w_1), \dots, \CM(w_k)$ span $\Span(\CM(Tv_1), \dots, \CM(Tv_n))$, and so they form a basis, as
+    desired. Thus $\Span(\CM(Tv_1), \dots, \CM(Tv_n))$ and $\Span(Tv_1, \dots, Tv_n)$ are isomorphic, with the same dimension. Note that $\Span(\CM(Tv_1), \dots, \CM(Tv_n))$ is the column
+    rank of $\CM(T)$. 
+
+    Finally, it is obvious that $\ran{T} = \Span(Tv_1, \dots, Tv_n)$. Thus $\dim\ran{T} = $ the column rank of $\CM{T}$, as desired.
+  \end{proof}
+  \begin{prop}[Row rank equals column rank]
+    Let $A \in \F^{m, n}$. Then the row rank of $A$ equals the column rank of $A$.
+  \end{prop}
+  \begin{proof}
+    Let $T: \F^{n, 1} \to \F^{m, 1}$ be defined by $Tx = Ax$. Then $\CM(T) = A$, where $\CM(T)$ is computed with respect to the standard bases of $\F^{n, 1}$ and $\F^{m, 1}$. Then,
+    \begin{align*}
+      \text{column rank of }A & = \text{column rank of }\CM{T} \\
+      & = \dim\ran{T} \\
+      & = \dim\ran{T^{\prime}} \\
+      & = \text{column rank of }\CM{T^{\prime}} \\
+      & = \text{column rank of }\CM{T}^T \\
+      & = \text{row rank of }\CM{T} \\
+      & = \text{row rank of }A \\
+    \end{align*}
+  \end{proof}
+  Thus we can dispense with saying row rank and column rank and just say rank.
+  \begin{prop}[rank]
+    The rank of a matrix $A \in \F^{m, n}$ is the column rank of $A$.
+  \end{prop}
+\end{document}
