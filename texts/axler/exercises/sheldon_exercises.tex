@@ -1,0 +1,2411 @@
+\documentclass{book}
+\usepackage{/Users/aligeisa/Desktop/desktop/aula/math_base/ali}
+
+\renewcommand\thechapter{\Roman{chapter}}
+\renewcommand\thesection{\Alph{section}}
+
+\begin{document}
+
+% TODO problem 7 chapter 2.C
+\author{Ali Geisa}
+\title{Linear Algebra Done Right Exercises}
+\chapter{Linear Spaces}
+\section{$\R^n$ and $\C^n$}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      \begin{align*}
+        \frac{1}{a + jb}\cdot\frac{a - jb}{a - jb} = \frac{a}{a^2 + b^2} - j\frac{b}{a^2 + b^2}
+      \end{align*}
+      Thus $c = \frac{a}{a^2 + b^2}$ and $d = -\frac{b}{a^2 + b^2}$.
+    \ii
+      \begin{align*}
+        (\frac{-1 + j\sqrt{3}}{2})^3 = \frac{-1 + 3j\sqrt{3} + 3\cdot3 - j3\sqrt{3}}{8} = \frac{8}{8} = 1
+      \end{align*}
+    \ii
+      Two distinct square roots of $j$. $j = e^{j\frac{\pi}{2}}$. Hence, $\sqrt{j} = \pm e^{j\frac{\pi}{4}}$. One root is thus 
+      \begin{align*}
+        e^{j\frac{\pi}{4}} = \frac{1}{\sqrt{2}} + j\frac{1}{\sqrt{2}}
+      \end{align*}
+      The other root is 
+      \begin{align*}
+        -e^{j\frac{\pi}{4}} = e^{j\frac{\pi}{4} + j\pi} = e^{j\frac{5\pi}{4}} = -\frac{1}{\sqrt{2}} - j\frac{1}{\sqrt{2}}
+      \end{align*}
+    \addtocounter{enumi}{3}
+    \ii
+      Let $\alpha = a + jb$ and $\beta = c + jd$. Then, assuming $\beta \neq 0$, how must we choose $\alpha$ such that $\alpha\beta = 1$? Let us investigate,
+      \begin{align*}
+        (a + jb)\cdot(c + jd) = ac + jad + jbc - bd = 1
+      \end{align*}
+      This implies then that,
+      \begin{align*}
+        ac - bd &= 1 \\
+        jad & = - jbc
+      \end{align*}
+      Putting this in matrix form, we get, 
+      \begin{align*}
+        \begin{bmatrix}
+          c & -d \\
+          d & c \\
+        \end{bmatrix}
+        \begin{bmatrix}
+          a \\
+          b \\
+        \end{bmatrix} =
+        \begin{bmatrix}
+          1 \\
+          0 \\
+        \end{bmatrix}
+      \end{align*}
+      Thus, 
+      \begin{align*}
+        \begin{bmatrix} 
+          a \\ 
+          b \\ 
+        \end{bmatrix} = 
+        \frac{1}{c^2 + d^2} 
+        \begin{bmatrix} 
+          c & -d \\ 
+          d & c \\ 
+        \end{bmatrix} 
+        \begin{bmatrix} 
+          1 \\ 
+          0 \\ 
+        \end{bmatrix} = 
+        \begin{bmatrix} 
+          \frac{c}{c^2 + d^2}
+          \\ -\frac{d}{c^2 + d^2} 
+        \end{bmatrix}
+      \end{align*}
+    \addtocounter{enumi}{3}
+    \ii
+      Not going to explicitly do it out, but assuming that $\lambda \in \C$ gives us one degree of freedom to rotate and scale, but in $\C^3$, we need 3 degrees of freedom to
+      rotate and scale to turn one vector into another.
+  \end{enumerate}
+\section{Definition of Linear Spaces}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      \begin{align*}
+        -(-v) = -1\cdot(-1\cdot v) = (-1\cdot -1)v = v
+      \end{align*}
+    \ii
+      \begin{align*}
+        &av = 0 \\
+        &av + av = (2a)v = av = 0 \\
+      \end{align*}
+      $2a = a$ if and only if $a = 0$. Alternatively, $v = 0$.
+    \ii
+      We know that $v - v = 0$. Adding $w$ to both sides, $v - v + w = w$. Thus, $x = \frac{1}{3}(w - v)$. By how we've shown, this is the only $x$ that will work.
+    \ii
+      There is no additive identity, as the empty set is by definition empty.
+    \ii
+      Let us show that the existence of an additive identity implies $0_Fv = 0_V$, and vice versa. 
+      \begin{align*}
+        0_V = v - v = 1v + (-1)v = (1 - 1)v = 0_Fv
+      \end{align*}
+  \end{enumerate}
+\section{Subspaces}
+  \begin{enumerate}[label=\arabic*)]
+    \ii The first and last are subspaces. The second and third are not. To prove, check conditions for first and fourth. For third, $(1, 0, 1)$ and $(0, 1, 0)$ are in the set,
+    but their sum is $(1, 1, 1)$ and it is not in the set, hence it is not closed under addition. For second, $(1, 0, 1)$ and $(0, 2, 0)$ are both in the set, but their sum is
+    not. Hence it is not closed under addition.
+    \ii 
+      \begin{enumerate}[label=\alph*)]
+        \ii if $b = 0$, then it is a subspace (check conditions, trivial). Conversely, if it is a subspace, then sums of vectors of the form $(a, c, 5d + b, d)$ are also in
+        the subspace. Hence, if sum two of them, $(a_1, c_1, 5d_1 + b, d_1)$, $(a_2, c_2, 5d_2 + b, d_2)$. Then their sum, $(a_1 + a_2, c_1 + c_2, 5(d_1 + d_2) + 2b, d_1 +
+        d_2)$ is also in the subspace. Thus $2b = b$. Which implies that $b = 0$.
+        \ii $0: x \mapsto 0 \in C[0, 1]$. Furthermore, if $f, g \in C[0, 1] = \R^{[0, 1]}$, and $a, b \in \R$,
+          \begin{align*}
+            (af + bg)(x) = af(x) + bg(x) \in C[0, 1]
+          \end{align*}
+          Hence it is a subspace.
+        \ii
+          Let $f, g \in \R^{\R}$ be differentiable. Then $0: \R \to \R$ is a differentiable function. Furthermore, $af + bg$ is differentiable.
+        \ii
+          Check again.
+        \ii
+          Let $\CC = \{(c_n)_{n = 1}^{\infty}: (c_n) \to 0\, c_n \in \C\}$ be the set of all complex sequences with limit zero. Let $(c_n)$ and $(d_n)$ be two such sequences.
+          Then, their linear combinations certainly have limit zero still, and the zero sequence obviously has limit zero.
+      \end{enumerate}
+    \ii
+      Check.
+    \ii Certainly if $b = 0$ then that set of functions is a subspace. Conversely, if, it is a subspace, then $\int{0}^{1}0(x)dx = 0$. Hence $b$ must be $0$ for the additive
+    identity to be in the subspace.
+    \ii $\R^2 \subset \C^2$ is the of all vectors in $\C^2 = (a + jb, c + jd)$ such that $b = d = 0$. This subspace certainly contains the additive identity and is closed
+    under addition. However, $\C^2$ over $\C$ implies that $\R^2$ is all over $\C$, and so $\R^2$ won't be closed under scalar multiplication. However, $\C^2$ over $\R$ or any
+    subfield of $\R$ means that $\R^2$ would indeed be a subsapce.
+    \ii 
+      \begin{enumerate}[label=\alph*)]
+        \ii Yes. $a^3 = b^3$ implies $a = b$ as the cubic function is a bijection. Indeed $\{(a, a, c): a, c \in \R\} \subset \R^3$. It is closed under addition and scalar
+        multiplication,
+        \begin{align*}
+          \lambda\cdot(a, a, c) + \gamma\cdot(b, b, d) = (\lambda + \gamma)(a + b, a + b, c + d)
+        \end{align*}
+        Furthermore, $(0, 0, 0)$ is in this subset.
+        \ii Yes. Check conditions.
+      \end{enumerate}
+    \ii
+      Consider $A = \{(x, 0): x \leq 0\}$. Then $A$ is closed under addition and has the identity, but not closed under scalar addition. Basically picking any quadrant will
+      keep you in that quadrant under addition but not under scalar multiplication.
+    \ii
+      Consider $B = \{\lambda(1, 0), \gamma(0, 1): \lambda, \gamma \in \R\}$. $B$ is closed under scalar multiplication, but is not closed under addition (e.g. can obtain $(1,
+      1)$, which is not in the set. Basically any two lines/planes/hyperplanes. Their union will be such that the scalar multiplication of any vector is also in the set, but
+      the sum of vectors from different hyperplanes will not be in the set, and hence not closed under addition. 
+    \ii 
+      Yes the periodic functions $P = \{f: \R \to \R\}$ are a subspace of $\R^\R$. They are closed under scalar multiplication and the additive identity is a member (it is
+      periodic). Finally, if $f_1, f_2 \in P$ with periods $p_1, p_2$, then $h = f_1 + f_2$ is also periodic with period lcm$(p_1, p_2)$.
+    \ii 
+      To show that $U_1 \cap U_2$ is a subspace, we check the conditions,
+    \begin{enumerate}[label=\arabic*)]
+      \ii $0$ is certainly $\in U_1 \cap U_2$.
+      \ii It is closed under addition, for if $u_1, u_2 \in U_1 \cap U_2$, then $u_1 + u_2 \in U_1$ as each is $U_1$ and $U_1$ is a subspace, and likewise with $U_2$. Thus
+      $u_1 + u_2 U_1 \cap U_2$.
+      \ii If $u \in U_1 \cap U_2$, then if $\lambda \in \F$, then $\lambda u \in U_1$ and $U_2$. Thus $\lambda u \in U_1 \cap U_2$ and so is closed under scalar
+      multiplication.
+    \end{enumerate}
+    \ii 
+      Let $A = \bigcap_{U: U \text{ subspace of } V}U$. $A$ certainly contains the additive identity. It is also closed under vector addition. Then if $x, y \in A$, then
+      $x, y \in U$ for every single subspace of $V$. Thus $x + y \in A$. Finally, if $x \in A$ and $\lambda \in \F$, then $\lambda x \in U$ for every single subspace of $V$,
+      and so $A$ is closed under scalar multiplication. Thus $A$ is a subspace of $V$.
+    \ii
+      Let $V_1, V_2$ be nested subspaces of $V$ such that $V_1 \subset V_2 \subset V$. Then $V_1 \cup V_2 = V_2$ is a subspace of $V$. Conversely, let $V_3 = V_1 \cup
+      V_2$ be a subspace of $V$. We must show now that either $V_1 \subset V_2$ or $V_2 \subset V_1$. Assume for the sake of contradiction that this is not the case. That is,
+      there exists $x \in V_1$ such that $x \not\in V_2$, and $y \in V_2$ such that $y \not\in V_1$. By symmetry, $x + y \not\in V_2$ either. Thus $x + y \not\in V_3$. Thus
+      either $x + y \in V_1$, $x + y \in V_2$, or both, since $x + y \in V_3 = V_1 \cup V_2$. Without loss of generality, assume $x + y \in V_1$. This implies then $x + y - x
+      = y \in V_1$, which contradicts our assumption. Thus there does not exist both $x \in V_1$ such that $x \not\in V_2$, and $y \in V_2$ such that $y \not\in V_1$. Hence,
+      either $V_1 \subset V_2$ or $V_2 \subset V_1$.
+    \ii
+      If one subspace contains the other two, then obviously the union is a subspace of $V$. Now, for the other direction. Assume that there exists three subspaces of $V$
+      $V_1, V_2, V_3$ such their union $U$ is a subspace of $V$. Hence any vector $u$ in $U$ must be in at least one of $V_1, V_2$, or $V_3$. Assume that no two subspaces are
+      subspaces of the other. Hence there exists $y \in V_2$ or $V_3$ such that $y \not\in V_1$. Furthermore, there must be $x \in V_1$ or $V_3$ such that $x \not\in V_2$.
+      Finally, there must exist $z \in V_1$ or $V_2$ such that $z \not\in V_3$. Either $x \in V_1$, $z \in V_1$, both, or neither. If neither, then certainly $x + y + z
+      \not\in V_1$. If only $x$, then again $x + y + z \not\in V_1$ as then, $x + y + z - x = y + z \in V_1$, which it is not. Finally if both, then again $x + y + z \not\in
+      V_1$ as then $x + y + z - x - z = y \in V_1$, which again is false. We do the same by symmetry with $V_2$ and $V_3$ to get that $x + y + z$ is neither of $V_1, V_2$, nor
+      $V_3$. This implies that $x + y + z \not\in U$, which contradicts $U$ being a subspace and hence closed under addition. Thus two subspaces must be a subspace of the
+      third in order for $U$ to be a subspace.
+    \ii 
+      If $u \in U = (a, a, b, b)$ and $w \in W = (c,c,c, d)$. Then,
+      \begin{align*}
+        u + w = (a + c, a + c, b + c, b + d)
+      \end{align*}
+      First, we choose $a$ and $c$ to set the first two coordinates. Then, we choose $b$ as we desire to obtain $b + c$, and then we choose $d$ as we desire to obtain $b + d$.
+      Hence, we can freely choose the first, third, and fourth coordinates, as the second is the same as the first. Thus, $u + w = (x, x, y, z) = U + W$.
+    \addtocounter{enumi}{4}
+    \ii
+      Let $W = \{(0, a, 0, b)\}$. After picking $x$ and $y$, we then pick $a$, and $b$ uniquely such that $x + a$ and $y + b$ come out to the value we want.
+    \ii
+      Let $V = \R^2$. Let $U_1 = \{\lambda(1, 1): \lambda \in \R\}$, $U_2 \{\lambda(0, 1): \lambda \in \R\}$, and $U_2 \{\lambda(1, 0): \lambda \in \R\}$. Certainly $V =
+      U_1 + W = U_2 + W$. However, $U_1 \neq U_2$.
+    \ii
+      $W = \{(0, 0, c, d, e) \in \F^5: c, d, e, \in \F\}$. After picking the first two coordinates $x, y$, $x + y$ has only one value, and so $x + y$ can have only one value,
+      thus there is a unique $c$ to be picked such that $x + y + c$ gives us the value we want, and similarly with $d + x - y$, and $e + 2x$.
+    \ii
+      By the arguments above, we pick $W_1 = (0, 0, c, 0, 0)$, $W_2 = (0, 0, 0, d, 0)$, $W_3 = (0, 0, 0, 0, e)$, 
+    \ii 
+      Let $V = \R^2$. Let $W = \{\lambda(1, 1): \lambda \in \R\}$, $U_1 \{\lambda(0, 1): \lambda \in \R\}$, and $U_2 \{\lambda(1, 0): \lambda \in \R\}$. Certainly $V =
+      U_1 \oplus W = U_2 \oplus W$. However, $U_1 \neq U_2$. The operative point here, with vocabulary from the future, is that direct sums need not involve orthogonal
+      complements, simply linearly independent vectors.
+    \ii 
+      For any $f \in \R^\R$, the even part is $f_e = \frac{f(x) + f(-x)}{2}$. The odd part of a function is $f_o = \frac{f(x) - f(-x)}{2}$. Notice that $f = f_e + f_o$.
+      Furthermore, $f_e \in U_e$ and $f_o \in U_o$. Finally, $U_e \cap U_o = \{0\}$. Thus $\R^\R = U_e \oplus U_o$.
+  \end{enumerate}
+\chapter{Finite Dimensional Linear Spaces}
+\section{Span and Linear Independence}
+  \begin{enumerate}[label=\arabic*)]
+      \ii Let $x \in V$. Then there exists $c_1, \dots, c_4$ such that $x = \sum_{i = 1}^{n}c_iv_i$. Let us term the vectors in the new list $w_1, w_2, w_3, w_4$. Now notice
+      that
+      \begin{align*}
+        v_1 & = w_1 + w_2 + w_3 + w_4 = v_1 - v_2 + v_2 - v_3 + v_3 - v_4 + v_4 \\
+        v_2 & = w_2 + w_3 + w_4 = v_2 - v_3 + v_3 - v_4 + v_4 \\
+        v_3 & = w_3 + w_4 = v_3 - v_4 + v_4 \\
+        v_4 & = w_4 = v_4
+      \end{align*}
+      Thus, we can represent $x$ as,
+      \begin{align*}
+        x & = \sum_{i = 1}^{4}c_iv_i \\
+        & = \sum_{i = 1}^{4}c_i\sum_{j = i}^{4}w_i\\
+        & = \sum_{j = 1}^{4}\sum_{i = 1}^{j}c_iw_i\\
+      \end{align*}
+      And so $w_1, \dots, w_4$ also span $V$, as desired.
+      \ii
+        \begin{enumerate}[label=\arabic*)]
+          \ii $cv = 0$ for $v \neq 0$ if and only if $c = 0$. Otherwise, if $v = 0$, then $c \in \F$ works.
+          \ii If $c_1v_1 + c_2v_2 = 0$, then $c_1v_1 = -c_2v_2$. If $c_1 = 0$, $c_2 \neq 0$, then $v_2 = 0$ and they are not linearly independent, and vice versa. Otherwise,
+          if $c_1, c_2 \neq 0$, then they are certainly not linearly independent as any multiple of them still yields zero. Hence, they are linearly independent if and only if
+          they are not scalar multiples of each others, as then the only way the sum is zero is if $c_1 = c_2 = 0$.
+          \ii 
+            \begin{align*}
+              a(1, 0, 0, 0) + b(0, 1, 0, 0) + c(0, 0, 1, 0) = (a, b, c, 0)
+            \end{align*}
+            This is the zero vector if and only if $a = b = c = 0$.
+          \ii
+            A polynomial is uniquely determined by its coefficients. Hence, if there exist $a_0, a_1, \dots, a_m$ such that
+            \begin{align*}
+              a_0 + a_1z + \dots + a_mz^m = 0
+            \end{align*}
+            For all $z \in \F$, then this is identical to the zero polynomial. The zero polynomial has all coefficients $0$, and so $a_0 = a_1 = \dots = a_m = 0$.
+        \end{enumerate}
+      \addtocounter{enumi}{2}
+      \ii 
+      \begin{enumerate}[label=\roman*)]
+        \ii $a(1 + j) + b(1 - j) = (a + b) + (a - b)j$. The only way to make this expression zero is by letting $a = b$. In which case we get $2a = 0$, which implies that $a =
+        0$. Hence they are linearly independent.
+        \ii Let $a = e^{j\frac{3\pi}{4}}$ and $b = e^{j\frac{\pi}{4}}$, then $a(1 + j) + b(1 - j) = 0$.
+      \end{enumerate}
+      \ii
+        Assume for the sake of contradiction that they are not linearly independent. Hence there exist $c_1, \dots, c_4$ not all zero such that $\sum_{i = 1}^{4}c_iw_i = 0$.
+        Thus,
+        \begin{align*}
+          0 & = \sum_{i = 1}^{4}c_iw_i \\
+          & = \sum_{i = 1}^{3}c_i(v_i - v_{i + 1}) + c_4v_4 \\
+          & = c_1v_1 + \sum_{i = 2}^{4}(c_{i - 1} - c_i)v_i
+        \end{align*}
+        And so we have found a way to write $0$ as a linear combination of $v_i$, with not all the constants being zero. Why? If $c_1$ is not zero, then we are done (because
+        $c_1v_1 = 0$ with $c_1 \neq 0$ implies that $v_1 = 0$ which contradicts lienar independene). If $c_1$ is zero, and $c_2$ is not zero, we are done. If they are both
+        zero, and $c_3$ is not zero, we are done. If they are all zero, and $c_4$ is nonzero, then we are done, and they can't all be zero by assumption.
+      \ii
+        If 
+        \begin{align*}
+          a_1(5v_1 - 4v_2) + a_2v_2 + \dots + a_mv_m = 0
+        \end{align*}
+        Then,
+        \begin{align*}
+          5a_1v_1 + (a_2 - 4a_1)v_2 + \dots + a_mv_m = 0
+        \end{align*}
+        Since $v_1, \dots, v_m$ are linearly independent, we must take $5a_1 = 0$ and $a_2 - 4a_1 = 0$. Thus $a_1 = a_2 = \dots = a_m = 0$, and so the list is linearly
+        independent, as desired.
+      \ii
+        If $\lambda \neq 0$, then,
+        \begin{align*}
+          a_1\lambda v_1 + \dots + a_m\lambda v_m = 0
+        \end{align*}
+        Implies that $a_i\lambda = 0$ since $v_1, \dots, v_m$ are linearly independent. Since $\lambda \neq 0$, then $a_i = 0$ for all $i \in [m]$, and so the new list is
+        linearly independent, as desired.
+      \ii
+        They are not linearly independent. If we let $w_i = -v_i$, then $w_i + v_i = 0$, and $0$ is not linearly independent.
+      \ii
+        If $v_1 + w, \dots, v_m + w$ is not linearly independent, then there exists some partition $\CP$ of $[m]$ such that for some $j \in [m]$, $j \not\in \CP$, $v_j + w$ is
+        a linear combination of $v_i + w$, $i \in \CP$. Let the constants of this linear combination be denoted $a_i$. Thus,
+        \begin{align*}
+          \sum_{i \in \CP}a_i(v_i + w) = v_j + w
+        \end{align*}
+        Hence,
+        \begin{align*}
+          \sum_{i \in \CP}a_iv_i + a_iw - v_j = w
+        \end{align*}
+        And so,
+        \begin{align*}
+          w = \frac{-v_j + \sum_{i \in \CP}a_iv_i}{1 - \sum_{i \in \CP}a_i}
+        \end{align*}
+        Thus $w$ is in the span of $v_1, \dots, v_m$, as desired.
+      \ii
+        If $w \not\in \Span(v_1, \dots, v_m)$, then certainly $v_1, \dots, v_m, w$, is linearly independent, as otherwise we would have some linear combination of $v_1, \dots,
+        v_m$ equaling $w$. That is,
+        \begin{align*}
+          a_1v_1 + \dots + a_mv_m + a_{m + 1}w = 0
+        \end{align*}
+        With not all $a_i = 0$, including, $a_{m + 1}$. This is because if $a_{m + 1} = 0$, then $a_1, \dots, a_m$ must equal zero as $v_1, \dots, v_m$ are linearly
+        independent, and if $a_{m + 1} \neq 0$, then at least one other $a_i \neq 0$, else we can't get the zero vector. Thus,
+        \begin{align*}
+          w = -\frac{1}{a_{m + 1}}\sum_{i = 1}^{m}a_iv_i
+        \end{align*}
+        Alternatively, if $w \not\in \Span(v_1, \dots, v_m)$, then $v_1, \dots, v_m, w$ must be linearly independent. Else, we would be able to write $w$ as a linear
+        combination of $v_i$, contradicting the fact that it is not in their span.
+      \ii
+        Every linearly independent list has dimension less than or equal the length of any spanning list in a linear space. $\CP_4(\F)$ is spanned by $1, z, \dots, z^4$, which
+        has length $5$. Hence any linearly independent list must have length less than $5$ and so there cannot exist a list of length $6$ that is linearly independent in
+        $\CP_4(\F)$.
+      \ii
+        The list $1, z, \dots, z^4$ is a linearly independent list in $\CP_4(\F)$. Hence, any spanning list must have length $\geq 5$.
+      \ii
+        If $v_1, \dots, v_m$ is linearly independent for any $m \in \N$, then we also have that a spanning set for $V$ must have length greater than or equal to $m$ for all $m
+        \in \N$. Hence, $V$ cannot be spanned by any finite set of vectors, and so is infinite dimensional. Conversely, if $V$ is infinite dimensional, then it cannot be
+        spanned by any finite set of vectors. The length of any linearly independent list is less than or equal to the length of any spanning list. Thus we generate a
+        sequence of linearly independent vectors as follows. Let $v_1 \in V$. This list is linearly independent. Then, since it cannot span $V$, there exists $v_2$ such that
+        $v_2 \not\in \Span(v_1)$. The list $v_1, v_2$ is linearly independent by the previous problem. Next, since this is a finite list and no finite list can span $V$, there
+        exists $v_j$ such that $v_j \not\in \Span(v_1, \dots, v_{j - 1})$. The list $v_1, \dots, v_j$ is linearly independent by the previous problem. Do this procedure for $j
+        = 3, 4, \dots$. The list, which grows to arbitrary size, is thus a sequence of linearly independent vectors. As desired.
+      \ii
+        By the previous problem, it suffices to show that there exists a sequence of linearly independent vectors in $\F^\infty$. The sequence given by $(e_i)_{i = 1}^\infty$,
+        where $e_i(j) = \I(j = i)$, where $\I$ is the indicator function. This is a sequence of linearly independent vectors in $\F^\infty$, and so it is infinite dimensional.
+        The sequence is infinite dimensional because,
+        \begin{align*}
+          \sum_{i = 1}^{\infty}a_ie_i = \begin{bmatrix}
+            a_1 & a_2 & \dots
+          \end{bmatrix} = 0
+        \end{align*}
+        And the only way the above is zero is if $a_i = 0$ for all $i \in \N$.
+      \ii
+        Consider the sequence of functions on $C[0, 1]$ given by $f_i: x \mapsto x^i$, for $i \in \N$. This sequence is linearly independent. Hence $C[0, 1]$ is infinite
+        dimensional.
+      \ii
+        Certainly the list $z, p_0, \dots, p_{m + 1}$ is linearly dependent, as the length of any linearly independent list is less than or equal the length of spanning list,
+        and the list of length $m + 1$, $1, z, \dots, z^{m}$ spans $\CP_m(\F)$. Hence, there exist $a_0, \dots, a_{m + 1}$ such that,
+        \begin{align*}
+          \sum_{i = 0}^{m}a_ip_i(z) + a_{m + 1}z = 0
+        \end{align*}
+        With not all $a_i = 0$. Now, at $z = 2$, we get,
+        \begin{align*}
+          2a_{m + 1} = 0
+        \end{align*}
+        Which implies that $a_{m + 1} = 0$. Hence, there exists some $p_i$ such that $a_i \neq 0$, and so the list is not linearly independent.
+  \end{enumerate}
+\section{Bases}
+  \begin{enumerate}[label=\arabic*)]
+    \ii A vector space with only one basis means that the space has only one list of linearly independent vectors that span the space. It cannot be a list with any nonzero
+    vectors, for if $v_1, \dots, v_n$ is a basis, $\lambda v_1, \dots, \lambda v_n$ is also a basis. So all spaces with bases of length greater than or equal to one have more
+    than one basis. The only possible space left is $\{0\}$, since the basis for this space is the empty set, $\{\}$. This is because if the basis contained any vector (in
+    this case, $(\{0\})$), than the set would not be linearly independent, since any scalar multiplied by zero yields zero.
+    \addtocounter{enumi}{1}
+    \ii 
+    \begin{enumerate}[label=\alph*)]
+      \ii $(3, 1, 0, 0, 0)$, $(0, 0, 7, 1, 0)$, and $(0, 0, 0, 0, 1)$. This makes sense, each linearly independent condition subtracts a dimension. Hence, imposing two
+      conditions means that in reality we only have 3 dimensions, and hence 3 vectors in the basis. If we encode this in a matrix, what we get is a $2\times5$ matrix, that
+      says, what $x$ satisfy $Ax = 0$?
+      \begin{align*}
+        \begin{bmatrix}
+          1 & -3 & 0 & 0 & 0 \\
+          0 & 0 & 1 & -7 & 0 \\
+        \end{bmatrix}
+        \begin{bmatrix}
+          x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+          0 \\ 0 \\ 0 \\ 0 \\ 0
+        \end{bmatrix}
+      \end{align*}
+      The space of all such $x$ is the nullspace of $A$, which is precisely the span of the 3 basis vectors given above. 
+      \ii Same vectors as above, plus $(1, 0, 0, 0)$ and $(0, 0, 1, 0, 0)$.
+      \ii $W = \Span\left((1, 0, 0, 0), (0, 0, 1, 0, 0)\right)$.
+    \end{enumerate}
+    \ii 
+      \begin{enumerate}[label=\alph*)]
+        \ii $(1, 6, 0, 0, 0)$, $(0, 0, -2, 1, 0)$, $(0, 0, -3, 0, 1)$.
+        \ii Add the vectors $(0, 1, 0, 0, 0)$, and $(0, 0, 1, 0, 0)$.
+        \ii $W = \Span\left((0, 1, 0, 0, 0), (0, 0, 1, 0, 0)\right)$.
+      \end{enumerate}
+    \ii Yes. Consider the basis, $1, z, z^3, z^2 - z^3$. None of the polynomials in this list have degree 2. Furthermore, they are linearly independent. Finally, they span
+    $\CP_3(\F)$.
+    \ii 
+      First, let us show they span $V$. Let $x \in V$. Then there exists $c_1, \dots, c_4$ such that $x = \sum_{i = 1}^{n}c_iv_i$. Let us term the vectors in the new list $w_1,
+      w_2, w_3, w_4$. Now notice
+      that
+      \begin{align*}
+        v_1 & = w_1 - w_2 + w_3 - w_4 = v_1 + v_2 - v_2 - v_3 + v_3 + v_4 - v_4 \\
+        v_2 & = w_2 - w_3 + w_4 = v_2 + v_3 - v_3 - v_4 + v_4 \\
+        v_3 & = w_3 - w_4 = v_3 + v_4 - v_4 \\
+        v_4 & = w_4 = v_4
+      \end{align*}
+      Thus, we can represent $x$ as,
+      \begin{align*}
+        x & = \sum_{i = 1}^{4}c_iv_i \\
+        & = \sum_{i = 1}^{4}\sum_{j = i}^{4}c_i(-1)^{j - i}w_i\\
+      \end{align*}
+      And so $w_1, \dots, w_4$ also span $V$. Furthermore, they are linearly independent. If they were not, then we can show that $v_1, \dots, v_4$ are linearly dependent, with
+      a proof very similar to the one in exercise II.A.6.
+    \ii 
+      Let $v_1 = e_1$, $v_2 = e_2$, $v_3 = e_3 + e_4$, $v_4 = e_4$. If $U = \{(a, b, c, 0): a, b, c, \in \F\}$, then $v_1, v_2 \in U$, $v_3, v_4 \not\in U$, but $v_1, v_2$ are
+      not a basis for $U$.
+    \ii
+      First, they certainly span $V$ since for any $v \in V$, we can write it as a sum of two vectors $u \in U$ and $w \in W$. That is, $v = u + w$ for some $w \in W$ and $u
+      \in U$ for all $v \in V$. Then, as $u_1, \dots, u_m$ form a basis for $U$, we thus get that $u = \sum_{i = 1}^{m}c_iu_i$ for some constants $\{c_i: i \in [m]\}$, and
+      likewise for some set of constants $\{d_i: i \in [n]\}$ for $w \in W$ with $w_1, \dots, w_n$. Thus $u_1, \dots, u_m, w_1, \dots, w_n$ span $V$.
+
+      Next, they are certainly linearly independent. Note that we can write $0_V = 0_U + 0_W$ (all the zeros are the same, since $U, W \subset V$). Furthermore, as this is a
+      direct sum, this representation is unique. Finally, since $u_1, \dots, u_m$ form a basis for $U$ (and so are linearly independent), the scalars for this representation
+      are all zero, and likewise for $w_1, \dots, w_n$. Hence, to write the zero vector in $V$, we must take all the constants to be zero. Thus $u_1, \dots, u_m, w_1, \dots,
+      w_n$ are linearly independent. Hence they form a basis for $V$.
+  \end{enumerate}
+\section{Dimension}
+  \begin{enumerate}[label=\arabic*)]
+    \ii Let $\CU = \{u_1, \dots, u_n\}$ and $\CV = \{v_1, \dots, v_n\}$ be bases for $U$ and $V$, respectively (they have the same length as $\dim U = \dim V$. Certainly $U
+    \subset V$ by supposition. If we can show that $V \subset U$, then we are done. Let $v \in V$. $\CU$ is a list of $n$ linearly independent vectors in $V$, and hence they
+    must form a basis for $V$. Thus we can write $v$ as a linear combination of vectors in $\CU$. Thus $V \subset U$. Thus $U = V$.
+    \ii Let $U$ be a subspace of $\R^2$. If $U$ has a basis of length $0$, then $U = \{0\}$. If $U$ has a basis of length $2$, then $U = \R^2$ by the previous problem. If $U$
+    has a basis of length $1$, then $U = \{\lambda(a, b): \lambda, a, b \in \R\}$, in other words, $U$ is a line with slope $\frac{b}{a}$ (unless $a = 0$, in which case it is
+    simply a vertical line). This is all the subspaces of $\R^2$.
+    \ii Let $U$ be a subspace of $\R^3$. If $U$ has a basis of length $0$, then $U = \{0\}$. If $U$ has a basis of length $3$, then $U = \R^3$ by problem $1$. If $U$
+    has a basis of length $1$, then $U = \{\lambda(a, b, c): \lambda, a, b, c \in \R\}$, that is, a line. If $U$ has a basis of length $2$, then $U = \{\gamma x + \lambda y:
+    x, y \in \R^3, \gamma, \lambda \in \R\}$. That is, a plane through $x$, $y$, and the origin.
+    \ii 
+    \begin{enumerate}[label=\arabic*)]
+      \ii 
+        Consider the arbitrary 4th degree polynomial $p(x) = ax^4 + bx^3 + cx^2 + dx + e$. $p(6) = 0$ implies that,
+        \begin{align*}
+          0 = 1296a + 216b + 36c + 6d + e
+        \end{align*}
+        Thus we must have that,
+        \begin{align*}
+          e = -1296a - 216b - 36c - 6d 
+        \end{align*}
+        Hence, if we take as a basis $v_1 = x - 6, v_2 = x^2 - 36, v_3 = x^3 - 216, v_4 = x^4 - 1296$, then notice that any linear combination of them satisfies the condition
+        above. Hence this is the basis we desire (as any fourth degree polynomial that satisfies the condition must look as above).
+      \ii
+        We extend the previous basis to a basis of $\CP_4(\R)$ by adding the additional vector $1$. This leads to a linearly list of vectors since,
+        \begin{align*}
+          e + \sum_{i = 1}^{4}a_iv_i = ax^4 + bx^3 + cx^2 + dx - 1296a - 216b - 36c - 6d + e
+        \end{align*}
+        Hence, we can arbitrarily set $e$ after setting $a, b, c, d$ to obtain any value of $- 1296a - 216b - 36c - 6d + e$ we want. 
+      \ii
+        The subspace $W$ is simply $\Span(1)$.
+    \end{enumerate}
+    \ii
+    \begin{enumerate}[label=\arabic*)]
+      \ii 
+        The second derivative of any degree 4 polynomial will be at most a degree 2 polynomial. Now, any degree 2 polynomial $P$ such that $P(6) = 0$ will be a linear
+        combination of the vectors $x^2 - 36, x - 6$. That is, these two vectors span the degree 2 polynomials such that $P(6) = 0$. Integrating $P(x) = a(x^2 - 36) + b(x - 6)$
+        twice and letting the double integral be termed $p$, we get then that $p^{\prime\prime} = P$ and,
+        \begin{align*}
+          p(x) = a(\frac{x^4}{12} - 18x^2) + b(\frac{x^3}{6} - 3x^2) + cx + d
+        \end{align*}
+        $p$ is thus a fourth degree polynomial with second derivative $P$ such that $P(6) = 0$. An arbitrary fourth degree polynomial that has second derivative zero at $x = 6$
+        must thus be of the above form given our logic. Thus $1, x, \frac{x^3}{6} - 3x^2, \frac{x^4}{12} - 18x^2$ span this space of polynomials, and as they are linearly
+        independent, form a basis.
+      \ii
+        We append the vector $x^2$ to the above basis to get a basis of $\CP_4(\R)$.
+      \ii
+        The subspace $W$ is $\Span(x^2)$.
+    \end{enumerate}
+    \ii
+    \begin{enumerate}[label=\arabic*)]
+      \ii 
+        Consider the arbitrary 4th degree polynomial $p(x) = ax^4 + bx^3 + cx^2 + dx + e$. $p(2) = p(5)$ implies that,
+        \begin{align*}
+          16a + 8b + 4c + 2d + e = 625a + 125b + 25c + 5d + e
+        \end{align*}
+        Thus we must have that,
+        \begin{align*}
+          -203a - 39b - 7c = d
+        \end{align*}
+        Hence, if we take as a basis $x^4 - 203x, x^3 - 39x, x^2 - 7x, 1$, then notice that any linear combination of them satisfies the condition above. Hence this is the basis
+        we desire (as any fourth degree polynomial that satisfies the condition must look as above).
+      \ii
+        We extend the previous basis to a basis of $\CP_4(\R)$ by adding the additional vector $x$. This leads to a linearly independent list of vectors since,
+        \begin{align*}
+          ax^4 + bx^3 + cx^2 + e + (d - 203 - 39 - 7)x
+        \end{align*}
+        Hence, we can arbitrarily set $d$ after setting $a, b, c, e$ to obtain any value taken on by any polynomial in $\CP_4(\R)$. This implies that they span $\CP_4(\R)$,
+        and since it is a spanning list of dimension $5$ (which is the same as the dimension of $\CP_4(\R)$), it must be a linearly independent list as well since any spanning
+        list which has the same length as the dimensionality of the space must be a basis.
+      \ii
+        The subspace $W$ is $\Span(x)$.
+    \end{enumerate}
+    \ii
+    \begin{enumerate}[label=\arabic*)]
+      \ii 
+        Consider the arbitrary 4th degree polynomial $p(x) = ax^4 + bx^3 + cx^2 + dx + e$. $p(2) = p(5) = p(6)$ implies that,
+        \begin{align*}
+          16a + 8b + 4c + 2d + e = 625a + 125b + 25c + 5d + e
+        \end{align*}
+        Thus we must have that,
+        \begin{align*}
+          -203a - 39b - 7c = d
+        \end{align*}
+        Furthermore,
+        \begin{align*}
+          16a + 8b + 4c + 2d + e = 1296a + 216b + 36c + 6d + e
+        \end{align*}
+        And so,
+        \begin{align*}
+          -320a - 52b - 8c = d
+        \end{align*}
+        Thus,
+        \begin{align*}
+          -320a - 52b - 8c =  -203a - 39b - 7c 
+        \end{align*}
+        Implies,
+        \begin{align*}
+          -117a - 13b = c
+        \end{align*}
+        Replugging into the other equations,
+        \begin{align*}
+        \end{align*}
+        Hence, if we take as a basis $x^4 - 203x, x^3 - 39x, x^2 - 7x, 1$, then notice that any linear combination of them satisfies the condition above. Hence this is the basis
+        we desire (as any fourth degree polynomial that satisfies the condition must look as above).
+      \ii
+      \ii
+    \end{enumerate}
+    \ii
+      \begin{enumerate}[label=\arabic*)]
+        \ii 
+          Let $p(x) = ax^4 + bx^3 + cx^2 + dx + e$. Then,
+          \begin{align*}
+            \int_{-1}^{1}p(x)dx = \frac{2a}{5} + \frac{2c}{3} + \frac{2e}{1} = 0
+          \end{align*}
+          Thus, $e = \frac{-a}{5} - \frac{c}{3}$. Hence, we take as our basis $x, x^2 - \frac{1}{3}, x^3, x^4 - \frac{1}{5}$.
+        \ii
+          We add the vector $1$ and get a basis.
+        \ii
+          $W = \Span(\{1\})$.
+      \end{enumerate}
+    \ii
+      Let $\CV = \{v_1, \dots, v_m\}$. Then consider the list $\CV + w = \{v_1 + w, \dots, v_m + w\}$. Notice that $v_i - v_1 = (v_i + w) - (v_1 + w)$, for $i = 2, \dots, m$.
+      This list of vectors, $\CB = \{v_i - v_1: i \in 2, \dots, m\}$ is linearly independent. Let us see why. For constants $a_2, \dots, a_m$,
+      \begin{align*}
+        \sum_{i = 2}^{m}a_i(v_i - v_1) = 0
+      \end{align*}
+      The above sum being zero implies that 
+      \begin{align*}
+        \sum_{i = 2}^{m}a_iv_i = (\sum_{i = 2}^{m}a_i)v_1
+      \end{align*}
+      Now, there are two scenarios,
+      \begin{enumerate}[label=\roman*)]
+        \ii $\sum_{i = 2}^{m}a_i \neq 0$. This implies that $v_1$ is a linear combination of $v_2, \dots, v_m$, which contradicts the linear independence of $\CV$, so this
+        cannot be the case.
+        \ii $\sum_{i = 2}^{m}a_i = 0$. Hence we have $\sum_{i = 2}^{m}a_iv_i = 0$. Since $v_2, \dots, v_m$ are linearly independent, this implies that we must have $a_2 = a_3
+        = \dots = a_m = 0$.
+      \end{enumerate}
+      Thus, $\CB$ is linearly independent. Since $\Span(\CB) \subset \Span(\CV + w)$, and $\Dim\Span(\CB) = m - 1$, we must thus have that $\Dim\Span(\CV + w) \geq m - 1$.
+      This is because $\CB$ is a linearly independent list in $\CV + w$, and so any basis for $\Span(\CV + w)$ must have length greater than or equal to $m - 1$ (length of any
+      spanning list is greater than or equal to length of any linearly independent list).
+    \ii
+      To show that $\CP = \{p_0, \dots, p_m\}$ is a basis for $\CP_m(\F)$, we simply have to show that it is a linearly independent list, as $\CP \subset \CP_m(\F)$ and it has
+      the right length ($m + 1$). If we want to write the zero polynomial as a linear combination of $\CP$, we get
+      \begin{align*}
+        \sum_{i = 0}^{m}a_ip_i = 0
+      \end{align*}
+      For this sum to be zero, we must have $a_i = 0$ for all $i \in 0, \dots, m$. Let us see why. If $a_j \neq 0$, then 
+      \begin{align*}
+        \sum_{i \neq j}^{m}-\frac{a_i}{a_j}p_i = p_j
+      \end{align*}
+      We surely must have that $a_m = 0$. If not, then we would have an $a_mx^m$ term that cannot be cancelled out by lower order terms, which contradicts $p_j$ being of
+      degree $j$. The same reasoning applies iteratively all the way down to $a_{j + 1}$. From then on, we would get a linear combination of $p_0, \dots, p_{j - 1}$ yielding
+      $p_j$, which is impossible (a linear combination of polynomials of degree less than $j$ cannot yield a polynomial with degree $j$). Thus $a_j$ must in fact be $0$ for
+      all $j \in 0, \dots, m$. Thus $\CP$ is linearly independent, and since it has length $m + 1$ and is a subset $\CP_m(\F)$, it thus spans $\CP_m(\F)$.
+    \ii
+      We will do this problem in a general manner. Let $R^8$ be an arbitrary linear space $V$. Let $U$ and $W$ be subspaces of $V$ such that $\Dim U = n$, $\Dim W = m$, $\Dim
+      V = m + n$, and $U + W = V$. We now want to show that $V = U \oplus W$.  
+
+      % proof below is correct but there is easier version below it
+      % Let $\CU = \{u_1, \dots,  u_n\}$ and $\CW = \{w_1, \dots, w_m\}$ be respectively bases for $U$ and $W$. Assume for the sake of contradiction that $U + W$ is not a direct
+      % sum. Then there exists $v \in U \cap W$ such that $v \neq 0$. Then $v \in U$ and $v \in W$. Thus there exist $a_1, \dots, a_n$, not all zero, and $b_1, \dots, b_m$, not
+      % all zero, such that
+      % \begin{align*}
+      %   \sum_{i = 1}^{n}a_iu_i = \sum_{j = 1}^{m}b_iw_i
+      % \end{align*}
+      % Or,
+      % \begin{align*}
+      %   \sum_{i = 1}^{n}a_iu_i - \sum_{j = 1}^{m}b_iw_i = 0
+      % \end{align*}
+      % Let $\CV = \CU \cup \CW$. Since not all $a_i, b_j$ are zero, we have a nontrivial linear combination of vectors in $\CV$ that yield zero. Thus $\CV$ is not linearly
+      % independent, and since it has length $m + n$, it thus cannot be a basis for $V$ (as any basis for $V$ has length $m + n$ and is linearly independent). This implies that
+      % $\CV$ does not span $V$ (if it spanned $V$, then because it is linearly dependent, then we can remove vectors from $\CV$ to form a new linearly independent list which
+      % would have the same span but have less than $m + n$ vectors, contradicting $\dim V = m + n$, the length of any basis for $V$). $\CV$ not spanning contradicts $V = U +
+      % W$, as $V = U + W$ implies we can write any vector in $V$ as some vector $u \in U$, and $w \in W$, which can in turn be written in terms of their respective bases $\CU$
+      % and $\CW$, which implies that any vector in $V$ can be written as a linear combination of vectors in $\CV$. Thus our supposition is false and we must have that $U + W =
+      % V$ is in fact a direct sum, $U \oplus W = V$.
+
+      Recall that $\dim(U + W) = \dim U + \dim W - \dim(U \cap W)$. Since $U + W = V$, we have $\dim V = \dim U + \dim W - \dim(U \cap W)$.  However, recall that by assumption
+      $\dim V = m + n$, $\dim U = m$, and $\dim V = n$. This implies that $\dim(U \cap W) = 0$, i.e. $U \cap W = \{0\}$. This implies thus that $U + W$ is in fact a direct
+      sum.
+
+      What this problem intuitively says is that if two non-overlapping subspaces have dimensions that sum to the dimension of the overall space, then their sum yields the
+      whole space, as we now have all the dimensions.
+    \ii
+      We will do this problem more generally. Let $U$ and $W$ be subspaces of $V$, with $\dim U = n$, $\dim W = m$, and $\dim V < m + n$. We want to show that this implies
+      that $U \cap W \neq \{0\}$. 
+      
+      % proof below is correct but there is easier version below it
+      % Assume for the sake of contradiction that $U \cap W = \{0\}$. Then $U + W$ is a direct sum, i.e $U \oplus W = V$. Since $U \oplus W$ is a direct sum, we thus have a
+      % basis of $V$ as taking their bases together, i.e. if $\CU = \{u_1, \dots, u_n\}$ and $\CW = \{w_1, \dots, w_m\}$ are respectively bases for $U$ and $W$, then $\CV = \CU
+      % \cup \CW$ is a basis for $V$ since it is linearly independent (if it were not, this would contract $U \cap W = \{0\}$ and we would have some nonzero vector in the
+      % intersection. Which one? Write a nontrivial combination of $\CV$ to get zero. Move the vectors from $\CU$ to one side, and the vectors from $\CW$ to the other, and that
+      % is the vector in common), and spans $V$, since $U \oplus W = V$, since for any $v \in V$, $v = u + w$ for some $u \in U$ and $w \in W$, which in turn can be rewritten in
+      % terms of $\CU$ and $\CV$ respectively. This implies thus that $\dim V = m + n$, which contradicts our assumption. Thus it cannot be the case that $U \cap W = 0$, and in
+      % fact $U \cap W \neq \{0\}$.
+
+      We know that $\dim(U + W) = \dim U + \dim W - \dim(U \cap W)$. Certainly $\dim(U + W) \leq \dim (V) < m + n$, since $U + W \subset V$. Thus,
+      \begin{align*}
+        m + n 
+        & > \dim(V) \\
+        & \geq \dim(U + W) \\
+        & = \dim U + \dim W - \dim(U \cap W) \\
+        & = m + n - \dim(U \cap W) \\
+      \end{align*}
+      Or in other words, $\dim(U \cap W) > 0$, and so $U \cap W \neq \{0\}$.
+
+      What this problem intuitively says is that if the sum of the dimensions of two subspaces is greater than the dimension of the overall space, then there must be a
+      nontrivial intersection between the two. The next problem goes farther and shows that this intersection is a linear space with dimension at least the excess dimension.
+      i.e. if $\dim V = k$, then $\dim(U \cap W) = j \geq m + n - k = \dim U + \dim W - \dim V$.
+    \ii
+      We will solve this problem more generally. Let $U$ and $W$ be subspaces of $V$, with $\dim U = n$, $\dim W = m$. If $\dim V = k$, and $m + n - k = j$, then $\dim (U \cap
+      W) \geq j$. 
+      
+      Now $j \leq 0$ is always true, as $0 \in U \cap W$ always. Recall again that $\dim(U + W) = \dim U + \dim W - \dim(U \cap W)$. We know that $\dim(U + W) \leq \dim V =
+      k$. Thus,
+      \begin{align*}
+        \dim V 
+        & = k \\
+        &\geq \dim (U + W) \\
+        & = m + n - \dim(U \cap W)
+      \end{align*}
+      Thus, $\dim(U \cap W) \geq m + n - k = j$, as desired.
+    \ii
+      Let $U_1, \dots, U_m$ be finite-dimensional subspaces of $V$. Let $\CU_1, \dots, \CU_m$ be respectively bases for $U_1, \dots, U_m$, respectively with lengths $k_1,
+      \dots, k_m$. Then $U = U_1 + \dots + U_m$ is finite dimensional as it is spanned by 
+      \begin{align*}
+        \CU = (u_{11}, \dots, u_{1k_1}, u_{21}, \dots, u_{2k_2}, \dots, u_{m1}, \dots, u_{mk_m}) 
+      \end{align*}
+      which is a finite list and can be reduced to a linearly independent list with the same span if not already linearly independent. 
+
+      Furthermore, since any basis is a linearly independent list, it has length less than or equal the length of any spanning list. Note that $\CU$ at most has length $k =
+      \dim U_1 + \dots + \dim U_m$. Either all the vectors in $\CU_1, \dots, \CU_m$ are linearly independent when listed together, in which case the length is $k$, or if not
+      linearly independent, then $\CU$ has a length smaller than that. In the latter case, since $\CU$ spans $U$, and since the length of any basis for $U$ has length upper
+      bounded by the length of $\CU$, which is upper bounded $k$, we thus get that,
+      \begin{align*}
+        \dim U = \dim(U_1 + \dots + U_m) \leq k = \dim U_1 + \dots + \dim U_m
+      \end{align*}
+      As desired.
+    \ii
+      Let $V$ be finite dimensional as specified with dimension $n$. Then there exists a basis $\CU = \{u_1, \dots, u_n\}$ for $V$. Let $U_i = \Span(u_i)$. Consider the sum
+      $U = U_1 + \dots + U_n$. Certainly $U \subset V$. Also notice that for any $v \in V$, there exist $a_1, \dots, a_n$ such that $\sum_{i = 1}^{n}a_iu_i = v$. Since $a_iu_i
+      \in U_i$ for $i \in [n]$, we thus have that $V \subset U$, and so $U = V$. Finally, since $\CU$ is a basis for $V$, $0$ must be written uniquely as a linear combination
+      of vectors in $\CU$. That is, there exists a unique sum in $U$ that yields the zero vector, and that sum is precisely by taking each vector from $U_i$ to be zero. By
+      definition of direct sum, this implies thus that $U = U_1 + \dots + U_n$ is in fact a direct sum. Thus,
+      \begin{align*}
+        V = \bigoplus_{i = 1}^{n}U_i
+      \end{align*}
+      As desired.
+    \ii
+      Let $U_1, \dots, U_m$ be finite-dimensional subspaces of $V$. Let $\CU_1, \dots, \CU_m$ be respectively bases for $U_1, \dots, U_m$, respectively with lengths $k_1,
+      \dots, k_m$. Then $U = U_1 + \dots + U_m$ is finite dimensional as it spanned by 
+      \begin{align*}
+        \CU = (u_{11}, \dots, u_{1k_1}, u_{21}, \dots, u_{2k_2}, \dots, u_{m1}, \dots, u_{mk_m})
+      \end{align*}
+      which is a finite list and can be reduced to a linearly independent list with the same span if not already linearly independent. 
+
+      We want to show now that $\CU$ is in fact a basis for $U = U_1 \oplus \dots \oplus U_m$, as it has length, 
+      \begin{align*}
+        k = \sum_{i = 1}^{m}\dim U_i = \sum_{i = 1}^{m}k_i
+      \end{align*}
+      and we are done. We already know that $\CU$ spans $U$. Thus we only have to show that it is made up of linearly independent vectors. Since $U$ is a direct sum, zero can
+      only be written as combination of vectors in $U_1, \dots, U_m$, namely the sum $u_1 + \dots + u_m$, $u_i \in U_i$, by taking each $u_i = 0$. Thus, we must write each
+      $u_i = 0$ as a linear combination of vectors in $\CU_i$. Since each $\CU_i$ is a basis, the coefficients in the linear combination must thus all be zero. Thus, to write
+      $0 \in U$ as linear combination of vectors in $\CU$, we must take all the coefficients to be zero. Thus $\CU$ is linearly independent and so is a basis for $U$, which
+      implies that,
+      \begin{align*}
+        \dim U = \dim U_1 \oplus U_m = \dim(\Span(\CU)) = k_1 + \dots k_m = \dim U_1 + \dots + \dim U_m
+      \end{align*}
+      As desired.
+    \ii
+      False. Consider $U_1 = \Span(\{(1, 0)\})$, $U_2 = \Span(\{(0, 1)\})$, $U_3 = \Span(\{(1, 1)\})$. Then,
+      \begin{align*}
+        \dim(U_1 + U_2 + U_3) = 2 
+      \end{align*}
+      And,
+      \begin{align*}
+       & \dim U_1 + \dim U_2 + \dim U_3 - \dim(U_1 \cap U_2) - \dim(U_1 \cap U_3) - \dim(U_2 \cap U_3) + \dim (U_1 \cap U_2 \cap U_3) \\
+       = & 1 + 1 + 1 - 0 - 0 - 0 - 0 \\
+       = & 3
+      \end{align*}
+      And so $2 \neq 3$.
+  \end{enumerate}
+\chapter{Linear Maps}
+\section{Linear Space of Linear Maps}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      By problem 3, we have the desired result (i.e. we must have $b = c = 0$).
+    \ii 
+      By problem 3, we have the desired result (i.e. we must have $b = c = 0$).
+    \ii 
+      What this exercise says is that a map $T \in \CL(\F^n, \F^m)$ is linear if and only if it can be represented in the form,
+      \begin{align*}
+        T(x_1, \dots, x_n) = [A_{1,1}x_1 + \dots + A_{1, n}x_n, A_{2, 1}x_1 + \dots + A_{2, n}x_n, \dots, A_{m, 1}x_1 + \dots + A_{m, n}x_n]
+      \end{align*}
+      Certainly the map as shown above is linear. Now let us show that every linear map can be represented in this form. Let $x \in \F^n$ be arbitrary. Then $x = \sum_{i = 1}^{n}x_ie_i$, where
+      $e_i$ is the $i$th standard basis vector. Then,
+      \begin{align*}
+        T(x) & = T(\sum_{i = 1}^{n}x_ie_i) \\
+        & = \sum_{i = 1}^{n}x_iT(e_i)
+      \end{align*}
+      Now, $T(e_i)$ gets mapped to to some vector in $\F^m$, say $A_i = [A_{i1} \dots A_{im}]$. We write this in terms of the standard basis vectors as
+      \begin{align*}
+        T(e_i) = A_i = \sum_{j = 1}^{m}A_{ij}e_j
+      \end{align*}
+      Then, replacing $T(e_i)$ in the original expression,
+      \begin{align*}
+        T(x) & = \sum_{i = 1}^{n}x_iT(e_i) \\
+        & = \sum_{i = 1}^{n}\sum_{j = 1}^{m}x_iA_{ij}e_j \\
+        & = \sum_{j = 1}^{m}(\sum_{i = 1}^{n}x_iA_{ij})e_j
+      \end{align*}
+      That is,
+      \begin{align*}
+        T(x) = [A_{1,1}x_1 + \dots + A_{1, n}x_n, A_{2, 1}x_1 + \dots + A_{2, n}x_n, \dots, A_{m, 1}x_1 + \dots + A_{m, n}x_n]
+      \end{align*}
+      As desired.
+    \ii
+      Let $c_1, \dots, c_m$ be constants such that $\sum_{i = 1}^{m}c_iv_i = 0$. Then,
+      \begin{align*}
+        0 = T(0) & = T(\sum_{i = 1}^{m}c_iv_i) \\ 
+        & = \sum_{i = 1}^{m}c_iTv_i
+      \end{align*}
+      Since the list $Tv_1, \dots, Tv_m$ is linearly independent in $W$, then we must have $c_1 = \dots = c_m = 0$. Thus $v_1, \dots, v_m$ are linearly independent. 
+    \ii
+    \ii
+    \ii
+      Let $\dim V = 1$. Then there exist $v_1 \in V$ such that $V = \Span(\{v_1\})$. Let $T \in \CL(V, V) = \CL(V)$. Let $v \in V$ be arbitrary. Then there exists $\mu$ such that $v_1 = \mu
+      v$.  Furthermore, since $\text{Img}(T) \subset V$, then there exist $\gamma$ such that $T(v) = \gamma v_1$. Then,
+      \begin{align*}
+        T(v) = \gamma v_1 = \gamma\mu v
+      \end{align*}
+      Now let $\lambda = \gamma\mu$.
+    \ii
+    \ii
+    \ii
+      Let $u \in U$, and let $v \in V$ and let $v \not\in U$. Let $u$ be such that $Su \neq 0$. Notice that $u + v \not\in U$. If it were, then there is another $x \in U$ such that $u + v =
+      x$. Then $x - u = v$. Since $U$ is a linear space, $v \in U$, which is a contradiction. Thus $u + v \not\in U$ as claimed. Thus $T(u + v) = 0$. However, $T(u) + T(v) = T(u) \neq 0$.
+      Hence $T$ is not linear.
+    \ii
+      Let $V$ have dimension $n$. Since $V$ is finite dimensional, $U$ is finite dimensional with dimension say $m \leq n$. Let $\CU = \{u_1, \dots, u_m\}$ be a basis for $U$. Extended $\CU$
+      to a basis $\CV$ of $V$, with the additional vectors being $v_1, \dots, v_k$, where $n - m = k$. Define $T$ by $Tu_i = Su_i$ and $Tv_i = 0$. This map is thus linear by the first
+      proposition from the chapter.
+    \ii
+      Let $\dim V = n$. Since $W$ is infinite dimensional, there exists a sequence $w = (w_i)_{i = 1}^{\infty}$ such that $w_1, \dots, w_m$ is linearly independent for any $m \in \N$.
+      Consider now the subsets of $w$ defined by $\CW_i = \{w_{i\cdot1}, \dots, w_{i\cdot n}\}$, for $i \in \N$. This is simply partitioning $w$ into subsets of length $n$. Let $\CV = \{v_1,
+      \dots, v_n\}$ be a basis for $V$. Define linear maps $T_i: V \to W$ by $T_i(v_j) = w_{i\cdot j}$. Consider now the sequence $T = (T_i)_{i = 1}^{\infty} \subset \CL(V, W)$. We claim
+      $T_1, \dots, T_k$ is linearly independent for any $k \in \N$.
+
+      Let $c_1, \dots, c_k$ be constants such that 
+      \begin{align*}
+        \sum_{i = 1}^{k}c_iT_i = 0
+      \end{align*}
+      That is, the zero map. Consider now the basis $\CV$ again. Let $v_\ell$ be the $\ell$th vector in $\CV$, for $\ell \in [n]$. Then,
+      \begin{align*}
+        0 = 0(v_\ell) = \sum_{i = 1}^{k}c_iT_i(v_\ell) = \sum_{i = 1}^{k}c_iw_{i\cdot\ell}
+      \end{align*}
+      Then, since $\{w_{i\cdot\ell}: \ell \in [n]\}$ are linearly independent, we must have $c_1 = \dots = c_k = 0$, and so $T_1, \dots, T_k$ is linearly independent. Since this holds true
+      for any $k \in \N$, we then have $\CL(V, W)$ is infinite dimensional, as desired.
+    \ii
+      Since $v_1, \dots, v_m$ is linearly dependent, there exists $k$ such that $v_k = \sum_{i = 1}^{k - 1}c_iv_i$ for some constants $c_1, \cdots, >_{k - 1}$. Consider now some map $T \in
+      \CL(V, W)$ such that $Tv_i = w_i$ for $i = 1, \cdots, k - 1$. Then,
+      \begin{align*}
+        Tv_k = T(\sum_{i = 1}^{k - 1}c_iv_i) = \sum_{i = 1}^{k - 1}c_iw_i
+      \end{align*}
+      Now, we simply choose $w_k$ such that $\sum_{i = 1}^{k - 1}c_iw_i \neq w_k$ (e.g. $w_k = 0$ if $Tv_k$ is nonzero and vice versa), and we have the desired result.
+    \ii
+      Let $v_1, \dots, v_n$ be a basis for $V$. Define $T$ by $Tv_i = v_i$ for $i = 3, \dots, n$, $Tv_1 = v2$, and $Tv_2 = v_1$. Define $S$ by $Sv_i = v_i$ for $i = 2, 4, \dots, n$, $Tv_1 =
+      v_3$, and $Vv_3 = v_1$. Then,
+      \begin{align*}
+        STv_1 & = Sv_2 = v_2 \\
+        TSv_1 & = Tv_3 = v_3
+      \end{align*}
+      And so $ST \neq TS$.
+      
+  \end{enumerate}
+\section{Null Spaces and Ranges}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      \begin{align*}
+        T(x) = [\sum_{i = 1}^{5}x_i, \sum_{i = 2}^{5}x_i]
+      \end{align*}
+    \ii
+      Let $v \in V$. Then,
+      \begin{align*}
+        (ST)^2v = STS(Tv)
+      \end{align*}
+      $STv \in \ran S \subset \nullspace T$. Thus $TSTv = 0$. Thus $STSTv = 0$. Thus $(ST)^2 = 0$.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          If $\dim\ran T = \dim V$, then $v_1, \dots, v_m$ spans $V$.
+        \ii
+          If $\dim\nullspace T = 0$, then $v_1, \dots, v_m$ are linearly independent. In this case, there is only vector, $z_1 = \dots = z_m = 0$ that would yield us the zero vector, which as
+          $T$ is defined, would imply $v_1, \dots, v_m$ are linearly independent.
+      \end{enumerate}
+    \ii
+      To show that the given space is not a subspace, we show it is not closed under linear combinations of its elements. Let $v_1, \dots, v_5$ be a basis for $\R^5$. Consider $T_1$ defined
+      by $Tv_i = 0$ for $i = 3, 4, 5$, and then $Tv_1 = e_1 \in \R^4$, $Tv_2 = e_2$, $e_2 \in \R^4$. Next, consider $T_2$ defined by $Tv_i = 0$ for $i = 1, 2, 5$, and $Tv_3 = e_3$, $Tv_4 =
+      e_4$. Consider then the map $T_1 + T_2$. By its definition, its clear that $\dim\ran T = 4$ and $\dim\nullspace T = 1$ (e.g. for any $u \in \R^4$, $u = \sum_{i = 1}^{4}c_ie_i$.
+      $T(\sum_{i = 1}^{5}c_iv_i) = u$, where $c_5$ is arbitrary). Thus $T \not\in \CL(\R^5, \R^4)$.
+
+      NB. This is the clearest demonstration of the fundamental theorem of linear maps, the rank nullity theorem. Each dimension either gets mapped to another dimension in the target space,
+      or gets mapped to zero. What we played around with in this exercise is sending different dimensions to zero, or alternatively preserving different dimensions, so that the overall
+      result has more dimensions.
+    \ii
+      Here is how to think about this. We want to split the space so that one half gets mapped to the other half, then this other half gets mapped to zero. This is how you get $\nullspace T =
+      \ran T$. This is easy. If we let $v_1, \dots, v_4$ be a basis for $\R^4$, then simply let $T$ be defined by $Tv_1 = v_3$, $Tv_2 = v_4$, $Tv_3 = 0$, $Tv_4 = 0$. We preserve two
+      dimensions and lose $2$, so far so good. Furthermore, the nullity is obviously $\Span(\{v_3, v_4\})$. By how $T$ maps $v_1$ and $v_2$, it's obvious that $\ran T = \Span(\{v_3, v_4\})$.
+      Hence the desired result.
+    \ii
+      For these two spaces to be equal, they must certainly have the same dimension. $\frac{5}{2} = 2.5$. Hence we can't even split up the dimensions of $\R^5$ among the dimensions
+      preserved and the dimensions mapped to zero (This is what rank nullity says. These dimensions always add up to the total dimension).
+    \ii
+      To show that the given space is not a subspace, we show it is not closed under linear combinations of its elements. Let $v_1, \dots, v_n$ be a basis for $V$. Let $w_1, \dots, w_n$ be a
+      list of linearly independent vectors in $W$. Let $T_1$ be defined by $T_1v_i = \frac{1}{2}w_i$ for $i = 2, \dots, n$, and $T_1v_1 = 0$, and let $T_2$ be defined by $T_2v_i =
+      \frac{1}{2}w_i$ for $i = 1, \dots, n - 1$, and $T_2v_n = 0$. These two maps are certainly not injective. Let $T = T_1 + T_2$. Notice that $Tv_i = w_i$ for all $i \in [n]$, and so
+      $\dim\nullspace T = 0$. Thus $T$ is injective. Thus the space specified in the problem is not a subspace, as desired.
+    \ii
+      To show that the given space is not a subspace, we show it is not closed under linear combinations of its elements. Let $v_1, \dots, v_n$ be a basis for $V$. Let $w_1, \dots, w_m$ be a
+      basis for $W$. Let $T_1$ be defined by $T_1v_1 = w_1$, $T_1v_2 = 0$, $T_1v_i = \frac{1}{2}w_i$ for $i = 3, \dots, m$ and $T_1Tv_i = 0$ for $i = m + 1, \dots, n$. Let $T_2$ be defined
+      by $T_2v_1 = 0$, $T_2v_2 = w_2$, $T_2v_i = \frac{1}{2}w_i$ for $i = 3, \dots, m$ and $T_2Tv_i = 0$ for $i = m + 1, \dots, n$. Both of these maps are not surjective. Let $T = T_1 +
+      T_2$. Note that $Tv_i = w_i$ for $i = 1, \dots, m$, and $Tv_i = 0$ for $i = m + 1, \dots, n$. $T$ is surjective. Thus the space specified in the problem is not a subspace, as desired.
+    \ii
+      Let $c_1, \dots, c_n$ be such that,
+      \begin{align*}
+        \sum_{i = 1}^{n}c_iTv_i = 0
+      \end{align*}
+      Then we must have that,
+      \begin{align*}
+        \sum_{i = 1}^{n}cTv_i & = T(\sum_{i = 1}^{n}c_iv_i) = 0
+      \end{align*}
+      Since $T$ is injective, we must have that $\nullspace T = \{0\}$, and so $\sum_{i = 1}^{n}c_iv_i = 0$, which implies $c_i = 0$ for $i \in [n]$ by the linear independence of $v_1, \dots,
+      v_n$. Thus $Tv_1, \dots, Tv_n$ are linearly independent.
+
+      This exercise is an application of the rank nullity theorem (fundamental theorem of linear maps). $T$ injective means that it is dimension preserving and no dimensions are mapped to
+      zero. Let's think of the subspace spanned by $v_1, \dots, v_n$. We know that under $T$, the image of this subspace under $T$ also has dimension $n$. To preserve this dimension then,
+      $Tv_1, \dots, Tv_n$ must be linearly independent so we can preserve the dimensions. Alternatively, by linearity, this is just the image of the subspace under $T$ is just the span of
+      $Tv_1, \dots, Tv_n$. Hence it must be the case that they be linearly independent that they may span a space with dimension $n$.
+     \ii
+       Let $w \in \ran T$. Then $Tv = w$ for some $v \in V$. Then $v = \sum_{i = 1}^{n}c_iv_i$ for some list of constants $c_1, \dots, c_n$. Thus,
+       \begin{align*}
+         w = Tv = T(\sum_{i = 1}^{n}c_iv_i) = \sum_{i = 1}^{n}c_iTv_i
+       \end{align*}
+       Thus $Tv_1, \dots, Tv_n$ spans $\ran T$, as desired.
+     \ii
+       Let $S_i: V_i \to V_{i - 1}$, for $i = 1, \dots, n$. Let $v \in V_n$. Then $S_1(S_2\dots S_nv) = 0$ implies that $S_2(S_3\dots S_nv) = 0$, which implies that $S_3(S_4\dots S_nv) = 0$,
+       and so on all the way down until we get that $v = 0$ (where each step in the iteration is by the injectivity of $S_i$). Thus $S_1\dots S_n$ is injective. 
+     \ii
+       Let $v_1, \dots, v_n$ be a basis for $\nullspace T$. Extend this to a basis of $V$ with vectors $\CU = \{u_1, \dots, u_m\}$. Let $U = \Span(\CU)$. Notice that $\nullspace T \cap U = \{0\}$
+       by definition of $U$ (the list $v_1, \dots, v_n, u_1, \dots, u_m$ wouldn't be linearly independent otherwise). For any $v \in V$, we have $v = \sum_{i = 1}^{n}a_iv_i + \sum_{j =
+       1}^{m}b_ju_j$, for some constants $a_1, \dots, a_n, b_1, \dots, b_m$. Then we get that 
+       \begin{align*}
+         Tv & = T(\sum_{i = 1}^{n}a_iv_i + \sum_{j = 1}^{m}b_ju_j) \\
+         & = T(\sum_{j = 1}^{m}b_ju_j) \\
+         & = Tu
+       \end{align*}
+       Where $u = \sum_{j = 1}^{m}b_ju_j$, since $v_1, \dots, v_n \in \nullspace T$ and so $Tv_i = 0$. Thus $\ran T = \{Tu: u \in U\}$. As desired.
+     \ii
+       If we can show $\dim\ran T = 2$, then we are done, as $\ran T \subset \F^2$ and so showing they have the same dimension implies $\ran T = \F^2$. Thus we simply have to show that
+       $\dim\nullspace T = 2$ (as the domain has dimension $4$). Notice that $\nullspace T$ is spanned by $(5, 1, 0, 0)$ and $(0, 0, 7, 1)$, which are linearly independent. Hence $\dim\nullspace T
+       = 2$ and we have the desired result.
+     \ii
+       We can generalize this problem. Let $T: V \to W$ be such that $\dim V = n$, with a subspace $U$ such that $\dim U = m$ (and obviously $m \leq n$), and $\dim W = \dim V - \dim U = n -
+       m$ and $\nullspace T = U$. We want to show now that $T$ is surjective. By rank nullity, $\dim\ran T = n - m$. Since $\ran T \subset W$, then $\ran T = W$ as they have the same dimension.
+       Thus $T$ is surjective, as desired.
+    \ii
+      The given space is spanned by the vectors $(3, 1, 0, 0, 0)$ and $(0, 0, 1, 1, 1)$. These vectors are linearly independent and thus their span has dimension $2$. By the rank nullity
+      theorem, we must have that $\dim\ran T = 5 - 2 = 3$. However, $\F^2$ only has dimension $2$, and it cannot be the case that $\dim\ran T > \dim W$ when $\ran T \subset W$. Thus we
+      cannot have the given space as the null space of any linear map.
+
+      More generally, if $T: V \to W$, with $\dim V = n$, $\dim W = m$, and $n > m$, then $\dim\nullspace T = \dim V - \dim \ran T = n - \dim\ran T \geq n - m$.
+    \ii
+      Let $T: V \to W$ be such that $m = \dim\nullspace T < \infty$ and $n = \dim\ran T < \infty$. Let $w_1, \dots, w_n$ be a basis for $\ran T$. Then $w_i = Tv_i$ for some list $\CV = \{v_1, \dots,
+      v_n\} \subset V$. $v_1, \dots, v_n$ are linearly independent since
+      \begin{align*}
+        \sum_{i = 1}^{n}c_iv_i & = 0 \implies 0 = T(\sum_{i = 1}^{n}c_iv_i) = \sum_{i = 1}^{n}c_iw_i
+      \end{align*}
+      Which implies $c_i = 0$ for $i \in [n]$ as $w_1, \dots, w_n$ are linearly independent. Let $\CU = \{u_1, \dots, u_m\}$ be a basis for $\nullspace T$. If we can show that $u_1, \dots,
+      u_m, v_1, \dots, v_n$ span $V$, then we are done. Let $v \in V$ be arbitrary. Then, either $Tv = 0$ or $Tv \neq 0$. If $v = 0$, then $v \in \Span(\CU) = \nullspace T$ and $v \in
+      \Span(\CV)$. If $v \neq 0$. Then if $Tv = 0$, then $v \in \Span(\CU) = \nullspace T$. If $Tv \neq 0$, then $v \in \Span(\CV)$ since $T(\Span(\CV)) = \ran T$ (abuse of notation). Thus
+      $\CU, \CV$ together span $V$, and since they are finite lists, then $V$ must be finite dimensional. 
+    \ii
+      Let $T: V \to W$ be injective. Let $v_1, \dots, v_n$ be a basis for $V$. Then $Tv_1, \dots, Tv_n$ is linearly independent in $W$ (check problem $3.B.9$). Since the length of any
+      spanning list (and hence basis) is greater than or equal to the length of any linearly independent list, we thus have $\dim V = n \leq \dim W$. Conversely, let $\dim V \leq \dim W$.
+      Let $v_1, \dots, v_n$ be a basis for $V$, and $w_1, \dots, w_m$ be a basis for $W$. $n \leq m$. Define $T: V \to W$ by $Tv_i = w_i$ for $i \in [n]$. Since $Tv_1 = w_1, \dots, Tv_n =
+      w_n$ are linearly independent, we must have that $\dim\ran T \geq n$, and so $\dim\ran T = n$ and $\dim\nullspace T = 0$ by rank nullity theorem. $\nullspace T = \{0\}$ implies that $T$ is
+      injective.
+    \ii
+      Let $T: V \to W$ be surjective. Let $v_1, \dots, v_n$ be a basis for $V$. Then $Tv_1, \dots, Tv_n$ spans $\ran T = W$ (problem $3.B.10$). Thus $\dim V \geq \dim\ran T = \dim W$.
+      Conversely, let $\dim V \geq \dim W$. Let $v_1, \dots, v_n$ be a basis for $V$. Let $w_1, \dots, w_m$ be a basis for $W$. $n \geq m$. Let $T: V \to W$ be defined by $Tv_i = w_i$ for $i
+      = 1, \dots, m$ and $Tv_i = 0$ for $i = m + 1, \dots, n$. This map is surjective as any $w \in W$ is in the span of $Tv_1 = w_1, \dots, Tv_m = w_m$ as $w_1, \dots, w_m$ is a basis. As
+      desired.
+    \ii
+      Let $T: V \to W$ be such that $\nullspace T = U$. Then $\dim V = \dim\nullspace T + \dim\ran T = \dim U + \dim\ran T \leq \dim U + \dim W$. Thus $\dim U \geq \dim V - \dim W$. Conversely,
+      let $\dim U \geq \dim V - \dim W$. Let $u_1, \dots, u_m$ be a basis for $U$. Grow this to a basis by adding vectors $v_1, \dots, v_n$. Let $w_1, \dots, w_p$ be a basis for $W$. Then,
+      since $\dim U \geq \dim V - \dim W$, we have that $m \geq m + n - p$, or $p \geq n$. Thus we define $T: V \to W$ by $Tu_i = 0$ for $i \in [m]$, $Tv_i = w_i$ for $i \in [n]$. By
+      construction, $\nullspace T = U$ (because $Tv_i \neq 0$ for all $v_i$).
+    \ii
+      Let $T: V \to W$ be injective. $W$ being finite dimensional implies that $\dim\ran T < \infty$ since $\ran T \subset W$. $T$ being injective implies $\dim\nullspace T = 0$. This implies
+      by problem $3.B.16$ that $V$ is finite dimensional. Let $v_1, \dots, v_n$ be a basis for $V$. $Tv_1, \dots, Tv_n$ spans $\ran T$ (problem $3.B.10)$. Let $S: W \to V$ be defined by
+      $S(Tv_i) = v_i$ for $i \in [n]$. This defines the behavior of $S$ on $\ran T$. For $w \in W$ and $w \not\in \ran T$, let $Sw$ be arbitrary, e.g. $Sw = 0$. Let $v \in V$ be arbitrary.
+      Then $v = \sum_{i = 1}^{n}c_iv_i$ for some constants $c_1, \dots, c_n$. Thus,
+      \begin{align*}
+        STv & = ST(\sum_{i = 1}^{n}c_iv_i) \\
+        & = S(\sum_{i = 1}^{n}c_iTv_i) \\
+        & = \sum_{i = 1}^{n}c_iS(Tv_i) \\
+        & = \sum_{i = 1}^{n}c_iv_i \\
+        & = v
+      \end{align*}
+      And so $ST$ is an identity map on $V$, as desired. Conversely, let $ST$ is the identity map on $V$. Let $v_1, v_2 \in V$ be such that $Tv_1 = Tv_2$. Then, $v_1 = STv_1 = STv_2 = v_2$,
+      and so $T$ is an injection, as desired.
+    \ii
+      Let $T: V \to W$ be surjective. Let $v_1, \dots, v_n$ be a basis for $V$. Then $Tv_1, \dots, Tv_n$ span $\ran T = W$ (problem $3.B.10$). Thus $W$ is finite dimensional. Reduce $Tv_1,
+      \dots, Tv_n$ to a basis of $W$, and, without loss of generality, assume the basis is $Tv_1, \dots, Tv_k$, $k \leq n$ (reorder the labels otherwise). Let $S: W \to V$ be defined by
+      $S(Tv_i) = v_i$ for $i \in [k]$. This defines the behavior of $S$ on all of $W$ since $Tv_1, \dots, Tv_k$ is a basis for $W$. Now let $w \in W$ be arbitrary, then there exist constants
+      $c_1, \dots, c_k$ such that $w = \sum_{i = 1}^{k}c_iTv_i$. Then,
+      \begin{align*}
+        TS(w) & = TS(\sum_{i = 1}^{k}c_iTv_i) \\
+        & = T(\sum_{i = 1}^{k}c_iv_i) \\
+        & = \sum_{i = 1}^{k}c_iTv_i \\
+        & = w
+      \end{align*}
+      And so $TS$ is the identity on $W$, as desired. Conversely, assume $V$ is finite dimensional and $TS$ is the identity on $W$. Let $w \in W$ be arbitrary. Notice that $T(Sw) = w$. Hence
+      $T$ is surjective, as desired.
+    \ii
+      % can you have $Tu \neq 0$, $Tv \neq 0$, $v \neq -u$, but T(u + v) = 0? Of course, if Tu \neq 0, then u \not\in \nullspace T, likewise with $v$. However, if in reality v = -u + v_1,
+      % where v_1 is some nonzero vector in \nullspace T, then it is very obvious then that even though u + v \in \nullspace T even though u, v \not\in \nullspace T.
+
+      % the key realization is this: dimension preserving linear maps, i.e. ones that have a trivial kernel, are injections. we knew this already. but what does this mean? if we consider a
+      % linear map T on just the preimage of its range, then this map is a surjection (trivially by virtue of its definition), and an injection (since it is a map on the preimage of the
+      % range, which by definition is disjoint from the null space.
+      % Let $\dim U = m$ and $\dim V = n$. $\nullspace ST$ has two components: $u \in U$ such that $Tu = 0$, and the preimage of $\nullspace S \cap \ran T$ under $T$ excluding $\null T$, which
+      % we term $U_{\ran T \cap \nullspace S} = (\{u \in U: Tu \neq 0\} \cup \{0\}) \cap \nullspace S$. The first component is simply $\nullspace T$. The second component is a subspace of $U$
+      % (preimage of a subspace is also a subspace. If $x, y$ are in the preimage, then $T(x + y) = T(x) + T(y) \in \nullspace S \cap \ran T$ because the image is a subspace). If we think of
+      % $T$ as being restricted to this image, i.e.  $T|_{U_{\ran T \cap \nullspace S}}$, then this new map is by definition surjective and an injection (injection because it has a trivial
+      % kernel). Furthermore, note that $U_{\ran T \cap \nullspace S} \cap \nullspace T = \{0\}$, and that $\nullspace ST = U_{\ran T \cap \nullspace S} \cup \nullspace T$. Thus,
+      % \begin{align*}
+      %   \dim\nullspace ST & = \dim\nullspace T + \dim U_{\ran T \cap \nullspace S} \\
+      %   & = \dim\nullspace T + \dim \{\ran T \cap \nullspace S\} \\
+      %   & \leq \dim\nullspace T + \dim\nullspace S
+      % \end{align*}
+
+      Let $T^\prime: \nullspace ST \to V$ by $T^\prime u = Tu$ for $u \in U$. Then notice that $\ran T^\prime \subset \nullspace S$. Thus,
+      \begin{align*}
+        \dim\nullspace ST & = \dim\nullspace T^\prime + \dim\ran T^\prime \\
+        & \leq \dim\nullspace T^\prime + \dim\nullspace S \\
+        & \leq \dim\nullspace T + \dim\nullspace S
+      \end{align*}
+      Where the first equality was by rank-nullity, first inequality since $\ran T^\prime \subset \nullspace S$, and second inequality since $\nullspace T^\prime \subset \nullspace T$ (in fact
+      they are equal).
+
+      What this problem ultimately says is that when we compose linear maps, the nullspace can grow, and here is an upper bound for how large it can get.
+    \ii
+      % a key insight is again an idea associated with rank nullity. a linear map won't ever grow your dimension. it'll only maintain dimension, or reduce it. hence in the intermediary space
+      % V, the domain is now \ran T, and so the range in the target space W is restricted by the size of \ran T.
+      $\ran ST = \{w \in W: STu = w, u \in U\}$. If $w \in W$ is such that $STu = w$ for some $u \in U$ (i.e. $w \in \ran ST$), then $Sv = w$, where $v = Tu \in V$. Thus $\ran ST \subset
+      \ran S$. Let $S^\prime: \ran T \to W$ be such that $S^\prime v = Sv$ where $v \in \ran T \subset V$. Notice that $\ran ST = \ran S^\prime$. Thus 
+      \begin{align*}
+        \dim\ran T & = \dim\nullspace S^\prime + \dim\ran S^\prime \\
+        & = \dim\nullspace S^\prime + \dim\ran ST \\
+        & \geq \dim\ran ST
+      \end{align*}
+      Thus $\dim\ran ST \leq \min\{\dim\ran T, \dim\ran S\}$, as desired.
+    \ii
+      % what if $\nullspace T_1 \not\subset \nullspace T_2$? i.e. what if \nullspace T_1 \setminus \nullspace T_2 \neq \neq \varnothing? In that case, for those values after doing the set
+      % subtraction, we would need S to map say zero to zero, but then also map zero to w where w is such that $T_1v = 0$, v \in \nullspace T_1 and $T_2v = w \neq 0$. So we can't actually form
+      % that linear map.
+      Assume there exists $S: W \to W$ such that $T_2 = ST_1$. Then, if $v \in V$ is such that $T_1v = 0$, then $ST_1v = T_2v = 0$. Thus $\nullspace T_1 \subset \nullspace T_2$. 
+
+      Conversely, assume $\nullspace T_1 \subset \nullspace T_2$. First, since $W$ is finite dimensional, and $\ran T_1, \ran T_2 \subset W$, we have that $\ran T_1$ and $\ran T_2$ are finite
+      dimensional. Let $Tv_{1}, \dots, Tv_{n}$ be a basis for $\ran T_1$. $v_{1}, \dots, v_{n}$ are linearly independent in $V$.
+
+      Since $\nullspace T_1 \subset \nullspace T_2$, then if  $T_2v \neq 0$, then $T_1v \neq 0$. Thus there exist $a_1, \dots, a_n$ such that $T_1(\sum_{i = 1}^{n}a_iv_i) = Tv$. Let $r = v -
+      \sum_{i = 1}^{n}a_iv_i$. Then $r \in \nullspace T_1$. Thus $r \in \nullspace T_2$.  Thus $T_2v = T_2(\sum_{i = 1}^{n}a_iv_i + r) = T_2(\sum_{i = 1}^{n}a_iv_i)$. 
+
+      Expand $Tv_1, \dots, Tv_n$ to a basis of $W$ by adding vectors $w_1, \dots, w_m$. Let $S \in \CL(W, W)$ be defined by $S(T_1v_i) = T_2v_i$ for $i \in [n]$, and $Sw_i = 0$ for $i \in
+      [m]$. 
+
+      Let $v \in V$ be arbitrary. If $v \in \nullspace T_1$, then $v \in \nullspace T_2$ and $ST_1v = T_2v = 0$. If $v \not\in \nullspace T_1$ but $v \in \nullspace T_2$, then $T_2v = 0$.
+      Furthermore, since $T_1v \neq 0$, and $T_1v_1, \dots, T_1v_n$ is a basis for $\ran T_1$, there exist $a_1, \dots, a_n$ such that $T_1(\sum_{i = 1}^{n}a_iv_i) = T_1v$. Let $r = v -
+      \sum_{i = 1}^{n}a_iv_i$. $r \in \nullspace T_1$, and thus also in $\nullspace T_2$. We thus get that
+      \begin{align*}
+        ST_1v & = ST_1(\sum_{i = 1}^{n}a_iv_i) \\
+        & = \sum_{i = 1}^{n}a_iST_1v_i \\
+        & = \sum_{i = 1}^{n}a_iT_2v_i \\
+        & = T_2(\sum_{i = 1}^{n}a_iv_i) \\
+        & = T_2(\sum_{i = 1}^{n}a_iv_i + r) \\
+        & = T_2v = 0
+      \end{align*}
+
+      Finally, if $v \not\in \nullspace T_2$, then $v \not\in \nullspace T_1$. Thus there exist $a_1, \dots, a_n$ such that $T_1v = T_1(\sum_{i = 1}^{n}a_iv_i)$. Let $r = v -
+      \sum_{i = 1}^{n}a_iv_i$. $r \in \nullspace T_1$ and thus $r \in \nullspace T_2$. Thus,
+      \begin{align*}
+        ST_1v & = ST_1(\sum_{i = 1}^{n}a_iv_i + r) \\
+        & = ST_1(\sum_{i = 1}^{n}a_iv_i) \\
+        & = \sum_{i = 1}^{n}a_iST_1v_i \\
+        & = \sum_{i = 1}^{n}a_iT_2v_i \\
+        & = T_2(\sum_{i = 1}^{n}a_iv_i) \\
+        & = T_2(\sum_{i = 1}^{n}a_iv_i + r) \\
+        & = T_2v
+      \end{align*}
+      And so $T_2 = ST_1$, as desired.
+    \ii
+      Assume there exists $S: V \to V$ such that $T_1 = T_2S$. Let $w \in \ran T_1$. Then there exists $v \in V$ such that $T_1v = w$. Thus $T_2Sv = w$, or $T_2(Sv) = w$. Thus $\ran T_1
+      \subset \ran T_2$.  
+      \\~\\
+
+      Conversely, let $\ran T_1 \subset \ran T_2$. Since $V$ is finite dimensional, $\nullspace{T_1}$ is finite dimensional. Let $v_1, \dots, v_n$ be a basis for it. Extend
+      $\nullspace{T_1}$ to a basis of $V$ by adding vectors $u_1, \dots, u_m$. Let $v \in V$ be arbitrary. Then,
+      \begin{align*}
+        v = \sum_{i = 1}^{n}a_iv_i + \sum_{j = 1}^{m}b_iu_i
+      \end{align*}
+      for some $a_1, \dots, a_n, b_1, \dots, b_m \in \F$. Then,
+      \begin{align*}
+        T_1v & = T_1(\sum_{i = 1}^{n}a_iv_i + \sum_{j = 1}^{m}b_iu_i)
+        & = \sum_{j = 1}^{m}b_iT_1u_i
+      \end{align*}
+      Thus $\ran{T_1}$ is spanned by $T_1u_1, \dots, T_1u_m$. Furthermore, this list is linearly independent and hence a basis. This is because if 
+      \begin{align*}
+        T_1v & = T_1(\sum_{j = 1}^{m}b_iu_i) = 0
+      \end{align*}
+      Then $\sum_{j = 1}^{m}b_iu_i \in \nullspace{T_1}$, which only happens when $b_1, \dots, b_m = 0$ since $\Span(u_1, \dots, u_m) \cap \nullspace{T_1} = \{0\}$, since $u_1, \dots, u_m,
+      v_1, \dots, v_n$ is a linearly independent list.
+
+      Let $T_1u_i = w_i$, $i \in [m]$. Since $\ran{T_1} \subset \ran{T_2}$, there exist $x_1, \dots, x_m$, such that $T_2x_i = w_i$ for $i \in [m]$. 
+
+      Let $v \in V$ be arbitrary. Then there exist $a_1, \dots, a_k$, $b_1, \dots, b_m$ such that $v = \sum_{i = 1}^{n}a_iv_i + \sum_{j = 1}^{m}b_iu_i$.  Let $S \in \CL(V)$ be defined by 
+      \begin{align*}
+        S(\sum_{i = 1}^{k}a_iv_i + \sum_{j = 1}^{m}b_ju_j) = b_1x_1 + \dots + b_mx_m
+      \end{align*}
+      This is a well defined linear map. Now, for arbitrary $v \in V$, 
+      \begin{align*}
+        T_1v & = T_1(\sum_{i = 1}^{k}a_iv_i + \sum_{j = 1}^{m}b_ju_j) \\
+        & = \sum_{j = 1}^{m}b_jw_j
+      \end{align*}
+      And
+      \begin{align*}
+        T_2Sv & = T_2S(\sum_{i = 1}^{k}a_iv_i + \sum_{j = 1}^{m}b_jw_j) \\
+        & = T_2(\sum_{j = 1}^{k}b_jx_j) \\
+        & = \sum_{i = 1}^{k}b_jw_j
+      \end{align*}
+      And so $T_1 = T_2S$, as desired.
+
+      Alternatively. Let $v_1, \dots, v_n$ be a basis for $V$. Then we can find $u_1, \dots, u_n$ such that $T_1v_i = T_2u_i$ for $i \in [n]$ since $\ran T_1 \subset \ran T_2$. Define $S \in
+      \CL(V, V)$ by $Sv_i = u_i$ for $i \in [n]$. This defines $S$. Note now that $T_1v_i = T_2u_i = T_2Sv_i$ for $i \in [n]$, and $T_1 = T_2S$, as desired.
+    \ii
+      Let $p \in \CP(\R)$ be arbitrary. We want to show that there exists $q$ such that $Dq = p$. Write $p$ as 
+      \begin{align*}
+        p = \sum_{i = 0}^{n}a_ix^i
+      \end{align*}
+      Where $n = \deg p$ and some constants $a_0, \dots, a_n$. Let $q = \sum_{i = 0}^{n + 1}b_ix^i$, for some constants $b_0, \dots, b_{n + 1}$. Then, $Dq$ is
+      \begin{align*}
+        Dq = \sum_{i = 0}^{n + 1}b_iDx^i
+      \end{align*}
+      By the linearity of $D$. $\deg Dr = (\deg r) - 1$ for any nonconstant polynomial $r$, hence we must have that $Dx^{i} \in \CP_{i - 1}(\R)$ for $i = 1, \dots, n + 1$. We can thus write
+      $Dx^{i} = \sum_{j = 0}^{i - 1}c_{ij}x^{i - 1}$, where $c_{ij}$ is a scalar. Note furthermore that $c_{i,i-1} \neq 0$ since $Dx^{i} \in \CP_{i - 1}(\R)$. Also notice that $Dx^{n + 1}$
+      is the only term in $Dq$ of degree $n$ (all other terms have strictly smaller degree). Hence, we adopt the following iterative algorithm. Pick $b_{n + 1}$ such that $b_{n + 1}c_{n +
+      1,n} = a_n$. This is the coefficient for the only $x^n$ term. Then, pick $b_{n}$ such that $b_{n + 1}c_{n + 1,n - 1} + b_{n}c_{n, n - 1} = a_{n - 1}$. We iteratively keep doing this,
+      where we pick $b_i$ such that $\sum_{j = i}^{n + 1}b_jc_{ji} = a_{i}$. We are able to do this since at each step there is only one undetermined quantity in the equality, $b_i$. We do
+      this all the way down to $i = 0$ (assuming that $Dx^{0} = D(1) \neq 0$). Thus for the given polynomial $p$, we have found a polynomial $q$ such that $Dq = p$. Thus $D$ is surjective.
+
+      The above proof was constructive, Here is an alternative proof. Recall from exercise $2.C.10$ that $p_0, \dots, p_j$ form a basis for $\CP_j(\R)$ if each $p_i$ is of degree $i$. Thus,
+      since $\deg D x^{i} = i - 1$ for $i \geq 1$, if $q \in \CP_{n}(\R)$, then $Dq$ is a linear combination of polynomials $Dx^{i}$, where $Dx^{i}$ has degree $i - 1$. That is, $Dq =
+      \sum_{i = 0}^{n}a_iDx^{i}$. Thus by choosing $a_1, \dots, a_n$ appropriately, we can form any polynomial in $\CP_{n - 1}(\R)$, and so $D$ is surjective.
+    \ii
+      Let $p \in \CP(\R)$ be arbitrary. Note that the derivative map $D$ is such that $\deg Dp = \deg (p - 1)$. Consider now the map defined by $5D^2 + 3D$, where $D^2$ denotes
+      differentiating twice. $5D^2 + 3D \in \CL(\CP(\R), \CP(\R))$. By the previous problem, (exercise $3.B.26$), there exists $q$ then such that $(5D^2 + 3D)q = 5q^{\prime\prime} +
+      3q^{\prime} = p$, as desired.
+    \ii
+      Let $v \in V$ be arbitrary. Since $Tv \in \ran T$, there exist constants $a_1, \dots, a_m$ such that $Tv = \sum_{i = 1}^{m}a_iw_i$. Let $\varphi_i: V \to \F$ be then defined by
+      $\varphi(v) = a_i$. Thus,
+      \begin{align*}
+        Tv = \varphi(v)w_1 + \dots + \varphi(v)w_m
+      \end{align*}
+      Note that $\varphi_i$ is a linear map since $T(\lambda v) = \lambda Tv = \sum_{i = 1}^{m}\lambda a_iw_i$, and so $\varphi_i(\lambda v) = \lambda a_i = \lambda\varphi_i(v)$.
+      Furthermore, $T(v_1 + v_2) = Tv_1 + Tv_2 = \sum_{i = 1}^{m}(a_i + b_i)w_i$, and so $\varphi_i(v_1 + v_2) = a_i + b_i = \varphi_i(v_1) + \varphi_i(v_2)$. Thus $\varphi \in \CL(V, \F)$,
+      as desired.
+    \ii
+      % Note that $\ran\varphi \subset \F$, and so $\dim\ran\varphi \leq 1$ (so either $1$ or $0$). 
+      If $u \in V$ is not in $\nullspace \varphi$, then $\varphi(u) \neq 0$. Thus $\lambda u \neq 0$ for all $\lambda \in \F$ whenever $\lambda \neq 0$. By rank nullity, either
+      $\dim\nullspace\varphi = \dim V$ or $\dim V - 1$. Since $u \not\in \nullspace\varphi$, we have that $\dim\nullspace\varphi = \dim V - 1$. Furthermore, $\nullspace\varphi \cap \Span(\{u\}) =
+      \{0\}$. Thus the sum of these two subspaces is a direct sum with dimension $\dim V$ (problem $2.C.16$). Thus their direct sum is in fact $V$ (as it is a subspace with the same
+      dimension, and the basis for this subspace is also a basis for $V$).
+    \ii
+      Either $\dim\varphi_1 = \dim V$ or $\dim\varphi_1 = \dim V - 1$. If it is the former case, then $\varphi_1(v) = 0$ for all $v \in V$ and $\nullspace\varphi_1 = \nullspace\varphi_2 = V$,
+      and so we have the desired result. Let it be the latter case now. Let $v_1, \dots, v_{n - 1}$ be a basis for $\nullspace\varphi_1 = \nullspace\varphi_2$, where $n = \dim V$. Then we expand
+      this to be a basis of $V$ by adding one more linearly independent vector $v_n$. By virtue of its definition, $\varphi_1(v_n) \neq 0$, $\varphi_2(v_n) \neq 0$. Thus there exists $c \in
+      \F$ such that $\varphi_1(v_n) = c\varphi_2(v_n)$ (simply their ratio). Then, by linearity, $\varphi_1 = c\varphi_2$ for all other vectors in $\Span(\{v_n\})$ (scaling input scales
+      output). Thus, for arbitrary $v \in V$, we have $v = a_1v_1 + \dots + a_nv_n$, for some constants $a_1, \dots, a_n$. Thus $\varphi_1(v) = \varphi_1(a_nv_n) = c\varphi_2(a_nv_n) =
+      c\varphi_2(v)$. As desired.
+    \ii
+      Consider $T_1: (x_1, \dots, x_5) \mapsto (x_1, x_2)$ and $T_2: (x_1, \dots, x_5) \mapsto (x_1, 2x_2)$. The nullspaces of $T_1$ and $T_2$ are both $\{(0, 0, x_3, x_4, x_5) \in \R^5\}$.
+      However, clearly there cannot exist $c$ such $T_1 = cT_2$, as desired.
+  \end{enumerate}
+\section{Matrices}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      Let $v_1, \dots, v_n$ be basis for $\nullspace T$. Extend this to a basis of $V$ by adding vectors $u_1, \dots, u_m$. We have that $Tu_1, \dots, Tu_m$ is a basis for $\ran T$. Let
+      $w_1, \dots, w_p$ be a basis for $W$. Let us consider $\CM(T)$ under the bases $v_1, \dots, v_n, u_1, \dots, u_m$ and $w_1, \dots, w_p$. We know that $Tu_i \neq 0$ for all $i \in [m]$
+      (since they by definition are not in the nullspace of $T$). Hence, representing them as a linear combination of $w_1, \dots, w_p$, we know that not all of the coefficients in the linear
+      combination will be zero (else it would be in the nullspace). These coefficients are exactly the entries of the corresponding column in $\CM(T)$. Hence at least one entry is nonzero in
+      each of those $m$ columns and $\CM(T)$ has at least $\dim\ran T = m$ nonzero entries.
+    \ii 
+      Consider the basis $x^2, x, 1$ for $\CP_2(\R)$ and the basis $\frac{1}{3}x^3, \frac{1}{2}x^2, x, 1$ for $CP_3(\R)$. With respect to these bases, we have the desired matrix.
+    \ii
+      Let $v_1, \dots, v_n$ be basis for $\nullspace T$. Extend this to a basis of $V$ by adding vectors $u_1, \dots, u_m$. 
+
+      We have that $Tu_1, \dots, Tu_m$ is a basis for $\ran T$. Extend $Tu_1, \dots, Tu_m$ to a basis of $W$ be adding vectors $w_1, \dots w_p$ (hence $\dim V = n + m$ and $\dim W = m + p$).
+      
+      Applying $T$ to $u_1, \dots, u_m$, we get the corresponding outputs $Tu_1, \dots, Tu_m$. Thus in the column corresponding to $u_i$, the entry corresponding to row $Tu_i$ has value $1$,
+      and the rest of the column has value $0$ (because representing $Tu_i$ as a linear combination of $Tu_1, \dots, Tu_m, w_1, \dots, w_p$ involves simply letting the coefficient for $Tu_i$
+      be $1$ and the other coefficients all zero).
+
+      Then, applying $T$ to $v_1, \dots, v_n$, we get $0$ as the output since $v_1, \dots, v_n \in \nullspace T$. Since $Tu_1, \dots, Tu_m, w_1, \dots, w_p$ are a basis for $W$, the
+      representing for $Tv_i$ for $i \in [n]$ will have all the coefficients in the linear combination be zero, and so the corresponding column is also all zeros. 
+
+      Hence $\CM(T)$, with the bases described as above, will have $\CM(T)_{jj} = 1$ for $j \in [\dim\ran T]$, and $0$ otherwise, if we list the bases as $u_1, \dots, u_m, v_1, \dots, v_n$
+      and $Tu_1, \dots, Tu_m, w_1, \dots, w_p$,
+      \begin{align*}
+        \bordermatrix{
+          & u_1 & u_2 & \cdots & u_m & v_1 & v_2 & \cdots & v_n \cr
+          Tu_1 & 1 & 0 & \cdots & 0 & 0 & 0 & \cdots & 0 \cr
+          Tu_2 & 0 & 1 & \cdots & 0 & 0 & 0 & \cdots & 0 \cr
+          \vdots & \null & \null & \ddots & \null & \null & \null & \vdots & \null \cr 
+          Tu_m & 0 & 0 & \dots & 1 & 0 & 0 & \cdots & 0 \cr
+          w_1 & 0 & 0 & \cdots & 0 & 0 & 0 & \cdots & 0 \cr
+          w_2 & 0 & 0 & \cdots & 0 & 0 & 0 & \cdots & 0 \cr
+          \vdots & \null & \null & \vdots & \null & \null & \null & \vdots & \null \cr 
+          w_p & 0 & 0 & \cdots & 0 & 0 & 0 & \cdots & 0 \cr
+        }
+      \end{align*}
+      N.B. What this exercise shows is that for every matrix $T$, row reduced echelon form is possible.
+    \ii
+      We know that $Tv_1, \dots, Tv_m$ spans $\ran T$. We reduce this spanning list to a basis of $\ran T$, $Tv_1, \dots, Tv_k$ (without loss of generality, we are assuming the basis list is
+      the first $k$ vectors, $k \leq m$. If not, simply reorder the vectors so that it is so). Next, we extend $Tv_1, \dots, Tv_k$ to a basis of $W$ be adding vectors $w_1, \dots, w_p$.
+      Hence $k + p = n$. With respect to these bases, $v_1, \dots, v_m$, and $Tv_1, \dots, Tv_k, w_1, \dots, w_p$, then $\CM(T)$ will be such that $\CM(T)_{11}$ may be $1$ or $0$ (depending
+      on whether $\dim\ran T > 0$ or equal to $0$), but all the other entries in the first column will be zero (How do we represent $Tv_1$ as a linear combination of $Tv_1, \dots, Tv_k, w_1,
+      \dots, w_p$? Simply coefficient of $1$ on the first vector, and zero on the rest).
+    \ii
+      We have that $\ran T \subset W$. Hence $\CW = w_1, \dots, w_n$ spans $\ran T$. Thus, there exists a subset of vectors from $\CW$ that span $\ran T$, say $w_1, \dots, w_k$ (without loss
+      of generality, we are assuming the basis list is the first $k$ vectors, $k \leq m$. If not, simply reorder the vectors so that it is so). Since $w_1, \dots, w_k \in \ran T$, there
+      exist $v_1, \dots, v_k$ such that $Tv_i = w_k$, $i \in [k]$. We have that $v_1, \dots, v_k$ are linearly independent since
+      \begin{align*}
+        \sum_{i = 1}^{k}c_iv_i = 0 \implies T(\sum_{i = 1}^{k}c_iv_i) = 0 \implies \sum_{i = 1}^{k}c_iTv_i = 0
+      \end{align*}
+      Since $Tv_1, \dots, Tv_k$ are linearly independent, then $c_i = 0$ for $i \in [k]$. Then, extend $v_1, \dots, v_k$ to a basis of $V$, by adding vectors $u_1, \dots, u_p$, such that $k
+      + p = m$. Note that $Tu_i = 0$ for $i \in [p]$, else $Tu_i \neq 0$ implies $u_i$ would be in the span of $v_1, \dots, v_k$. Thus the matrix $\CM(T)$ with these bases will be such that
+      the first row is zero everywhere except possibly the first entry, which may be $1$. Let us see why. The bases are $\CV = v_1, \dots, v_k, u_1, \dots, u_p$ and $w_1 = Tv_1, \dots, w_k =
+      Tv_k, w_{k + 1}, \dots, w_n$. The first row represents the coefficients of $Tv_1$ in representing each vector in $\CV$. Certainly the first entry (corresponding to representing $Tv_1$)
+      is either $1$ or zero depending on whether $\dim\ran T > 0$ or not. $Tv_1$ is linearly independent of $Tv_2, \dots, Tv_k$, and so its coefficient will be zero in those cases also.
+      Finally, since $Tu_i = 0$ for $i \in [p]$, we must have the coefficient of $Tv_1$ being zero in those cases also since $\CW$ is linearly independent and the only way to write zero is
+      by taking all the coefficients in the linear combination to be also zero.
+    \ii
+      Let $\dim V = m$ and $\dim W = n$. 
+      % lemma. for all v \in V, there exists a basis such that the coefficients in the linear combination to yield v are all nonzero.
+
+      First, a lemma. For all $v \in V$ such that $v \neq 0$, there exists some basis such that the linear combination of basis vectors to yield $v$ has all nonzero coefficients. Let $v_1,
+      \dots, v_m$ be a given basis for $V$. Let $v \in V$ be arbitrary and nonzero. Then $v = \sum_{i = 1}^{m}c_iv_i$. If $c_i \neq 0$ for $i \in [m]$, we are done. Else, there exist at
+      least one $v_i$ such that $c_i = 0$ and another $v_j$ such that $c_j \neq 0$. Consider the list obtained by replacing $v_j$ with $v_i + v_j$. This list is linearly independent ($v_i
+      \not\in \Span(\{v_i + v_j\})$) and since it has length $m$, is a basis for $V$. Now to write $v$ in this new list, we must take the coefficient for $v_i + v_j$ to be $c_j$ still, but
+      now we must take the coefficient for $v_i$ to be $-c_j$ now. We can repeat this process for any vectors in the new list with coefficient zero, until all of the coefficients to write
+      $v$ in terms of the basis are nonzero.
+
+      Assume $\dim\ran T = 1$. Then there exists nonzero $w \in W$ such that $Tv = \lambda w$ for some $\lambda \in \F$ for all $v \in V$. Let $r_1, \dots, r_n$ be a basis for $W$. Then $w =
+      \sum_{i = 1}^{n}a_ir_i$ for some coefficients $a_1, \dots, a_n$, which we take to all be nonzero by our lemma. Construct a new basis $w_1, \dots, w_n$ by letting $w_i = a_ir_i$. In
+      that case, $w = \sum_{i = 1}^{n}w_i$. Next, let $s_1, \dots, s_m$ be a basis for $V$. Then, by assumption, we have that $Ts_i = b_iw$ for some coefficient $b_i \neq 0$ (we will show
+      shortly that we can pick $b_i \neq 0$ for $i \in [m]$ with the right choice of basis). Let $v_i = \frac{1}{b_i}s_i$ be a new basis for $V$. Then $Tv_i = w = \sum_{i = 1}^{n}w_i$ for
+      all $i \in [m]$. Thus $\CM(T)$ with respect to the bases $v_1, \dots, v_m$, $w_1, \dots, w_n$, is a matrix of all $1$s. As desired.
+
+      Let us show that we can pick a basis of $V$ such that $Ts_i = b_iw$ where $b_i \neq 0$ for $i \in [m]$. If $b_i \neq 0$ for all $i \in [m]$, we are done. Else, there exist $k$ such
+      that $b_k = 0$. We know that not all $b_i = 0$ since $\dim\ran T = 1$, otherwise we would have $\dim\ran T = 0$. Let $j$ be such that $b_j \neq 0$. Consider the list constructed by
+      replacing $s_k$ with $s_k + s_j$. This new is linearly independent and since it has length $m$, it must thus be a basis for $V$. Furthermore, note now that $T(s_k + s_j) = b_jw$, and
+      so the coefficient in the result corresponding to the vector $s_k + s_j$ is nonzero. We can then repeat this process until we obtain a basis for which none of the $b_i$ are zero.
+
+      Assume there exist bases $v_1, \dots, v_m$, $w_1, \dots, w_n$, such that with respect to these bases $\CM(T)$ has all entries being $1$. Then $Tv_1 = \dots = Tv_m = \sum_{i = 1}^{n}w_i
+      = w$. Thus, for arbitrary $v \in V$ such that $v = \sum_{i = 1}^{m}c_iv_i$, we have that $Tv = \sum_{i = 1}^{m}c_iTv_i = (\sum_{i = 1}^{m}c_i)w$. Since we can pick $c_1, \dots, c_m$
+      arbitrarily, we can get their sum to be any value in $\F$. Thus $\ran T = \Span(\{w\})$, and so $\dim\ran T = 1$.
+    \ii
+    \ii
+    \ii
+      Let $A \in \F^{m, n}$ and $c \in \F^{n, 1}$. Thus, $Ac \in \F^{m, 1}$. Entry $ij$, $i \in [m]$, $j = 1$, in $Ac$, represents the dot product of the row $i$ of $A$ with the first column (and
+      only) column of $c$. Writing $Ac$ as $Ac = \sum_{i = 1}^{n}c_{i,1}A_{\cdot, i}$ is simply a convenient way of representing this fact.
+    \ii
+      Let $A \in \F^{m, n}$, $C^{n, p}$. Entry $ji$ of $AC$ is
+      \begin{align*}
+        (AC)_{ji} = \sum_{k = 1}^{n}A_{jk}C_{ki}
+      \end{align*}
+      Thus, row $j$ is simply repeating this operation for $i = 1, \dots, p$ and putting the results next to one another. Notice this is exactly what happens as specified by the problem.
+    \ii
+      These problems are very tedious, just pure plug and chug.
+    \ii
+    \ii
+    \ii
+    \ii
+  \end{enumerate}
+\section{Invertibility and Isomorphic Linear Spaces}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      It is enough to show that $ST$ is injective and surjective. Let $u_1, u_2 \in U$ be such that $STu_1 = STu_2$. Let $Tu_1 = v_1$ and $Tu_2 = v_2$. Then, $Sv_1 = Sv_2$. Since $S$ is
+      injective, $v_1 = v_2$. Since $T$ is injective, $u_1 = u_2$. Thus $ST$ is injective. Let $w \in W$ be arbitrary. Then there exists $v \in V$ such that $Sv = w$. Then there exists $u
+      \in U$ such that $Tu = v$. Thus $STu = Sv = w$. Thus $ST$ is surjective. Thus $ST$ is invertible.
+
+      Furthermore, notice that $STT^{-1}S^{-1} = SS^{-1} = I$, the identity on $U$, and $T^{-1}S^{-1}ST = I$, the identity on $W$. Thus $T^{-1}S^{-1}$ is an inverse for $ST$. Since inverses
+      are unique, we then have that $(ST)^{-1} = T^{-1}S^{-1}$.
+    \ii
+      Let $v_1, \dots, v_n$ be a basis for $V$. Let $T_1 \in \CL(V, W)$ be defined by $T_1v_1 = v_1$, and $T_1v_i = 0$ for $i = 2, \dots, n$. Let $T_2 \in \CL(V, W)$ be defined by $T_2v_1 =
+      0$ and $T_2v_i = v_i$ for $i = 2, \dots, n$. Clearly neither map is injective and so neither is invertible. However, consider the map $T = T_1 + T_2$. $T$ is linear, surjective, and
+      injective. Thus $T$ is invertible. Thus the space of noninvertible operators on $V$ is not a linear subspace of $\CL(V)$.
+    \ii
+      If there exists $T \in \CL(V)$ invertible such that $Tu = Su$ for all $u \in U$, then $S$ is clearly injective by virtue of being $T$ being injective. 
+
+      % the problem was with my definition of T, what if Su_1 = w_1 for example? then surely T can't be injective, as then Tw_1 = w_1 and Tu_1 = w_1. that is why i was unable to prove it.
+      % Conversely, assume $S$ is injective. Let $u_1, \dots, u_n$ be a basis of $U$. Extend this to a basis of $V$ by adding vectors $w_1, \dots, w_p$. Define $T \in \CL(V)$ by $Tu = Su$ for
+      % $u \in U$, and $Tw_i = w_i$ for $i \in [p]$. First, note that this makes $T$ well defined on $V$, as $Tu = Su$ defines its behavior on $u_1, \dots, u_n$, and $Tw_i = w_i$ defines its
+      % behavior on $w_1, \dots, w_p$. Since $u_1, \dots, u_n, w_1, \dots, w_p$ is a basis for $V$, this defines the behavior of $T$ on all of $V$. 
+
+      Conversely, assume $S$ is injective. Let $u_1, \dots, u_n$ be a basis of $U$. Extend this to a basis of $V$ by adding vectors $v_1, \dots, v_p$. Note that $Su_1, \dots, Su_n$ are a
+      basis for $\ran S$ since $\dim\nullspace S = 0$ (and so they are linearly independent). Extend this to a basis with vectors $w_1, \dots, w_p$ (notice that this is the same $p$ as before,
+      since bases must have the same number of vectors). Define $T \in \CL(V)$ by $Tu = Su$ for $u \in U$, and $Tv_i = w_i$ for $i \in [p]$. First, note that this makes $T$ well defined on
+      $V$, as $Tu = Su$ defines its behavior on $u_1, \dots, u_n$, and $Tv_i = w_i$ defines its behavior on $w_1, \dots, w_p$. Since $u_1, \dots, u_n, w_1, \dots, w_p$ is a basis for $V$,
+      this defines the behavior of $T$ on all of $V$. Next, if $v \in V$ is such that $Tv = 0$, then
+      \begin{align*}
+        0 = Tv = T(\sum_{i = 1}^{n}a_iu_i + \sum_{j = 1}^{p}b_jv_j) = \sum_{i = 1}^{n}a_iTu_i + \sum_{j = 1}^{p}b_jw_j
+      \end{align*}
+      Since $u_1, \dots, u_n, w_1, \dots, w_p$ are a basis for $V$, we must have $a_i = b_j = 0$ for $i \in [n]$, $j \in [p]$. Thus $\nullspace T = \{0\}$, which implies $T$ is injective.
+      This implies that $T$ is invertible. Alternatively, $T$ is surjective since $Tu_1, \dots, Tu_n, w_1, \dots, w_p \in \ran T$ are a basis for $V$. This implies that $T$ is injective and
+      so $T$ is invertible.
+    \ii
+      % remember, just because v \not\in \nullspace T DOES NOT mean that v \in \Span(v_1, \dots, v_n), where v_1, \dots, v_n are such that Tv_1, \dots, Tv_n are a basis for \ran T. This is
+      % because $v + u$, where $v \in \Span(v_1, \dots, v_n)$ and $u \in \nullspace T$ are such that $u + v$ is in neither space and their sum is such that $T(u + v) \neq 0$.
+      Assume $\nullspace T_1 = \nullspace T_2$. Since $W$ is finite dimensional, $\ran T_1$ and $\ran T_2$ are also finite dimensional (as they are subspaces of $W$). 
+      \\~\\
+      Let $\CT_1 = T_1v_1, \dots, T_1v_n$ be a basis for $\ran T_1$. This implies that $\CV = v_1, \dots, v_n$ is linearly independent in $V$. This implies that $\CT_2 = T_2v_1, \dots,
+      T_2v_n$ is a basis of $\ran T_2$. Let us show why. 
+      \\~\\
+      If $\sum_{i = 1}^{n}c_iT_2v_i = 0$, then $T_2(\sum_{i = 1}^{n}c_iv_i) = 0$. Thus $v = \sum_{i = 1}^{n}c_iv_i \in \nullspace T_2 = \nullspace T_1$. This implies then that $v = c_i = 0$
+      for $i \in [n]$ (else we will have found a nontrivial linear combination of $T_1v_1, \dots, T_1v_n$ that yields zero). Thus $T_2v_1, \dots, T_2v_n$ are linearly independent. 
+      \\~\\
+      Next, they span $\ran T_2$. $T_20 = 0$, and $0 \in \Span(\CV)$. If $v \in V$ is such that $T_2v \neq 0$, then $v \not\in \nullspace T_2 = \nullspace T_1$. This implies that $T_1v \neq
+      0$. Thus $T_1v = \sum_{i = 1}^{n}c_iT_1v_i = T_1(\sum_{i = 1}^{n}c_iv_i)$ for some scalars $c_i$, $i \in [n]$, since $T_1v_1, \dots, T_1v_n$ is a basis for $\ran T_1$. This implies
+      then $T_2v = T_2(\sum_{i = 1}^{n}c_iv_i)$, since if not, then $T_2(v - \sum_{i = 1}^{n}c_iv_i) \not\in \nullspace T_2 = \nullspace T_1$, which is a contradiction since $T_1v =
+      T_1(\sum_{i = 1}^{n}c_iv_i)$ implies $T_1(v - \sum_{i = 1}^{n}c_iv_i) = 0$. Thus we have found $c_1, \dots, c_n$ such that $\sum_{i = 1}^{n}c_iT_2v_i = T_2v$. Thus $T_2v_1, \dots,
+      T_2v_n$ span $\ran T_2$ and hence are a basis for $\ran T_2$ (they span it and are linearly independent).
+      \\~\\
+      Extend $\CT_2$ to a basis of $W$ by adding vectors $w_1, \dots, w_p$ and $\CT_1$ to a basis of $W$ by adding vectors $x_1, \dots, x_p$. Define $S \in \CL(W)$ by $S(T_2v_i) = T_1v_i$,
+      $i \in [n]$, and $Sw_i = x_i$, $i \in [p]$. Notice that by definition of $S$, $S$ is injective and surjective (basis to basis mapping). Thus $S$ is invertible. Then, for arbitrary $v
+      \in V$, $ST_2v = S(\sum_{i = 1}^{n}c_iT_2v_i) = \sum_{i = 1}^{n}c_iT_1v_i = T_1v$. And so we have our desired map $S$.
+      \\~\\
+      Conversely, if there exists invertible $S \in \CL(W)$ such that $T_1 = ST_2$, then if $v \in V$ is such that $T_1v = 0$, then $ST_2v = 0$. $S$ invertible implies $T_2v = 0$. Thus
+      $\nullspace T_1 \subset \nullspace T_2$. If $v \in V$ is such that $T_2v = 0$, then $T_1v = ST_2v = 0$, and so $\nullspace T_2 \subset \nullspace T_1$. Thus $\nullspace T_1 =
+      \nullspace T_2$. As desired.
+    \ii
+      Assume $\ran T_1 = \ran T_2$. $V$ finite dimensional implies $\ran T_1, \ran T_2$ finite dimensional. Let $v_{k + 1}, \dots, v_n$ be a basis for $\nullspace T_1$. Extend it to a basis of
+      $V$ by adding vectors $v_1, \dots, v_k$.  $Tv_1, \dots, Tv_k$ is thus a basis for $\ran T_1$ (spans it and has length $\dim\ran T_1$). Since $\ran T_1 = \ran T_2$, we can find
+      $x_1, \dots, x_k$ such that $T_2x_i = T_1x_i$, $i \in [k]$. Notice that $x_1, \dots, x_k$ are linearly independent as
+      \begin{align*}
+        \sum_{i = 1}^{k}c_ix_i = 0 \implies T_2(\sum_{i = 1}^{k}c_iT_2x_i) = 0 \implies \sum_{i = 1}^{k}c_iT_2x_i = 0 \implies \sum_{i = 1}^{k}c_iT_1v_i = 0
+      \end{align*}
+      And so $c_i = 0$ for $i \in [k]$ by the linear independence of $T_1v_1, \dots T_kv_k$. Let $x_{k + 1}, \dots, x_n$ be a basis for $\nullspace T_2$ (there are $n - k$ many by
+      rank-nullity theorem). $x_1, \dots, x_n$ are linearly independent since
+      \begin{align*}
+        \sum_{i = 1}^{n}c_ix_i = 0 \implies T_2(\sum_{i = 1}^{n}c_ix_i) = 0 \implies \sum_{i = 1}^{k}c_iT_2x_i = 0
+      \end{align*}
+      Thus $c_1, \dots, c_k = 0$ by the linear independence of $T_2x_1, \dots, T_2x_k$. Thus,
+      \begin{align*}
+        \sum_{i = 1}^{n}c_ix_i = 0 \implies \sum_{i = k + 1}^{n}c_ix_i = 0
+      \end{align*}
+      And so $c_{k + 1}, \dots, c_n = 0$ by the linear independence of $x_{k + 1}, \dots, x_n$. Thus $x_1, \dots, x_n$ is a basis for $V$. Define $S \in \CL(V)$ by $Sv_i = x_i$, $i \in [n]$.
+      This map $S$ is invertible since it is a basis to basis map. Let $v = \sum_{i = 1}^{n}c_iv_i$ be arbitrary. Then,
+      \begin{align*}
+        T_2S(\sum_{i = 1}^{n}c_iv_i) & = T_2(\sum_{i = 1}^{n}c_iSv_i \\
+        & = T_2(\sum_{i = 1}^{n}c_ix_i) \\
+        & = \sum_{i = 1}^{k}c_iT_2x_i \\
+        & = \sum_{i = 1}^{k}c_iT_1v_i \\
+        & = T_1v
+      \end{align*}
+      And so $T_2S = T_1$. As desired.
+    \ii
+      Assume $V, W$ are finite dimensional, and $T_1, T_2 \in \CL(V, W)$. First, assume $\dim\nullspace T_1 = \dim\nullspace T_2$. Then there exist $v_1, \dots, v_n$ and $r_1, \dots, r_n$
+      that are respectively bases for $\nullspace T_1$ and $\nullspace T_2$. Extend both to a basis of $V$ by respectively adding vectors $u_1, \dots, u_m$ and $s_1, \dots, s_m$. Define $R
+      \in \CL(V)$ by $Rv_i = r_i$, $i \in [n]$, and $Ru_i = s_i$, $i \in [m]$. Since it is a basis to basis mapping, $R$ is invertible (exercise: prove basis to basis mappings injective and
+      surjective). Now, let $v \in V$ be arbitrary, then $v = \sum_{i = 1}^{n}a_iv_i + \sum_{j = 1}^{m}b_iu_i$ for some constants $a_1, \dots, a_n, b_1, \dots, b_m$. Then,
+      \begin{align*}
+        T_2Rv & = T_2R(\sum_{i = 1}^{n}a_iv_i + \sum_{j = 1}^{m}b_iu_i) \\
+        & = T_2(\sum_{i = 1}^{n}a_ir_i + \sum_{j = 1}^{m}b_js_j) \\
+        & = \sum_{j = 1}^{m}b_jw_j
+      \end{align*}
+      Where $w_j = T_2s_j$, $j \in [m]$. Extend $w_1, \dots, w_m$ (we know they are linearly independent because if not then there exists some non-trivial linear combination of them that
+      yields the zero vector, which implies there is some non-trivial linear combination of $s_1, \dots, s_m$ in $\nullspace T_2$, which contradicts them not being in the nullspace) to a
+      basis of $W$ by adding vectors $x_1, \dots, x_l$. Now, notice that
+      \begin{align*}
+        T_1v & = T_1(\sum_{i = 1}^{n}a_iv_i + \sum_{j = 1}^{m}b_iu_i) \\
+        & = \sum_{j = 1}^{m}b_jy_j
+      \end{align*}
+      Where $y_j = T_1u_j$, $j \in [m]$. Extend $y_1, \dots, y_m$ to a basis of $W$ by adding vectors $z_1, \dots, z_l$. Let $S \in \CL(W)$ be such that $Sw_i = y_i$, $i \in [m]$, and $Sx_j
+      = z_j$, $j \in [l]$. This map is invertible as it is a basis to basis map. Then, 
+      \begin{align*}
+        ST_2Rv & = S(\sum_{j = 1}^{m}b_jw_j) = \sum_{j = 1}^{m}b_jy_j
+      \end{align*}
+      And so $T_1 = ST_2R$, as desired.
+
+      Conversely, assume there exist $S \in \CL(W)$, $R \in \CL(V)$ such that $T_1 = ST_2R$. Then, we have that $S^{-1}T_1 = T_2R$. Let $v \in \nullspace T_1$. Then $S^{-1}T_1v = 0$. Thus
+      $T_2Rv = 0$. Thus $Rv \in \nullspace T_2$. Thus if $v_1, \dots, v_n$ is a basis for $\nullspace T_1$, and $Rv_i = u_i$, $i \in [n]$, then $u_1, \dots, u_n$ are linearly independent (if
+      not, then there exist a non-trivial linear combination of them that yields zero, which implies there exists some non-trivial linear combination of $v_1, \dots, v_n$ which is mapped by
+      $R$ to zero, contradicting its injectivity as an invertible map), and their span is a subspace of $\nullspace T_2$. Thus $\dim\nullspace T_1 \leq \dim\nullspace T_2$. If we write,
+      $T_1R^{-1} = ST_2$, then by analogous reasoning, we get $\dim\nullspace T_1 \geq \dim\nullspace T_2$. Thus $\dim\nullspace T_1 = \dim\nullspace T_2$.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii Let $S, T \in E$. Let $a, b \in \F$. Then $(aS + bT)v = a(Sv) + b(Tv) = 0$. Thus $aS + bT \in E$. Finally, $0 \in E$. There $E$ is a subspace of $\CL(V, W)$.
+        \ii Let $v \neq 0$. $\dim\CL(V, W) = nm$, where $\dim V = n$ and $\dim W = m$. Then $\dim E = (n - 1)m$. Consider a basis of $V$ $v_1, \dots, v_n$ and a basis of $W$ $w_1, \dots,
+        w_m$. Under these two bases, we recognize $\F^{m, n}$ and $\CL(V, W)$ are isomorphic linear spaces.
+
+        Instead of considering $E$ directly, we can consider a space isomorphic to it, the space of all matrices $\CM(T) \in \F^{m, n}$ such that $\CM(T)\CM(v) = \CM(0)$. In the course of
+        the matrix-vector multiplication, for each row to yield zero, we have $n - 1$ degrees of freedom to set the $n - 1$ numbers, but then the last number in the row must be chosen so
+        that the sum of products yields zero. We do this $m$ times as there are $m$ rows.  Hence this space has dimension $(n - 1)m$, and so $E$ has dimension $(n - 1)m = \dim W\cdot\dim V -
+        1$.
+      \end{enumerate}
+    \ii
+      Since $T$ is surjective and $V$ is finite dimensional, we know that $\dim V = \dim\nullspace T + \dim\ran T = \dim\nullspace T + \dim W$. Thus $W$ is also finite dimensional. Let $\dim
+      W = m$. Thus there exists a basis for $W$ $w_1, \dots, w_m$. 
+      Since $T$ is surjective, there exist $u_1, \dots, u_m$ such that $Tu_i = w_i$, $i \in [m]$. These $u_1, \dots, u_m$ are linearly independent (if not, then there exist a non-trivial
+      linear combination that yields zero, which applying $T$ to this linear combination and using linearity of $T$, we get that $w_1, \dots, w_m$ is linearly dependent, a contradiction).
+      
+      Let $U = \Span(\{u_1, \dots, u_m\}$. Consider $T|_U$. $T|_U$ is clearly surjective by construction. Furthermore, it is injective because the nullspace only has the vector $0$. This is
+      because if $u \in \nullspace T|_U$, then there exist $a_1, \dots, a_m$ such that $T(\sum_{i = 1}^{m}a_iu_i) = 0$, or $\sum_{i = 1}^{m}a_iw_i = 0$. This implies $a_i = 0$ for $i \in
+      [m]$ by the linear independence of $w_1, \dots, w_m$. Thus $T|_U$ is an isomorphism between $U$ and $W$.
+    \ii
+      If $S$ and $T$ are both invertible, then $ST$ is invertible with inverse $T^{-1}S^{-1}$. 
+
+      Conversely, if $ST$ is invertible, then $T$ is injective since if $v \in V$ such that $Tv = 0$, then $STv = 0$, and so $\nullspace T \subset \nullspace ST$. Thus $\dim\nullspace T \leq
+      \dim\nullspace = 0$. Since $V$ is finite dimensional (use rank-nullity), $T$ is thus invertible. 
+
+      Also, $ST$ invertible implies $S$ is surjective as $ST$ invertible implies it is surjective which implies that for all $v \in V$, there always exists $u, w \in V$ such that $Tu = w$,
+      $Sw = v$, meaning that $STu = Sw = v$. Thus since for all $v \in V$ there always exists $w \in V$ such that $Sw = v$, $S$ is surjective. Again since $V$ is finite dimensional, this
+      implies $S$ is invertible (use rank-nullity to get nullspace having dimension zero).
+    \ii
+      Suppose $V$ is finite dimensional and $ST = I$. This implies $ST$ is invertible as it is injective since the only way $STv = Iv = v = 0$ is if $v = 0$. By the previous problem, both
+      $S$ and $T$ are individually invertible. Thus $S = T^{-1}$. Thus $TS = TT^{-1} = I$. By symmetry, we have the desired result.
+    \ii
+      By the previous problem, we have that $ST$ and $U$ are both invertible, are inverses of one another, and $UST = I$. Again by the same logic, $US$ and $T$ are invertible and are
+      inverses of one another. Thus $T^{-1} = US$, as desired.
+    \ii
+      Let $V = \R^\infty$. Let $U = I$. Let $S$ be the forward shift operator,
+      \begin{align*}
+        S( (v_1, v_2, \dots)) = (v_2, v_3, \dots)
+      \end{align*}
+      And $T$ be the backward shift operator,
+      \begin{align*}
+        T( (v_1, v_2, \dots)) = (0, v_1, v_2, \dots)
+      \end{align*}
+      Then $STU = I$. However, $T$ is not invertible as it is not surjective.
+    \ii
+      If $RST$ is surjective, then $RST$ is invertible. By problem $9$, this implies $R$ is invertible and that $ST$ is also invertible. $ST$ invertible again by problem 9 implies $S$ and
+      $T$ individually invertible. $S$ invertible means it is surjective.
+
+      Another way to see this exercise is that we do not lose any dimension in going from $V$ to $\ran T$ to $\ran S$ to $\ran R = V$, hence they are all invertible.
+    \ii
+      We have to show that the map is linear and invertible. Let $v, u \in V$ such that $v = \sum_{i = 1}^{n}a_iv_i$ and $u = \sum_{i = 1}^{n}b_iv_i$. Also let $c, d \in \F$. Then,
+      \begin{align*}
+        T(cv + du) & = \CM(cv + du) \\
+        & = \CM(\sum_{i = 1}^{n}(c + d)(a_i + b_i)v_i) \\
+        & = 
+        \begin{bmatrix}
+          (c + d)(a_1 + b_1) \\
+          \vdots \\
+          (c + d)(a_n + b_n) 
+        \end{bmatrix} \\
+        & = 
+        c \begin{bmatrix}
+          a_1 \\
+          \vdots \\
+          a_n
+        \end{bmatrix} + d \begin{bmatrix}
+          b_1 \\
+          \vdots \\
+          b_n
+        \end{bmatrix}\\
+        & = c\CM(v) + d\CM(u) \\
+        & = cTv + dTu
+      \end{align*}
+      Thus $T$ is linear. Next, let 
+      \begin{align*}
+        a = \begin{bmatrix}
+          a_1 \\
+          \vdots \\
+          a_n
+        \end{bmatrix} \in \F^{n, 1}
+      \end{align*}
+      be arbitrary. Then $v = \sum_{i = 1}^{n}a_iv_i$ is such that $Tv = \CM(v) = a$. Thus $T$ is surjective. Thus $T$ is also injective as $V$ is finite dimensional (rank nullity, $n \dim
+      \F^{n, 1} = \dim\ran T = \dim V$, and so $\dim\null T = 0$). Thus $T$ is invertible and hence an isomorphism.
+    \ii
+      Let $T \in \CL(\F^{n, 1}, \F^{m, 1})$. Let $\CM(T) = A$, with the standard bases chosen. Then 
+      \begin{align*}
+        Tx = \CM(Tx) = \CM(T)\CM(x) = Ax 
+      \end{align*}
+      Since $\CM(x) = x$ as $x \in \F^{n, 1}$ already, $\CM(T) = A$ by definition, $Tx = \CM(Tx)$ since $Tx \in \F^{m, 1}$ already, and the second equality is by proposition 3.65.
+    \ii
+      Assume $V$ is finite dimensional. Let $T \in \CL(V)$ be a scalar multiple of the identity, say for some $c \in \F$. Thus $T = cI$. Then, for any $S \in \CL(V)$, 
+      \begin{align*}
+        ST = ScI = cS = cIS = TS
+      \end{align*}
+      Conversely, let $ST = TS$ for all $S \in \CL(V)$ for some $T \in \CL(V)$. We want to show that $T$ is a scalar multiple of the identity. If it is, then that implies that $Tv = cv$ for
+      some $c \in \F$ and $v \neq 0$, $v \in V$. Then $Tv$ and $v$ are linearly dependent. Let us show that this is the case. For the sake of contradiction, assume $v$ and $Tv$ are linearly
+      independent, and extend them to a basis of $V$ by adding vectors $v_1, \dots, v_n$. Consider then the linear map
+      \begin{align*}
+        S(av + bTv + c_1v_1 + \dots + c_nv_n) = bv
+      \end{align*}
+      Such that $S \in \CL(V)$. Thus $S(v) = 0$ and $S(Tv) = v$. Since $S \in \CL(V)$, by assumption we have $TS = ST$. Thus, $T0 = TS(v) = ST(v) = v$, which is a contradiction since we
+      assumed $v \neq 0$. Thus $Tv$ and $v$ are linearly dependent and so $Tv = cv$ for some $c \in \F$. Next, we show that $c$ actually does not depend on $v$. Assume $v, u \in V$ are such
+      that $Tv = c_vv$ and $Tu = c_uu$. We want to show that $c_v = c_u$. First assume that $v, u$ are linearly dependent. Then $v = du$ for some $d \in \F$. Thus,
+      \begin{align*}
+        c_vv = Tv = Tdu = dc_uu = dc_u\frac{v}{d} = c_uv
+      \end{align*}
+      Thus $c_v = c_u$. Next, if $v, u$ are linearly independent,
+      \begin{align*}
+        c_{v + u}(v + u) = T(v + u) = Tv + Tu = c_vv + c_uu
+      \end{align*}
+      And so $(c_v - c_{v + u})v + (c_u - c_{v + u})u = 0$. This implies $c_v = c_u = c_{v + u}$ since $u$ and $v$ are linearly independent. Hence $c$ is independent of $v$. Thus $Tv = cv$
+      for some $c \in \F$ for all $v \in V$ and so $T$ is a scalar multiple of the identity.
+    \ii
+      Certainly with those properties $\CE$ can be $\{0\}$ or $\CL(V)$. In the case that $\CE \neq \{0\}$, we want to show that $\CE = \CL(V)$. Thus there must exist some nonzero $T \in
+      \CE$. The idea now is that if we can show that the identity $I \in \CE$, then we are done. Let's construct the identity using $T$. Let $v_1, \dots, v_n$ be a basis for $V$. Thus $Tv_i
+      \neq 0$ for some $i$. Say $Tv_i = \sum_{j = 1}^{n}c_jv_j$. At least one $c_j \neq 0$, say for $j = k$. Consider now the map $E_{lj}v_s = \delta_{ls}v_j$. Thus,
+      \begin{align*}
+        E_{kl}TE_{li}e_j = a_k\delta_{lj}e_l
+      \end{align*}
+      The map $E_{kl}TE_{li} \in \CE$ by the properties of $\CE$ and $T \in \CE$. Thus,
+      \begin{align*}
+        (\sum_{l = 1}^{n}E_{kl}TE_{li})e_j = a_ke_j 
+      \end{align*}
+      For $j = 1, \dots, n$. Since $\CE$ is a subspace of $\CL(V)$ (closed under addition), then $\sum_{l = 1}^{n}E_{kl}TE_{li} \in \CE$. Call this map $R$. Thus $Re_j = a_ke_j$. Thus
+      $\frac{1}{a_k}Re_j = e_j$. In other words, $\frac{1}{a_k}R = I$, the identity. Hence $I \in \CE$, and so $\CE = \CL(V)$, since now for any $S \in \CL(V)$, $S = SI \in \CE$.
+    \ii
+      Let $v \in V$ be arbitrary. Define $\varphi_v \in \CL(\F, V)$ by $\varphi_v(\lambda) = \lambda v$. Consider then the map $T: V \to \CL(\F, V)$ defined by $Tv = \varphi_v$. Let $v, w
+      \in V$, $a, b \in F$. Then,
+      \begin{align*}
+        T(av + bu) = \varphi_{av + bu} = av + bu = a\varphi_v + b\varphi_u
+      \end{align*}
+      Thus $T$ is linear. It is injective since $Tv = 0$ implies $v = 0$ (if $v \neq 0$ then $\varphi_v \neq 0$). Next, if $S \in \CL(\F, V)$, and $S(1) = v$, then $S(\lambda) = \lambda v$.
+      Thus, $S = \varphi_v$. Thus given $S \in \CL(\F, V)$, we have that $Tv = \varphi_v = S$. Thus $T$ is surjective. Thus $T$ is an isomorphism and so $V, \CL(F, V)$ are isomorphic.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii For any $p \in \CP(\R)$, since $\deg Tp \leq \deg p$, we have then that for any $n$, the restriction to $\CP_n(\R)$ is such that $T|_{\CP_n(\R)}: \CP_n(\R) \to \CP_n(\R)$. That is,
+        $T|_{\CP_n(\R)} \in \CL(\CP_n(\R))$. $T|_{\CP_n(\R)}$ is also injective by virtue of $T$ being injective, and $\CP_n(\R)$ is finite dimensional, then (use rank nullity),
+        $T|_{\CP_n(\R)}$ is also surjective. Now do this for any $n \in \N$. Thus for any $p \in \CP(\R)$, we have that $\deg p = m$ for some $m$. Then, since $T|_{\CP_m(\R)}$, there must
+        exist $q \in \CP_m(\R)$ such that $Tq = p$. Thus $T$ is surjective.
+        \ii This is an inductive proof on degree $n$. First, we have that this holds for $\deg p = 0$ since there isn't any lower degree (and so $\deg Tp = \deg p$ for $\deg p = 0$). Next,
+        assume $\deg Tp = \deg p$ for all $p$ with degrees $0, 1, \dots, n - 1$. Then, for $p$ with degree $n$, $p$ can't be mapped by $T$ to a lower degree polynomial since $T|_{\CP_k(\R)}$
+        is surjective onto $\CP_k(\R)$ for $k = 0, 1, \dots, n - 1$, and mapping to any of those polynomials would make $T$ not injective (another polynomial was already mapped to those
+        lower degree polynomials). Thus $p$ has to be mapped only to polynomials in $\CP_n(\R)$, i.e. also with degree $n$, so that $T$ remains injective and surjective. Thus $\deg p = \deg
+        Tp$, as desired.
+      \end{enumerate}
+    \ii
+      The first set of equation can be rewritten as finding $x$ such that $Ax = 0$, where $A \in \F^{n, n}$ is a matrix with entries as $A_{ij}$ as given. Assuming $A$ is with respect to the
+      standard bases, this matrix corresponds to a linear map $T$ such that $Te_i = \sum_{j = 1}^{n}A_{ij}e_j$, where $e_i, e_j$ are standard basis vectors, for $i = 1, \dots, n$. The first
+      set of equations thus says that $x = 0$ is the only solution to $Tx = 0$ is to say that $T$ is injective. The second set of equations, reinterpreted as a linear map, says that $Tx = c$
+      always has a solution. That is, there always exists $x$ such that $Tx = c$. This is simply saying that $T$ is surjective. As $T \in \CL(\F^{n, n})$, we have that surjectivity and
+      injectivity are equivalent for linear maps on finite dimensional linear spaces. Thus the two parts are demanding the same thing of $T$.
+  \end{enumerate}
+\section{Products and Quotients of Linear Spaces}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      Let $T$ be a linear map. Let's show that its graph is a subspace. We have to simply show that it is closed under addition, scalar multiplication, and contains zero. It certainly
+      contains zero ($T0 = 0$, and so $(0, 0)$ in graph of $T$). It is closed under linear combinations as well,
+      \begin{align*}
+        a(v, Tv) + b(u, Tu) = (av + bu, aTv + bTu) = (av + bu, T(av + bu))
+      \end{align*}
+      Since $w = av + bu$ implies that we wrote the combination $a(v, Tv) + b(u, Tu) = (w, Tw)$, i.e. another element of the graph of $T$. Now, assume the graph is a subspace. Let us show
+      that this implies $T$ is linear. Since the graph is a subspace, we have that
+      \begin{align*}
+        a(v, Tv) + b(u, Tu) = (av + bu, aTv + bTu) 
+      \end{align*}
+      Since $(av + bu, aTv + bTu)$ is in the graph of $T$ as well, we get that $T(av + bu) = aTv + bTu$, and so $T$ is linear.
+    \ii
+      Assume $V = V_1 \times \dots \times V_m$ is finite dimensional. Consider the space of all vectors of the form $U_i = \{(0, \dots, 0, u_i, 0, \dots 0): u_i \in V\}$, where $u_i$ is in
+      the $i$th slot and everywhere else is zero. $U_i$ is a subspace of $V$. Thus $U_i$ is finite dimensional. Furthermore, $U_i$ is isomorphic to $V_i$ by the isomorphism $T \in \CL(V_i,
+      U_i)$ such that $Tv_i = (0, \dots, 0, v_i, 0, \dots, 0) \in U_i$, where $v_i$ is in the $i$th slot. Thus $V_i$ is also finite dimensional. Since $i \in [m]$ was arbitrary, we have the
+      desired result.
+    \ii
+      Consider $U_1 = V$ and $U_2 = \{\lambda(1, 1, \dots): \lambda \in \F\}$. Consider then $T \in \CL(U_1\times U_2, U_1 + U_2)$, such that
+      \begin{align*}
+        T\left( (x_1, x_2, \dots), (\lambda, \lambda, \dots) \right) = (\lambda, x_1 + \lambda, x_2 + \lambda, \dots)
+      \end{align*}
+      This map is linear (check). This map is also injective. The only way to write $Tv = 0$ is by taking $v = \left( (0, 0, \dots), (0, 0, \dots)\right)$ (need to take $\lambda = 0$ for
+      first slot, and then $x_i = 0$ naturally). Finally this map is surjective. Let $y = (y_1, \dots) \in V$. Then 
+      \begin{align*}
+        T\left( (y_2 - y_1, y_3 - y_1, \dots), (y_1, y_1, \dots) \right) = (y_1, y_2, \dots)
+      \end{align*}
+      Thus this map is an isomorphism, and so $U_1 + U_2$ and $U_1 \times U_2$ are isomorphic. Now, $U_1 + U_2$ is not a direct sum since,
+      \begin{align*}
+        U_1 + U_2 = \{(\lambda + x_1, \lambda + x_2, \dots): x_i, \lambda \in \F\}
+      \end{align*}
+      And so for example,
+      \begin{align*}
+        (1, 1, \dots) = (1, 1, \dots) + (0, 0, \dots) = (2, 2, \dots) + (-1, -1, \dots)
+      \end{align*}
+      So there is more than one way to write a vector, and so $U_1 + U_2$ cannot be a direct sum.
+    \ii
+      Consider the map $S: \CL(V_1, W) \times \dots \times \CL(V_m, W) \to \CL(V_1 \times\dots\times V_m, W)$ that maps $(T_1, \dots, T_m)$ to $T_{T_1, \dots, T_m} \equiv T$ such that
+      $T(v_1, \dots, v_m) = \sum_{i = 1}^{m}T_iv_i$. This map preserves scalar multiplication,
+      \begin{align*}
+        \lambda S(T_1, \dots, T_m)(v_1, \dots, v_m) & = \lambda T(v_1, \dots, v_m) \\
+        & = \lambda\sum_{i = 1}^{m}T_iv_i \\
+        & = \sum_{i = 1}^{m}\lambda T_iv_i \\
+        & = T_{\lambda T_1, \dots, \lambda T_m}(v_1, \dots, v_m) \\
+        & = S(\lambda T_1, \dots, \lambda T_m)(v_1, \dots, v_m)
+      \end{align*}
+      This map is also additive since,
+      \begin{align*}
+        S(T_1, \dots, T_m)(v_1, \dots, v_m) + S(R_1, \dots, R_m)(v_1, \dots, v_m) & = \sum_{i = 1}^{m}T_iv_i + \sum_{i = 1}^{m}R_iv_i \\ 
+        & = \sum_{i = 1}^{m}(T_i + R_i)v_i \\
+        & = S(T_1 + R_1, \dots, T_m + R_m)(v_1, \dots, v_m)
+      \end{align*}
+      Thus $S$ is linear. Next, $S$ is injective. If $S(T_1, \dots, T_m)(v_1, \dots, v_m) = 0$, for all $v_1, \dots, v_m$, then in particular, we can do the following: Let $i \in [m]$. For
+      all $j \neq i$, $j \in [m]$, let $v_j = 0$. Then,
+      \begin{align*}
+        S(T_1, \dots, T_m)(v_1, \dots, v_m) & = T(v_1, \dots, v_m) \\
+        & = \sum_{j = 1}^{m}T_jv_j \\
+        & = T_iv_i = 0
+      \end{align*}
+      Now, let $v_i$ vary across all $v \in V$, and we still get $T_iv_i = 0$. This implies that $T_i = 0 \in \CL(V, W)$ by the uniqueness of the zero map, since
+      \begin{align*}
+        0 = 0 + T
+      \end{align*}
+      And subtracting the zero map from both sides still yields zero. Hence $T = 0$. We were able to write $0 = 0 + T$ because since $T$ is always zero, we can add it and not affect the
+      final result. Now, repeat this process we did with $v_i$ for $i = 1, \dots, m$. Hence $(T_1, \dots, T_m) = 0$. Thus, by the linearity of $S$, this implies that it is injective (it maps
+      only zero to zero, and nothing else). 
+
+      Finally, the map $S$ is surjective. Consider an arbitrary map $T \in \CL(V_1\times\dots\times V_m, W)$. Fix $i \in [m]$, then define $T_i: V \to W$ by $T_iv = T(0, \dots, v, \dots,
+      0)$, where $(0, \dots, v, \dots, 0)$ is equal to $v$ in the $i$th position and zero elsewhere. This defines $T_i$ for all $v \in V$. $T_i$ is linear since 
+      \begin{align*}
+        aT_iv + bT_iu & = aT(0, \dots, v, \dots, 0) + b(0, \dots, u, \dots, 0) \\
+        & = T(0, \dots, av + bu, \dots, 0) \\
+        & = T_i(av + bu)
+      \end{align*}
+      And so $T_i \in \CL(V, W)$. Now repeat this process for $i = 1, \dots, m$. By linearity of $T$, we have then tha
+      \begin{align*}
+        T(v_1, \dots, v_m) = \sum_{i = 1}^{m}T_iv_i
+      \end{align*}
+      For arbitrary $(v_1, \dots, v_m) \in V^m$. Notice now that 
+      \begin{align*}
+        S(T_1, \dots, T_m)(v_1, \dots, v_m) = \sum_{i = 1}^{m}T_iv_i = T(v_1, \dots, v_m)
+      \end{align*}
+      Thus $S$ is surjective. Thus $S$ is invertible and an isomorphism. Thus $\CL(V_1\times\dots\times V_m, w)$ and $\CL(V_1,W)\times\dots\times\CL(V_m, W)$ are isomorphic.
+    \ii
+      Consider the map
+      \begin{align*}
+        S: \CL(V, W_1)\times\dots\dots\CL(V, W_m) \to \CL(V, W_1\times\dots\times W_m)
+      \end{align*}
+      Such that $S(T_1, \dots, T_m)(v) = (T_1v, \dots, T_mv)$. This map is linear since,
+      \begin{align*}
+        aS(T_1, \dots, T_m)(v) + bS(R_1, \dots, R_m)(v) & = a(T_1v, \dots, T_mv) + b(R_1v, \dots, R_mv) \\
+        & = ( (aT_1 + bR_1)v, \dots, (aT_1 + bR_1)v) \\
+        & = S(aT_1 + bR_1, \dots, aT_m + bR_m)(v)
+      \end{align*}
+      This map is also injective. Assume $S(T_1, \dots, T_m)(v) = 0$ for all $v \in V$ for some $(T_1, \dots, T_m) \in \CL(V, W_1)\times\dots\times\CL(V, W_m)$. Then,
+      \begin{align*}
+        S(T_1, \dots, T_m)(v) = (T_1v, \dots, T_mv) = 0
+      \end{align*}
+      This implies that $T_i = 0$ for all $i \in [m]$ since they always yield the zero vector. Thus since only zero is mapped to zero $S$, then by its linearity it is injective. 
+
+      Finally, this map is surjective. Consider an arbitrary map $T \in \CL(V, W_1\times\dots\times W_m)$. Calculate $Tv = (w_1, \dots, w_m)$ for all $v \in V$. Define $T_i \in \CL(V, W_i)$
+      such that $T_iv$ is equal to the $i$th slot of the output of $Tv$. This defines the value of $T_i$ for all $v \in V$. $T_i$ is also linear by virtue of $T$ being linear. Notice now
+      that 
+      \begin{align*}
+        Tv = (T_1v, \dots, T_mv) = S(T_1, \dots, T_m)(v) 
+      \end{align*}
+      by construction. And so the map is a surjection, and so it is invertible, and hence an isomorphism. Thus $\CL(V, W_1\times\dots\times W_m)$ and $\CL(V, W_1)\times\dots\times\CL(V,
+      W_m)$ are isomorphic.
+    \ii
+      Let $(v_1, \dots, v_n) \in V^n$. Consider the map $\varphi \in \CL(\F^n, V)$ defined by 
+      \begin{align*}
+        \varphi_{v_1, \dots, v_n}(\lambda_1, \dots, \lambda_n) = \sum_{i = 1}^{n}\lambda_iv_i 
+      \end{align*}
+      Define now the map $T: V^n \to \CL(\F^n, V)$ such that
+      \begin{align*}
+        T\left((v_1, \dots, v_n)\right) = \varphi_{v_1, \dots, v_n}
+      \end{align*}
+      This map is linear since 
+      \begin{align*}
+        aT\left((v_1, \dots, v_n)\right) + bT\left((u_1, \dots, u_n)\right) = a\varphi_{v_1, \dots, v_n} + b\varphi_{u_1, \dots, u_n}
+      \end{align*}
+      And
+      \begin{align*}
+        \big(a\varphi_{v_1, \dots, v_n} + b\varphi_{u_1, \dots, u_n}\big)(\lambda_1, \dots, \lambda_n) & = a\sum_{i = 1}^{n}\lambda_iv_i + b\sum_{i = 1}^{n}\lambda_iv_i \\
+        & = \sum_{i = 1}^{n}\lambda_i(av_i + bu_i) \\
+        & = \varphi_{(av_1 + bu_1, \dots, av_n + bu_n}(\lambda_1, \dots, \lambda_n)
+      \end{align*}
+      Which implies that 
+      \begin{align*}
+        aT\left((v_1, \dots, v_n)\right) + bT\left((u_1, \dots, u_n)\right) & =  a\varphi_{v_1, \dots, v_n} + b\varphi_{u_1, \dots, u_n} \\
+        & = \varphi_{(av_1 + bu_1, \dots, av_n + bu_n} \\
+        & = T\left((av_1 + bu_1, \dots, av_n + bu_n)\right)
+      \end{align*}
+      And so $T$ is linear. Next, this map is injective, since if $\varphi_{v_1, \dots, v_n} = 0$, then this implies $\sum_{i = 1}^{n}\lambda_iv_i = 0$ for all possible $(\lambda_1, \dots,
+      \lambda_n) \in \F^n$. In particular, using $e_1, \dots, e_n \in \F^n$ (standard basis vectors where $e_i$ is $1$ in the $i$th slot and $0$ elsewhere), we get that
+      \begin{align*}
+        \varphi_{v_1, \dots, v_n}(e_i) = v_i = 0
+      \end{align*}
+      And so $\varphi_{v_1, \dots, v_n} = 0$ if and only if $v_i = 0$ for $i \in [n]$. In other words, if $(v_1, \dots, v_n) = 0$. Thus $T$ is injective. Next, for any map $S \in \CL(\F^n,
+      V)$, get its output on $n$ standard basis vectors $e_1, \dot, e_n$, so that $Se_i = v_i$. Then, for any $(\lambda_1, \dots, \lambda_n) \in \F^n$, note that
+      \begin{align*}
+        (\lambda_1, \dots, \lambda_n) = \sum_{i = 1}^{n}\lambda_ie_i
+      \end{align*}
+      Thus
+      \begin{align*}
+        S\left((\lambda_1, \dots, \lambda_n)\right) & = S(\sum_{i = 1}^{n}\lambda_ie_i) \\
+        & = \sum_{i = 1}^{n}\lambda Se_i \\
+        & = \sum_{i = 1}^{n}\lambda_iv_i \\
+        & = \varphi_{v_1, \dots, v_n}(\lambda_1, \dots, \lambda_n)
+      \end{align*}
+      And so $S = \varphi_{v_1, \dots, v_n}$. Notice then that $T\big((v_1, \dots, v_n)\big) = \varphi_{v_1, \dots, v_n} = S$. Thus $T$ is also surjective. Thus $T$ is an invertible linear
+      map and so $\CL(\F^n, V)$ and $V^n$ are isomorphic.
+    \ii
+      Let $u \in U$ be arbitrary. Then $v + u \in v + U$ and $v \in v + U$. Then there exists some $w_1$, $w_2$ such that $v + u = x + w_1$ and $v = x + w_2$. Then
+      \begin{align*}
+        v - x = w_2 = w_1 - u
+      \end{align*}
+      And so $u = w_1 - w_2 \in W$. Thus $u \in W$. Since $u \in U$ is arbitrary, then $U \subset W$. By symmetry, we get that $W \subset U$, and $U = W$.
+    \ii
+      Let $A$ be an affine subset of $V$. Then there exists a subspace $U$ of $V$ and $x \in V$ such that $x + U = A$. Let $v, w \in A$ and let $\lambda \in \F$. Then there exists $u_1, u_2$
+      such that $v = x + u_1$ and $w = x + u_2$. Thus, 
+      \begin{align*}
+        \lambda v + (1 - \lambda)w & = \lambda(x + u_1) + (1 - \lambda)(x + u_2) \\
+        & = \lambda x + \lambda u_1 + x + u_2 - \lambda x - \lambda u_2 \\
+        & = x + (\lambda u_1 + (1 - \lambda)u_2)
+      \end{align*}
+      Since $(\lambda u_1 + (1 - \lambda)u_2) \in U$ since $U$ is a subspace, we get that $\lambda v + (1 - \lambda)w \in A$ for all $\lambda \in \F$, as desired. Conversely, assume $\lambda
+      v + (1 - \lambda)w \in A$ for all $\lambda \in \F$ and all $v, w \in A$. Let $a \in A$ be arbitrary. We will show that $-a + A = A - a$ is a subspace of $V$. First, it contains $0$
+      since $a - a = 0$. Second, it is closed under scalar multiplication since for $x \in A$,
+      \begin{align*}
+        \lambda(x - a) = \lambda x - \lambda a = \lambda x + (1 - \lambda)a - a \in A - a
+      \end{align*}
+      Since $\lambda x + (1 - \lambda)a \in A$ by definition of $A$. Now, let $x, y \in A$ be arbitrary. Notice that by letting $\lambda = \frac{1}{2}$, we have $\frac{x}{2} +
+      \frac{y}{2} \in A$. Thus, $\frac{x}{2} + \frac{y}{2} - a \in A - a$. Thus, since $A - a$ is closed under scalar multiplication,
+      \begin{align*}
+        (x - a) + (y - a) = 2(\frac{x}{2} + \frac{y}{2} - a) \in A - a
+      \end{align*}
+      Thus $A - a$ is also closed under addition. Hence $A - a = -a + A$ is a subspace of $V$. Notice now that $a + (A - a) = A$ is an affine subset of $V$, and hence the desired result.
+    \ii
+      Let $x, y \in A_1 \cap A_2$. By the previous problem, we have that for any $\lambda \in \F$,
+      \begin{align*}
+        \lambda x + (1 - \lambda)y \in A_1 \\
+        \lambda x + (1 - \lambda)y \in A_2 
+      \end{align*}
+      This implies thus that for any $\lambda$, $\lambda x + (1 - \lambda)y \in A_1 \cap A_2$. Thus $A_1 \cap A_2$ is an affine set by the previous problem.
+
+      As a side note. If $A_1 = v + U$ and $A_2 = x + W$, then geometric intuition says that $A_1 \cap A_2 = (x + v) + (U \cap W)$.
+    \ii
+      For any finite collection of affine subsets, we can apply the result of the previous problem iteratively to get the desired solution.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          Let $v = \sum_{i = 1}^{m}\lambda_iv_i$, $\sum_{i = 1}^{m}\lambda_i = 1$, $\lambda_i \in \F$. Let $w = \sum_{i = 1}^{m}\eta_iv_i$, $\sum_{i = 1}^{m}\eta_i = 1$, $\eta_i \in \F$. Let
+          $\beta \in \F$. Then,
+          \begin{align*}
+            \beta v + (1 - \beta)w & = \sum_{i = 1}^{m}(\beta\lambda_i + (1 - \beta)\eta_i)v_i
+          \end{align*}
+          Now note that 
+          \begin{align*}
+            \sum_{i = 1}^{m}(\beta\lambda_i + (1 - \beta)\eta_i) = \beta + (1 - \beta) = 1
+          \end{align*}
+          Thus $\beta v + (1 - \beta)w \in A$ for all $\beta \in \F$ and all $v, w \in A$ (since we can let $\lambda_1, \dots, \lambda_m$ and $\eta_1, \dots, \eta_m$ vary freely to get all
+          elements in $A$). Thus by problem $8$, $A$ is an affine set.
+        \ii
+          Let $B$ be an affine subset of $V$ that contains $v_1, \dots, v_m$. Since $B$ is an affine set, there exists $v \in V$, and $U$ some subspace of $V$, such that $B = v + U$. Thus
+          there exist $u_1, \dots, u_m$ such that $v_i = v + u_i$. Notice that if $\sum_{i = 1}^{m}\lambda_i = 1$, $\lambda_i \in \F$, $i \in [m]$, then,
+          \begin{align*}
+            \sum_{i = 1}^{m}\lambda_iv_i & = (\sum_{i = 1}^{m}\lambda_i)v + \sum_{i = 1}^{m}\lambda_iu_i \\
+            & = v + \sum_{i = 1}^{m}\lambda_iu_i
+          \end{align*}
+          Since $U$ is a subspace, $u = \sum_{i = 1}^{m}\lambda_iu_i \in U$. Thus $v + u \in B$ by definition of an affine space. Thus $v + u = \sum_{i = 1}^{m}\lambda_iv_i \in B$. Since
+          $\lambda_1, \dots, \lambda_m$ are arbitrary, we thus get that $A \subset B$.
+        \ii
+          Since $A$ is an affine subset of $V$, there exists $v \in V$ and $U$ subspace of $V$ such that $A = v + U$. Let $u \in U$ be arbitrary. Then there exist $\lambda_1, \dots,
+          \lambda_m$ such that
+          \begin{align*}
+            u = \sum_{i = 1}^{m}\lambda_iv_i - v = \sum_{i = 1}^{m}\lambda_i(v_i - v)
+          \end{align*}
+          Thus the list $v_1 - v, \dots, v_m - v$ is a spanning list for $U$. Now, since $0 \in U$, note that,
+          \begin{align*}
+            0 & = \sum_{i = 1}^{m}\lambda_i(v_i - v)
+            v = \sum_{i = 1}^{m}\lambda_iv_i
+          \end{align*}
+          Thus we have found a nontrivial linear combination of $v_1 - v, \dots, v_m - v$ that yields zero, and the list is linearly dependent (there must be at least one
+          $\lambda_i$ that is nonzero). Thus there can be at most $m - 1$ linearly independent vectors in the spanning list, and so $U$ has dimension at most $m - 1$. 
+      \end{enumerate}
+    \ii
+      Intuitively, specifying the equivalence class ($U/V$), then specifying the offset from the vector $w$ that decides the equivalence class (i.e. $w + U$), is enough to uniquely identify
+      any vector in $V$.
+
+      Let $v \in V$ be arbitrary. Consider $v + U$. Since $V/U$ is finite dimensional, it has some basis $v_1 + U, \dots, v_n + U$, for $v_1, \dots, v_n \in V$. Thus there exist $\lambda_1,
+      \dots, \lambda_n$ such that $\sum_{i = 1}^{n}\lambda_iv_i + U = v + U$. Let $w = \sum_{i = 1}^{n}\lambda_iv_i$. Thus $w + U = v + U$. Thus $v - w \in U$. Let $v - w = u$. Then $v = w +
+      v$. Let $T: V/U \times U \to V$ be such that
+      \begin{align*}
+        T(\sum_{i = 1}^{n}\lambda_iv_i + U, u) = \sum_{i = 1}^{n}\lambda_iv_i + u
+      \end{align*}
+      This map $T$ is linear (check). This map is also injective. If 
+      \begin{align*}
+        T(\sum_{i = 1}^{n}\lambda_iv_i + U, u) = \sum_{i = 1}^{n}\lambda_iv_i + u = 0
+      \end{align*}
+      Then
+      \begin{align*}
+        \sum_{i = 1}^{n}\lambda_iv_i = -u
+      \end{align*}
+      Thus $\sum_{i = 1}^{n}\lambda_iv_i \in U$. Thus $\sum_{i = 1}^{n}\lambda_iv_i + U = U = 0 + U$. Since $v_1 + U, \dots, v_n + U$ is a basis for $V/U$, this implies that we must have
+      that $\lambda_1 = \dots = \lambda_n = 0$. Thus $u = 0$, since, 
+      \begin{align*}
+        \sum_{i = 1}^{n}\lambda_iv_i = u
+      \end{align*}
+      Thus the only way to get $T$ to map to zero is to take in the pair $(0 + U, 0)$. Thus by linearity of $T$, $T$ must be injective. Finally, let $v \in V$ be arbitrary. Then by the
+      explanation at the beginning of the problem, this map is surjective. Thus $T$ is an isomorphism. Thus $V/U \times U$ and $V$ are isomorphic when $V/U$ is finite dimensional.
+    \ii
+      Recall the isomorphism $T \in \CL(V/U\times U, V)$ from the previous problem, such that
+      \begin{align*}
+        T(\sum_{i = 1}^{n}\lambda_iv_i + U, u) = \sum_{i = 1}^{n}\lambda_iv_i + u
+      \end{align*}
+      Since $U$ is finite dimensional in this problem, then it has a basis, say $u_1, \dots, u_m$. Thus $u$ can be written as $u = \sum_{i = 1}^{m}\eta_iu_i$ for some $\eta_1, \dots,
+      \eta_m$. Thus, since $T$ is surjective, then for all $v \in V$, there exists $\lambda_1, \dots, \lambda_n, \eta_1, \dots, \eta_m$ such that
+      \begin{align*}
+        T(\sum_{i = 1}^{n}\lambda_iv_i + U, \sum_{i = 1}^{m}\eta_iu_i) = \sum_{i = 1}^{n}\lambda_iv_i + \sum_{i = 1}^{m}\eta_iu_i = v
+      \end{align*}
+      $v_1, \dots, v_n, u_1, \dots, u_m$ is thus a spanning list for $V$. Furthermore, it is linearly independent since $v_1 + U \dots, v_n + U$ is linearly independent, which implies that $u_j$
+      cannot be in the span of $v_1, \dots, v_n$. This is because if it were, then we could write 
+      \begin{align*}
+        U = 0 + U = u_j + U = \sum_{i = 1}^{n}\lambda_iv_i + U
+      \end{align*}
+      for some $\lambda_1, \dots, \lambda_n$. That would imply there is more than one way to write zero ($u_j + U = 0 + U$, and $u_j \neq 0$ since $u_1, \dots, u_m$ is linearly
+      independent), which would contradict linear independence of $v_1 + U, \dots, v_n + U$. Since $j \in [m]$ is arbitrary, we have that $v_1, \dots, v_n, u_1, \dots, u_m$ is a linearly
+      independent spanning list for $V$, and hence a basis.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii  
+          Let $u \in U$ and $a \in \F$. $U$ is closed under scalar multiplication,
+          \begin{align*}
+            au = (ax_1, ax_2, \dots)
+          \end{align*}
+          And so for $x_j = 0$, $ax_j = 0$. Thus $ax_j = 0$ for all $j \in \N$ except possibly for finitely many $j$. Thus $au \in U$. $U$ is also closed under addition. Let $u, v \in U$. Then,
+          \begin{align*}
+            u + v = (u_1 + v_1, u_2 + v_2, \dots)
+          \end{align*}
+          Assume $u$ has $m$ nonzero entries and $v$ has $n$ nonzero entries. Then $u + v$ has at most $m + n$ nonzero entries. Thus $u + v$ still only has finitely many nonzero entries, and so
+          $u + v \in U$. $U$ also contains the zero vector. Thus $U$ is closed under linear combinations and contains zero, and so is a subspace.
+        \ii
+          For a quick intuition as to this problem, $\F^\infty/U$ is the space of sets of vectors that differ only by a finite number of terms. That is, the equivalence relation is $v - w
+          \in U$, meaning $x$ and $y$ have only finitely many different entries, and $\F^\infty/U$ is the space of the equivalence classes. The idea to this problem then is to produce an
+          infinite list of infinitely different vectors, which will result in different equivalence classes for each. 
+
+
+          All we have to do is produce one vector $v$ that is infinitely different from any vector in the span of $v_1, \dots, v_n$. Why? $v + U$ is the set of vectors that are finitely
+          different from $v$, so if $v$ is infinitely different from another set of vectors, then so will any vector in $v + U$, thus we only need to consider $v$. Next, if $v_1, \dots, v_n$
+          in all their linear combinations are infinitely different from $v$, then any finite changes to any $v_i$ will still be infinitely different from $v$. Hence we only need to consider
+          $v_1, \dots, v_n$, instead of all possible $v_i + u_i$.
+
+
+          This will be a proof by induction. Consider the list of vectors, $(a_k)_{k = 1}^{\infty}$, where $a_k = (x_1^k, x_2^k, \dots)$, and none of the $x_i = 0$. First the base
+          step. 
+          \begin{align*}
+            a_1 & = (x_1^1, x_2^1, \dots) \\
+            a_2 & = (x_1^2, x_2^2, \dots)
+          \end{align*}
+          Certainly $a_2$ is infinitely different from $a_1$, as lower order powers cannot be written as a linear combination of higher order powers. Now the induction step. Assume for $k =
+          1, \dots, n - 1$, $a_1 + U, \dots, a_{n - 1} + U$ are linearly independent. Consider $a_n$. Any linear combination of $a_1, \dots, a_{n - 1}$ will be
+          of them form,
+          \begin{align*}
+            \sum_{k = 1}^{n - 1}\lambda_ia_i = (\sum_{i = 1}^{n - 1}\lambda_ix_1^i, \sum_{i = 1}^{n - 1}\lambda_ix_2^i, \dots)
+          \end{align*}
+          Hence we want $\sum_{i = 1}^{n - 1}\lambda_ix_k^i = x_k^n$, $k \in \N$. We know that $x_k^n$ is not in the span of $\{1, x_k^1, \dots, x_k^{n - 1}\}$. That is, a linear combination
+          of lower order powers cannot represent a higher order power for all $x_k \in \F$. 
+
+
+          We know by the fundamental theorem of algebra that $\sum_{i = 1}^{n - 1}\lambda_ix_k^i = x_k^n$ has for any given list $\lambda_1, \dots, \lambda_{n - 1}$ at most $n$ many roots.
+          Thus at most we can we have $\sum_{i = 1}^{n - 1}\lambda_ix_k^i = x_k^n$ $n$ many times. This is a finite number of times. 
+
+
+          Thus $a_k - \sum_{k = 1}^{n - 1}\lambda_ia_i \not\in U$, as they are infinitely different for all possible $\lambda_1, \dots, \lambda_{n - 1}$. Thus 
+          \begin{align*}
+            a_1 + U, \dots, a_n + U 
+          \end{align*}
+          is a linearly independent list. Since $n \in \N$ is arbitrary, we get that $(a_n + U)_{n = 1}^{\infty}$ is an infinite list of linearly independent vectors in $\F^\infty/U$, and so
+          $\F^\infty/U$ is infinite dimensional, as desired.
+      \end{enumerate}
+    \ii
+      Consider the map $\tilde{\varphi} \in \CL(V/(\nullspace\varphi), \F)$, such that $\tilde{\varphi}(v + \nullspace{\varphi}) = \varphi(v)$. By definition, $\tilde{\varphi}$ is injective,
+      with $\ran{\tilde{\varphi}} = \ran{\varphi} \subset \F$ (check the last proposition in the section). Since $\varphi$ is not the zero map, then it $\dim{\ran{\varphi}} > 0$, and since
+      $\ran{\varphi} \subset \F$, we thus must have have that $\dim\ran{\varphi} = 1$, and so $\ran{\varphi} = \F$. Thus $\tilde{\varphi}$ is an isomorphism from $V/(\nullspace{\varphi})$ to
+      $\F$. Thus $V/(\nullspace{\varphi})$ and $\F$ are isomorphic, and so $\dim V/(\nullspace{\varphi}) = 1$.
+    \ii
+      Since $\dim V/U = 1$, there exists a basis for $V/U$, say $w + U$, for some $w \in V$. Let $v \in V$ be arbitrary. Consider $v + U$. Since $w + U$ is a basis for $V/U$, there must
+      exist $\lambda$ such that $\lambda w + U = v + U$. Define the map $S: V/U \to \F$ such that $S(v + U) = S(\lambda w + U) = \lambda$. This map is an isomorphism. First scalar
+      multiplication. Let $v \in V$ be arbitrary.
+      \begin{align*}
+        aS(v + U) & = aS(\lambda w + U) \\
+        & = a\lambda + U \\
+        & = S(a\lambda w + U) 
+        & = S(v + U)
+      \end{align*}
+      Where $\lambda$ is such that $\lambda w + U = v + U$. Next additivity. Let $v, x \in V$,
+      \begin{align*}
+        S(v + U) + S(x + U) & = S(\lambda_1 w + U) + S(\lambda_2 w + U) \\
+        & = \lambda_1 + \lambda_2 \\
+        & = S( (\lambda_1 + \lambda_2)w + U)
+        & = S( (v + x) + U)
+      \end{align*}
+      Thus it is linear. Next, injectivity. If $S(v + U) = S(\lambda w + U) = \lambda = 0$, then $v + U = 0 + U = U$. Thus only zero gets mapped to zero and by linearity it is injective.
+      Finally, surjectivity. Let $\lambda \in \F$ be arbitrary. Then $S(\lambda w + U) = \lambda$. Thus $S$ is an isomorphism. 
+
+      Let $\pi: V \to V/U$. The quotient map is linear. Finally, let $\varphi = S \circ \pi$. Since $\varphi$ is the composition of two linear maps, it is also linear. Thus $\varphi \in
+      \CL(V, \F)$. Finally, let $u \in V$ be such that $\varphi(u) = 0$. Then $S(u + U) = 0$. By the injectivity of $S$, this implies that $u + U = 0 + U = U$. Thus $u - 0 \in U$, or $u \in
+      U$. Thus $\nullspace{\varphi} \subset U$. Furthermore, for any $u \in U$, $u + U = U = 0 + U$, and so $\varphi(u) = 0$. $U \subset \nullspace{\varphi}$, and so $\nullspace{\varphi} =
+      U$, as desired.
+    \ii
+      Since $V/U$ is finite dimensional, there exists $v_1 + U, \dots, v_n + U$ for some $v_1, \dots, v_n \in V$ that are a basis for $V/u$. Notice that $v_1, \dots, v_n$ are linearly
+      independent in $V$. If not, then one of the $v_i + U$ is redundant, which is a contradiction. Let $W$ be the span of $v_1, \dots, v_n$.
+
+      Let $v \in V$ be arbitrary. Consider $v + U$.  There exist $\lambda_1, \dots, \lambda_n$ such that $\sum_{i = 1}^{n}\lambda_iv_i + U = v + U$ by definition of basis. Thus 
+      \begin{align*}
+        u = \sum_{i = 1}^{n}\lambda_iv_i - v \in U
+      \end{align*}
+      Thus for all $v \in V$, we have that there exist $\lambda_1, \dots, \lambda_n$ and $u \in U$ such that $w = \sum_{i = 1}^{n}\lambda_iv_i \in W$ and $v = u + w$. Thus $V \subset U + W$.
+      Since $U, W \subset V$ and $U + W \subset V$, we thus get that that $V = U + W$. 
+
+      Finally, $U + W$ is actually a direct sum. Note that for any $u \in U$ such that $u \neq 0$, we have that $u \not\in W$. For if it were, then there exist $\lambda_1, \dots, \lambda_n$
+      such that $\sum_{i = 1}^{n}\lambda_iv_i + U = u + U = U = 0 + U$. This would imply that we have just found a nontrivial linear combination of $0 \in V/U$ with its basis, a
+      contradiction. Thus $U \cap W = \{0\}$, and so $U + W$ is a direct sum.
+    \ii
+      Assume $U \subset \nullspace{T}$. Let $S: V/U \to W$ be defined by $S(v + U) = Tv$, for $v \in V$. First, this definition makes sense since if $v, x \in V$ such that $v + U = x + U$,
+      then $u = v - x \in U \subset \nullspace{T}$. Thus, $S(v + U) = Tv = T(x + u) = Tx = S(x + U)$. Thus this map is well defined. Next, this map is linear,
+      \begin{align*}
+        aS(v + U) + bS(x + U) & = aTx + bTv \\
+        & = T(ax + bv) \\
+        & = S\left( (ax + bv) + U \right)
+      \end{align*}
+      Finally, let us show that that $T = S \circ \pi$. Let $v \in V$ be arbitrary, then
+      \begin{align*}
+        S\circ\pi(v) = S(v + U) = Tv
+      \end{align*}
+      And hence the desired result. 
+
+      Conversely, assume there exist $S \in \CL(V/U, W)$ such that $T = S \circ \pi$. Let $u \in U$. Then $\pi(u) = u + U = U = 0 + U$. Thus,
+      \begin{align*}
+        Tu = S \circ \pi(u) = S(0 + U) = 0
+      \end{align*}
+      Thus $u \in \nullspace{T}$. Thus $U \subset \nullspace{T}$, as desired.
+
+
+      Note: this is almost the same as the first isomorphism theorem, very similar. however, $U$ relaxed to only being a subset of $\nullspace{T}$ is okay because for $v \in
+      \nullspace{T}$ such that $v \not\in U$, they get mapped to zero anyway.
+    \ii
+      Assume $A$ is a finite set with cardinality $\abs{A} < \infty$, and $A_1, \dots, A_m$ subsets of $A$. Then $\bigcup_{i = 1}^{m}A_i$ is a disjoint union if and only if,
+      \begin{align*}
+        \abs{\bigcup_{i = 1}^{m}A_i} = \sum_{i = 1}^{m}\abs{A_i}
+      \end{align*}
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii Linearity,
+          \begin{align*}
+            \Gamma(aS + bT) & = (aS + bT) \circ \pi \\
+            & = a(S \circ \pi) + b(T \circ \pi) \\
+            & = a\Gamma(S) + b\Gamma(T)
+          \end{align*}
+        \ii 
+          If $\Gamma(S) = S \circ \pi = 0$, then $S(v + U) = 0 + U$ for all $v \in V$. The only map that does that is the zero map. Thus $S = 0$. By linearity of $\Gamma$, we thus get that
+          $\Gamma$ is injective.
+        \ii
+          Let $S \in \CL(V/U, W)$ be arbitrary. Then $T = \Gamma(S) = S \circ \pi$. Now, for any $u \in U$, 
+          \begin{align*}
+            Tu & = (S \circ \pi)(u) \\
+            & = S(u + U) \\
+            & = S(0 + U) \\
+            & = 0
+          \end{align*}
+          Thus $Tu = 0$ for all $u \in U$. Thus $\ran{\Gamma} \subset \{T \in \CL(V, W): Tu = 0, u \in U\}$. 
+
+          Conversely, if $Tu = 0$ for all $u \in U$, then $U \subset \nullspace{T}$. By problem 18 there thus exists $S \in \CL(V/U, W)$ such that $T = S \circ \pi$. Note then that
+          $\Gamma(S) = S \circ \pi = T$, and so $\{T \in \CL(V, W): Tu = 0, u \in U\} \subset \ran{\Gamma}$. Thus $\{T \in \CL(V, W): Tu = 0, u \in U\} = \ran{\Gamma}$, as desired.
+      \end{enumerate}
+  \end{enumerate}
+\section{Duality}
+  \begin{enumerate}[label=\arabic*)]
+    \ii 
+      Let $V$ a linear space and $\varphi \in \CL(V, \F)$. Then, note that since $\dim\F = 1$, and $\ran{\varphi}$ is a subspace of $\F$, either $\dim\ran{\varphi} = 1$ or $0$. If it is $1$,
+      then it is a subspace with the same dimension, hence equals the entire containing space $\F$, and so $\varphi$ is surjective. Otherwise, $\dim\varphi = 0$, it has no basis, and it is
+      spanned by $0$, i.e. it is the zero map.
+    \ii
+      Let $\varphi_1, \varphi_2, \varphi_3 \in \CL(\R^{[0, 1]}, \F)$, i.e. linear functionals on the space of real valued functions on the unit interval. Let $f \in \R^{[0, 1]}$ be
+      arbitrary. Then $\varphi_1(f) = f(0)$, $\varphi_2(f) = f(0.5)$, and $\varphi_3(f) = f(1)$. Thus they are all different.
+    \ii
+      Extend $v$ to a basis of $V$ by adding vectors $v_2, \dots, v_n$. Consider the corresponding dual basis $\varphi, \varphi_2, \dots, \varphi_n$. Then $\varphi(v) = 1$.
+    \ii
+      Since $V$ is finite dimensional, so is $U$. Let $u_1, \dots, u_m$ be a basis for $U$. Extend these vectors to a basis of $V$ by adding vectors $v_1, \dots, v_n$. Consider the dual
+      basis $\varphi_1, \dots, \varphi_m, \psi_1, \dots, \psi_m$. Then $\psi_j(u_i) = 0$ for all $i \in [m]$. This implies that $\psi_j(u) = 0$ for all $u \in U$ by linearity and the fact
+      that all $u \in U$ are in the span of $u_1, \dots, u_m$. However, $\psi_j(v_j) = 1$, and $\psi_j \neq 0$.
+    \ii
+      Consider the map $T: V_1^{\prime} \times \dots \times V_m^{\prime} \to (V_1 \times \dots \times V_m)^{\prime}$ defined by
+      \begin{align*}
+        T(\varphi_1, \dots, \varphi_m) = \varphi \in (V_1 \times \dots \times V_m)
+      \end{align*}
+      Where 
+      \begin{align*}
+        \varphi(v_1, \dots, v_m) = \varphi_1v_1 + \dots + \varphi_mv_m
+      \end{align*}
+      The map $T$ is linear. Let $a \in \F$. Then,
+      \begin{align*}
+        aT(\varphi_1, \dots, \varphi_m)(v_1, \dots, v_m) & = a\varphi_1v_1 + \dots + a\varphi_mv_m \\
+        & = T(a\varphi_1, \dots, \varphi_m)
+      \end{align*}
+      Also, let $\psi_i \in V_i$, then, 
+      \begin{align*}
+        T(\varphi_1, \dots, \varphi_m)(v_1, \dots, v_m) + T(\psi_1, \dots, \psi_m)(v_1, \dots, v_m) & = \sum_{i = 1}^{m}\varphi_iv_i + \sum_{i = 1}^{m}\psi_iv_i \\
+        & = \sum_{i = 1}^{m}(\varphi_i + \psi_i)v_i \\
+        & = T(\varphi_1 + \psi_1, \dots, \varphi_m + \psi_m)(v_1, \dots, v_m)
+      \end{align*}
+      $T$ is also injective. Let $\varphi_1, \dots, \varphi_m$ be such that $T(\varphi_1, \dots, \varphi_m) = 0$. Then,
+      \begin{align*}
+        T(\varphi_1, \dots, \varphi_m)(v_1, \dots, v_m) = \varphi_1v_1 + \dots + \varphi_mv_m = 0
+      \end{align*}
+      For all $(v_1, \dots, v_m) \in V_1\times\dots\times V_m$. In particular, fix $v_i$, and then let $v_j = 0$ for all $j \neq i$. Then let $v_i$ vary across all $v \in V_i$. This gives us
+      $\varphi_iv_i = 0$ for all $v_i = v \in V_i$. Since we always get zero, this implies that $\varphi_i = 0$. Since $i \in [m]$ is arbitrary, we thus get get that $\varphi_1 = \dots =
+      \varphi_m = 0$. Since $T$ maps only zero to zero, then by linearity of $T$, it is injective.
+
+      Finally, let $\varphi \in (V_1 \times \dots \times V_m)^{\prime}$ be arbitrary. Now consider $(0, \dots, v_i, \dots, 0)$, where all the slots are zero except slot $i$. Let $v_i$ vary
+      across all $v \in V_i$ and compute the output, then define $\varphi_i \in V_i^{\prime}$ by $\varphi_i(v_i) = \varphi(0, \dots, v_i, \dots, 0)$. $\varphi_i$ is well defined since we
+      have specified its value on all $v \in V_i$. Compute $\varphi_i$ for $i \in [m]$ and get $m$ linear functionals, each on $V_i$. Now notice that by linearity of $\varphi$,
+      \begin{align*}
+        \varphi(v_1, \dots, v_m) & = \sum_{i = 1}^{m}\varphi_iv_i \\
+        & = T(\varphi_1, \dots, \varphi_m)(v_1, \dots, v_m)
+      \end{align*}
+      Thus $T$ is surjective. Thus $T$ is an isomorphism and so $V_1^{\prime} \times \dots \times V_m^{\prime}$ is isomorphic to $(V_1 \times \dots \times V_m)^{\prime}$.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          \begin{enumerate}[label=\roman*)]
+            \ii 
+              Assume $v_1, \dots, v_m$ spans $V$. Assume $\Gamma(\varphi) = \left( \varphi(v_1), \dots, \varphi(v_m) \right) = 0$. Then $\varphi(v_i) = 0$ for $i \in [m]$. Since $v_1, \dots,
+              v_m$ span $V$, then any arbitrary vector $v \in V$ may be expressed as $v = \sum_{i = 1}^{m}\lambda_iv_i$ for some $\lambda_i \in \F$ for $i \in [m]$. Applying $\varphi$ to
+              $v$, we get
+              \begin{align*}
+                \varphi(v) = \sum_{i = 1}^{m}\lambda_i\varphi(v_i) = 0
+              \end{align*}
+              Thus $\varphi(v) = 0$ for all $v \in V$, which implies $\varphi = 0$. Thus $\Gamma$ maps only zero to zero, and since it is linear, then $\Gamma$ must be injective.
+            \ii
+              Assume $\Gamma$ is injective. For the sake of contradiction, assume $v_1, \dots, v_m$ does not span $V$. Then by problem 4, there exists $\varphi$ such that $\varphi(u) = 0$
+              for all $u \in \Span(v_1, \dots, v_m)$ (and hence $\varphi(v_i) = 0$), but $\varphi \neq 0$. This contradicts $\Gamma$ being injective, since then both $0$ and $\varphi$ are
+              such that $\Gamma(\varphi) = \Gamma(0) = (0, \dots, 0)$. Hence $v_1, \dots, v_m$ do span $V$.
+          \end{enumerate}
+        \ii
+          \begin{enumerate}[label=\roman*)]
+            \ii 
+              Assume $v_1, \dots, v_m$ is linearly independent. Extend $v_1, \dots, v_m$ to a basis of $V$ by adding vectors $w_1, \dots, w_n$. Let $\varphi_1, \dots, \varphi_m, \psi_1,
+              \dots, \psi_n$ be the dual basis for $V^{\prime}$. Let $u = (u_1, \dots, u_m) \in \F^m$ be arbitrary. Let $\varphi = \sum_{i = 1}^{m}u_i\varphi_i$. Then note that
+              \begin{align*}
+                \varphi(v_j) = \sum_{i = 1}^{m}u_i\varphi_i(v_j) = u_i
+              \end{align*}
+              By definition of dual basis. Thus,
+              \begin{align*}
+                \Gamma(\varphi) & = \left( \varphi(v_1), \dots, \varphi(v_m) \right) \\
+                & = (u_1, \dots, u_m) \\
+                & = u \in \F
+              \end{align*}
+              Since $u$ is arbitrary, $\Gamma$ is thus surjective, as desired.
+            \ii 
+              Assume $\Gamma$ is surjective. To show that $v_1, \dots, v_m$ are linearly independent, we must show that $\sum_{i = 1}^{m}a_iv_i = 0$ implies $a_i = 0$ for all $i \in [m]$ where
+              $a_i \in \F$. To this effort, let $\varphi_i$ be such that
+              \begin{align*}
+                \Gamma(\varphi_i) & = \left( \delta_{i1}, \dots, \delta_{im} \right)
+              \end{align*}
+              So that $\varphi_i(v_j) = \delta_{ij}$ is $1$ if $i = j$ and $0$ otherwise. Then,
+              \begin{align*}
+                \varphi_i(\sum_{i = 1}^{m}a_iv_i) & = \sum_{i = 1}^{n}a_i\varphi_i(v_i) \\
+                & = a_i \\
+                & = \varphi_i(0) = 0
+              \end{align*}
+              Since $i \in [m]$ is arbitrary, we thus get that $a_i = 0$ for all $i$ and so $v_1, \dots, v_m$ is a linearly independent list, as desired.
+          \end{enumerate}
+      \end{enumerate}
+    \ii
+      By checking directly, we see that for any $x^i$, $i = 0, 1, \dots, m$, and considering $\varphi_j(x^i)$, if $j > i$, then $\varphi_j(x^i) = 0$. This is because taking more derivatives
+      than a monomial has degree yields zero. Conversely, if $j < i$, then we get 
+      \begin{align*}
+        \varphi_j(x^i) = i(i - 1)\dots(i - j)\frac{x^{i - j}(0)}{j!} 
+      \end{align*}
+      Since $i > j$, then $k = i - j >= 1$, and $x^k(0) = 0$. Finally, if $j = i$, then
+      \begin{align*}
+        \varphi_j(x^i) = \frac{j!}{j!} = 1
+      \end{align*}
+      And so by definition of dual basis, the provided $\varphi_0, \dots, \varphi_m$ is indeed a dual basis for $0, x, \dots, x^m$.
+    \ii
+    \begin{enumerate}[label=\alph*)]
+      \ii 
+        The provided list is a list with dimension $m + 1 = \dim\CP_m(\R)$. Thus if we can show it is a linearly independent list, then we are done. This will be a proof by induction. First
+        the base case. $1$ and $x - 5$ are linearly independent. Now assume $1, x - 5, \dots, (x - 5)^{m - 1}$ are linearly independent. Consider now the addition of $(x - 5)^m$. $(x - 5)^m$
+        contains a higher degree monomial than does any of the previous terms ($x^m$ that is), and lower order polynomials cannot express/equal a higher degree one. Thus $(x - 5)^m$ cannot be
+        expressed as a linear combination of $1, x - 5, \dots, (x - 5)^{m - 1}$, and so they are linearly independent, which is the desired result.
+      \ii
+        Let $y = x - 5$. The dual basis for $1, y, \dots, y^m$ is the same as problem 7. Plugging in $x - 5$ for $y$ (so we have $0 = y = x - 5$) now, we see that the dual basis is,
+        \begin{align*}
+          \varphi_j(p) = \frac{p^{(j)}(5)}{j!}
+        \end{align*}
+        This can be verified.
+    \end{enumerate}
+    \ii
+      Since $\varphi_1, \dots, \varphi_n$ is a basis for $V^{\prime}$, then there exist $\lambda_1, \dots, \lambda_n$ such that
+      \begin{align*}
+        \psi = \sum_{i = 1}^{n}\lambda_i\varphi_i
+      \end{align*}
+      Now, let us consider $\psi(v_j)$ for $j \in [n]$,
+      \begin{align*}
+        \psi(v_j) & = \sum_{i = 1}^{n}\lambda_i\varphi_i(v_j) \\
+        & = \lambda_j
+      \end{align*}
+      Since $\varphi_i(v_j) = \delta_{ij}$. Hence $\lambda_j = \psi(v_j)$. Thus,
+      \begin{align*}
+        \psi & = \sum_{i = 1}^{n}\lambda_i\varphi_i \\
+        & = \sum_{i = 1}^{n}\psi_i(v_i)\varphi_i
+      \end{align*}
+      As desired.
+    \ii
+      Check the notes.
+    \ii
+      Since $A$ is rank 1, there exist a column of $A$ that spans all the other columns. Let $A_{\cdot k}$ be the $k$th column, then $A_{\cdot 1}$, the first column, spans all the other
+      columns. Let $A_{j1} = c_j$. Then, $A_{\cdot k} = d_kA_{\cdot 1}$. Thus,$A_{jk} = A_{j1}d_k = c_jd_k$, as desired.
+    \ii
+      Let $T = I \in \CL(V)$ be the identity map. Let $T^{\prime}$ be the dual map of $T$. Let $\varphi \in V^{\prime}$. Then,
+      \begin{align*}
+        T^{\prime}(\varphi) = \varphi \circ T = \varphi \circ I = \varphi
+      \end{align*}
+      And so $T^{\prime} \in \CL(V^{\prime})$ is the identity map on $V^{\prime}$ as well, as desired.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          \begin{align*}
+            T^{\prime}(\varphi_1) & = \varphi_1 \circ T \\
+            & = \varphi_1(4x + 5y + 6z, 7x + 8y + 9z) \\
+            & = 4x + 5y + 6z \\
+            T^{\prime}(\varphi_2) & = \varphi_2 \circ T \\
+            & = \varphi_1(4x + 5y + 6z, 7x + 8y + 9z) \\
+            & = 7x + 8y + 9z
+          \end{align*}
+        \ii 
+          \begin{align*}
+            T^{\prime}(\varphi_1) & = 4x + 5y + 6z \\
+            & = 4\psi_1(x, y, z) + 5\psi_2(x, y, z) + 6\psi_3(x, y, z) \\
+            T^{\prime}(\varphi_2) & = 7x + 8y + 9z \\
+            & = 7\psi_1(x, y, z) + 8\psi_2(x, y, z) + 9\psi_3(x, y, z) \\
+          \end{align*}
+      \end{enumerate}
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          \begin{align*}
+            T^{\prime}(\varphi)(x) & = (\varphi \circ T)\left( p(x) \right) \\
+            & = \varphi\left( Tp(x) \right) \\
+            & = \varphi(x^2p(x) + p^{\prime\prime}(x)) \\
+            & = \left(2xp(x) + x^2p^{\prime}(x) + p^{(3)}(x)\right)(4) \\
+            & = 8p(4) + 16p^{\prime}(4) + p^{(3)}(4) \\
+          \end{align*}
+        \ii
+          \begin{align*}
+            \left(T^{\prime}(\varphi)\right)(x^3) & = (\varphi \circ T)(x^3) \\
+            & = \varphi\left( T(x^3) \right) \\
+            & = \varphi\left( x^2x^3 + 6x \right) \\
+            & = \int{0}^{1}(x^5 + 6x)dx \\
+            & = \frac{1}{6}x^6 + 3x^2|_0^1 \\
+            & = \frac{19}{6} 
+          \end{align*}
+      \end{enumerate}
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          Let $T^{\prime} = 0$. Since $W$ is finite dimensional, $W^{\prime}$ is also finite dimensional with the same dimensionality. Let $w_1, \dots, w_n$ be a basis for $W$ and
+          $\varphi_1, \dots, \varphi_n$ the corresponding dual basis. Then
+          \begin{align*}
+            \varphi = \sum_{i = 1}^{n}\lambda_i\varphi_i
+          \end{align*}
+          For some $\lambda_i \in \F$ for $i \in [n]$ for all $\varphi \in W^{\prime}$. Furthermore, for arbitrary $v \in V$,
+          \begin{align*}
+            Tv = \sum_{i = 1}^{n}\eta_iw_i
+          \end{align*}
+          for $\eta_i \in \F$ for $i \in [n]$. Then for all $\varphi \in W^{\prime}$, $T^{\prime}(\varphi) = \varphi \circ T = 0$. Let $\varphi \in W^{\prime}$ be arbitrary and have the
+          above decomposition, and likewise with $Tv$ for arbitrary $v \in V$. Then,
+          \begin{align*}
+            T^{\prime}(\varphi)(v) & = \varphi(\sum_{i = 1}^{n}\eta_iw_i) \\
+            & = \sum_{j = 1}^{n}\lambda_j\varphi_j(\sum_{i = 1}^{n}\eta_iw_i) \\
+            & = \sum_{j = 1}^{n}\lambda_j\eta_j = 0
+          \end{align*}
+          Since $\varphi \in W^{\prime}$, we can choose $\lambda_j$ as we like. Hence, let $\lambda_k = 1$ and $\lambda_{j \neq k} = 0$. In that case the above sum becomes,
+          \begin{align*}
+            \sum_{j = 1}^{n}\lambda_j\eta_j & = \eta_k = 0
+          \end{align*}
+          Do this for $k \in [n]$. We thus get that $\eta_k = 0$ for $k \in [n]$. In other words, for arbitrary $v \in V$,
+          \begin{align*}
+            Tv = \sum_{i =  1}^{n}\eta_iw_i = 0
+          \end{align*}
+          And so $T = 0$, as desired.
+        \ii 
+          Assume $T = 0$. Let $\varphi \in W^{\prime}$ and $v \in V$ be arbitrary, then,
+          \begin{align*}
+            T^{\prime}(\varphi)(v) & = (\varphi \circ T)(v) \\
+            & = \varphi(Tv) \\
+            & = \varphi(0) = 0
+          \end{align*}
+          Thus for all $v \in V$, $T^{\prime}(\varphi) \in V^{\prime}$ is always zero. This implies that $T^{\prime}(\varphi) = 0$. Since $\varphi \in W^{\prime}$ is arbitrary, we thus get
+          that $T^{\prime}(\varphi) = 0$ always, and so $T^{\prime} = 0$, as desired.
+      \end{enumerate}
+    \ii
+      Let $R: \CL(V, W) \to \CL(W^{\prime}, V^{\prime})$ such that if $T \in \CL(V, W)$, then $R(T) = T^{\prime}$ where $T^{\prime}(\varphi) = \varphi \circ T$. This map is linear by problem
+      10. Next, $R$ is injective. Let $T \in \CL(V,W)$ such that $R(T) = T^{\prime} = 0$. By the previous problem, this implies $T = 0$. Hence $R$ maps only zero to zero, and by linearity is
+      thus injective. Finally, by the fundamental theorem of linear maps, we have that
+      \begin{align*}
+        \dim\CL(W^{\prime}, V^{\prime}) & = \dim W^{\prime}\dim{V^{\prime}} \\
+        & = \dim V\dim W \\
+        & = \dim\CL(V, W) \\
+        & = \dim\ran{R} + \dim{\nullspace{R}} \\
+        & = \dim{\ran{R}}
+      \end{align*}
+      Since $R$ is injective and so $\dim{\nullspace{R}} = 0$. Since $\ran{R} \subset \CL(W^{\prime}, V^{\prime})$ and they have the same dimension, then $\ran{R} = \CL(W^{\prime},
+      V^{\prime})$ and so $R$ is surjective. Thus $R$ is an isomorphism, as desired.
+    \ii
+      Let $\varphi \in V^{\prime}$. Then $\varphi \in U^0$ if and only if $\varphi(u) = 0$ for all $u \in U$ if and only if $U \subset \nullspace{\varphi}$. Thus $U^0 = \{\varphi \in
+      V^{\prime}: U \subset \nullspace{\varphi} \}$, as desired.
+    \ii
+      If $U^0 = V^{\prime}$, then $\varphi(u) = 0$ for all $u \in U$ and all $\varphi \in V^{\prime}$. In particular, let $v_1, \dots, v_n$ be a basis for $V$ and $\varphi_1, \dots,
+      \varphi_n$ the corresponding dual basis. Then for arbitrary $u \in U$, we can write $u = \sum_{i = 1}^{n}\lambda_iv_i$. Then,
+      \begin{align*}
+        \varphi_j(u) & = \varphi_j(\sum_{i = 1}^{n}a_iv_i) \\
+        & = a_j = 0
+      \end{align*}
+      And so $u = 0$. Thus $U = \{0\}$. Conversely, if $U = \{0\}$, then $\varphi(u) = 0$ for all $u \in U$ and $\varphi \in V^{\prime}$. Thus $U^0 = V^{\prime}$, as desired.
+    \ii
+      Suppose $U = V$. Then if $\varphi \in V^0$, then $varphi(v) = 0$ for all $v \in V$, and so $\varphi = 0$. Hence $V^0 = \{0\}$. Conversely, Assume for the sake of contradiction that $U
+      \neq V$. By problem 4 then, there exists $\varphi \in V^{\prime}$ such that $\varphi(u) = 0$ for all $u \in U$, and so $\varphi \in U^0$, but $\varphi \neq 0$. This contradicts $U^0 =
+      \{0\}$, and so $U = V$.
+    \ii
+      Let $\varphi \in W^0$. Then $\varphi(w) = 0$ for all $w \in W$. Since $U \subset W$, then $\varphi(u) = 0$ for all $u \in U$. Thus $\varphi \in U^0$. Thus $W^0 \subset U^0$, as
+      desired.
+    \ii
+      Suppose $W^0 \subset U^0$. Let $v_1, \dots, v_k$ be a basis for $W$. Extend this list to a basis of $V$ by adding vectors $v_{k + 1}, \dots, v_n$. Let the corresponding dual basis be
+      $\varphi_1, \dots, \varphi_n$. The corresponding dual basis for $v_1, \dots, v_k$ is thus $\varphi_1, \dots, \varphi_k$.
+
+      This implies that if $\varphi \in W^0$, then $\varphi = \sum_{j = k + 1}^{n}\lambda_j\varphi_j$. Thus $\varphi_{k + 1}, \dots, \varphi_n$ span $W^0$. Furthermore, any linear
+      combination of them annihilates $W$, and since it is a linearly independent list already, it is also a basis. 
+
+      Let $u \in U$ be arbitrary. Then $u = \sum_{i = 1}^{n}a_iv_i$ for some $a_1, \dots, a_n$. Since $W^0 \subset U^0$, then $\varphi$ annihilates $U$. Thus $\varphi(u) = 0$.  Hence it must
+      be the case that $a_{k + 1} = \dots = a_n = 0$. This is because $\varphi_j(u) = a_{j}$, $j = k + 1, \dots, n$, and so all the $a_j$ from $k + 1$ to $n$ must be zero for annihilators
+      from $W^0$ to annihilate $U$ as well. Thus $u$ is a linear combination of $v_1, \dots, v_k$, and so $U \subset W$.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          Let $\varphi \in U^0 \cap W^0$. Then $\varphi \in U^0$ and $\varphi \in W^0$. Then $\varphi(u) = 0$ for all $u \in U$ and $\varphi(w) = 0$ for all $w \in W$. now, for any $v \in U +
+          W$, we have $v = u + w$ for some $u \in U$ and some $w \in W$. Thus $\varphi(v) = \varphi(u + w) = \varphi(u) + \varphi(w) = 0$. Thus $\varphi \in (U + W)^0$. Thus $U^0 \cap W^0
+          \subset (U + W)^0$.
+        \ii 
+          Let $\varphi \in (U + W)^0$ be arbitrary. Now, for all $v \in U + W$, we have $v = u + w$ for some $u \in U$ and $w \in W$. Let $u \in U$ be arbitrary. Then $v = u + 0$, and so $v
+          \in U + W$.  Thus $0 = \varphi(v) = \varphi(u)$. Thus $\varphi(u) = 0$ for all $u \in U$, and so $\varphi \in U^0$. Repeating the same process with $W$, we get $\varphi \in W^0$.
+          Thus $\varphi \in U^0 \cap W^0$. Thus $(U + W)^0 \subset U^0 \cap W^0$. Hence by the previous part, we get that $(U + W)^0 = U^0 \cap W^0$, as desired.
+      \end{enumerate}
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          Let $\varphi \in U^0 + W^0$. Then $\varphi = \varphi_U + \varphi_W$ for some $\varphi_U \in U^0$ and some $\varphi_W \in W^0$. Now let $v \in U \cap W$ be arbitrary. Then,
+          \begin{align*}
+            \varphi(v) & = \varphi_U(v) + \varphi_W(v) \\
+            & = 0 + 0 = 0
+          \end{align*}
+          And so $U^0 + W^0 \subset (U \cap W)^0$.
+        \ii 
+          Since $U^0 + W^0 \subset (U \cap W)^0$, we just have to show they have the same dimension and we are done. Now,
+          \begin{align*}
+            \dim{(U^0 + W^0)} & = \dim{U^0} + \dim{W^0} - \dim{(U^0 \cap W^0)} \\
+            & = \dim{V} - \dim{U} + \dim{V} - \dim{W} - \left( \dim{V} - \dim{(U + W)} \right) \\
+            & = \dim{V} - \dim{U} - \dim{W} + \dim{(U + W)} \\
+            & = \dim{V} + (\dim{U} + \dim{W} - \dim{(U + W)}) \\
+            & = \dim{V} - \dim{U \cap W} \\
+            & = \dim{\left( (U \cap W)^0 \right)}
+          \end{align*}
+          
+      \end{enumerate}
+    \ii
+      See notes
+    \ii
+      Let $W = \{v \in V: \varphi(v) = 0 \text{ for all } \varphi \in U^0\}$. Let $u \in U$ be arbitrary, then since $\varphi(u) = 0$ for all $\varphi \in U^0$, then $U \subset W$. 
+
+      Conversely, let $v_1, \dots, v_k$ be a basis for $U$. Expand $v_1, \dots, v_k$ to a basis of $V$ so that $v_1, \dots, v_n$, $n \geq k$, is a basis of $V$ with corresponding dual basis
+      $\varphi_1, \dots, \varphi_n$ for $V^{\prime}$. 
+
+      Thus $U^{\prime}$ has $\varphi_1, \dots, \varphi_k$ as a basis, and so $\varphi_{k + 1}, \dots, \varphi_{n}$ is a basis for $U^0$ (because $\varphi_i(v_i) = 1$ for $i = 1, \dots, k$). 
+
+      Thus if $v \in W$, then $\varphi_j(v) = 0$ for $j = k + 1, \dots, n$ by definition of annihilator. Thus $v$ must solely be a linear combination of $v_1, \dots, v_k$ (else
+      $\varphi_{j}(v) \neq 0$ for some $j = k + 1, \dots, n$ by definition of dual basis). This implies thus $v \in U$, since $v_1, \dots, v_k$ is a basis of $U$. Hence $W \subset U$. Thus
+      $U = W$, as desired.
+    \ii
+      Let $S = \{v \in V: \varphi(v) = 0 \text { for all } \varphi \in \Gamma\}$. Let us show that $S$ is a subspace of $V$. It certainly contains zero. Let $\lambda \in \F$, then if $v \in
+      V$, then $\varphi(v) = 0$ for all $\varphi \in \Gamma$. Thus $\varphi(\lambda v) = \lambda\varphi(v) = 0$, and so $\lambda v \in S$ also. Thus it is closed under scalar multiplication.
+      Finally, let $v, u \in S$. Then $\varphi(v + u) = \varphi(v) + \varphi(u) = 0$ for all $\varphi \in \Gamma$. Thus $S$ is closed under vector and so is a linear subspace of $V$.
+
+      Now, by definition of $S$, then for all $\gamma \in \Gamma$, $\gamma(v) = 0$ for $v \in S$. Thus $\Gamma \subset S^0$. Now, let $\psi_1, \dots, \psi_k$ be a basis for $\Gamma$. Expand
+      $\psi_1, \dots, \psi_k$ to basis of $S^0$, $\psi_1, \dots, \psi_n$, $n \geq k$. For the sake of contradiction, assume $n > k$. Thus $\psi_n \not\in \Gamma$. By problem 31, there exists
+      a basis $s_1, \dots, s_n$ of $S$ such that $\psi_1, \dots, \psi_n$ is its dual basis. Note now that $\psi_n(s_n) = 1$, which contradicts $\psi_n \in S^0$ (i.e. annihilates $S$) as $s_n
+      \in S$. Thus it must be the fact that $n = k$, and so $S^0 = \Gamma$, as desired.
+
+      % Now let us show $\Gamma = S^0$. Let $v_1, \dots, v_k$ be a basis for $S$. Expand $v_1, \dots v_k$ to a basis of $V$ $v_1, \dots, v_n$, $n \geq k$. Let $\varphi_1, \dots, \varphi_n$
+      % be the corresponding dual basis of $V^{\prime}$. We know that $S^0$ has basis $\varphi_{k + 1}, \dots, \varphi_n$ (since $\varphi_j(v_j) = 1$ for $j \in [k]$). We want to show that
+      % $\varphi_{k + 1}, \dots, \varphi_n$ spans $\Gamma$. Let $\varphi \in \Gamma$. Assume for the sake of contradiction that $\varphi$ is not in the span of $\varphi_{k + 1}, \dots,
+      % \varphi_n$. Then, 
+      % \begin{align*}
+      %   \varphi = \sum_{i = 1}^{n}\lambda_i\varphi_i
+      % \end{align*}
+      % And for some $j \in [k]$, $\lambda_j \neq 0$. This implies that $\varphi(v_j) = \lambda_j \neq 0$. However, for all $\psi \in \Gamma$, we have $\psi(v) = 0$ for all $v \in S$ by
+      % definition of $S$. In particular, $v_j \in S$ (recall that $j \in [k]$). Thus, by definition of dual basis, $\psi(v_j) = 0$. This implies then that $\varphi \not\in \Gamma$. A
+      % contradiction. Thus $\varphi$ must be in the span of $\varphi_{k + 1}, \dots, \varphi_n$, and so $\varphi_{k + 1}, \dots, \varphi_n$ spans $\Gamma$. Thus $\Gamma \subset S^0$. Thus
+      % $\dim{\Gamma} \leq n - k$.
+    \ii
+      By the next problem, $\ran{T} = \nullspace{\varphi}$. Now, $\nullspace{\varphi}$ is the space of polynomial that get sent to zero by $\varphi$. That is, $\varphi(p) = 0 = p(8)$. Hence,
+      $\ran{T} = \{p \in \CP_5(\R): p(8) = 0\}$, as desired.
+    \ii
+      We know that $\nullspace{T^{\prime}} = \left( \ran{T} \right)^0$. Thus
+      \begin{align*}
+        \left( \ran{T} \right)^0 = \Span(\varphi)
+      \end{align*}
+      Let $w \in \ran{T}$. Then $\varphi(w) = 0$ since $\varphi$ is an annihilator of $\ran{T}$ (by the above equality). Thus $\ran{T} \subset \nullspace{\varphi}$. Now,
+      \begin{align*}
+        \dim{\left( \ran{T} \right)^0} + \dim{\ran{T}} & = \dim{W} \\
+      \end{align*}
+      And so,
+      \begin{align*}
+        \dim{\ran{T}} & = \dim{W} - \dim{\left( \ran{T} \right)^0} \\
+        & = \dim{W} - \dim{\Span(\varphi)} \\
+        & = \dim{W} - 1 \\
+        & = \dim{W} - \dim{\F} \\
+        & = \dim{W} - \dim{\ran{\varphi}} \\
+        & = \dim{\nullspace{\varphi}}
+      \end{align*}
+      if $\varphi \neq 0$. And since $\ran{T} \subset \nullspace{\varphi}$, we thus have $\ran{T} = \nullspace{\varphi}$. If $\varphi = 0$, then $\left( \ran{T} \right)^0 = \{0\}$, and so
+      $\ran{T} = W$ by problem 19, and $\nullspace{\varphi} = W$ in that case, and we still get $\ran{T} = \nullspace{\varphi}$. Thus we have the desired result.
+    \ii
+      If $\varphi \neq 0$,
+      \begin{align*}
+        \dim{\nullspace{\varphi}} & = \dim{V^{\prime}} - \dim{\ran{\varphi}} \\
+        & = \dim{V} - \dim{\F} \\
+        & = \dim{V} - 1 \\
+        & = \dim{V} - \Span(\varphi) \\
+        & = \dim{V} - \ran{T^{\prime}} \\
+        & = \dim{V} - \ran{T} \\
+        & = \nullspace{T}
+      \end{align*}
+      There exists $\psi \in W^{\prime}$ such that $T^{\prime}(\psi) = \varphi$ since $\Span(\varphi) = \ran{T^{\prime}}$. Let $v \in \nullspace{T}$. Then $Tv = 0$. Thus,
+      \begin{align*}
+        \varphi(v) & = T^{\prime}(\psi)(v) \\
+        & = \psi(Tv) = 0
+      \end{align*}
+      And so $v \in \nullspace{\varphi}$. Thus $\nullspace{T} \subset \nullspace{\varphi}$. Since they have the same dimension, they must thus be equal spaces, as desired. If $\varphi = 0$, then
+      $\nullspace{\varphi} = V$, and $\ran{T^{\prime}} = \{0\}$. Thus $\dim{\ran{T}} = \dim{\ran{T^{\prime}}} = 0$. Thus $\nullspace{T} = V$. Hence $\nullspace{\varphi} =
+      \nullspace{T}$. As desired.
+    \ii
+      This will be a proof by induction. The base case is $m = 1$. 
+      \begin{align*}
+        \dim{\nullspace{\varphi_1}} & = \dim{V} - \dim{\ran{\varphi}} \\
+        & = \dim{V} - 1
+      \end{align*}
+      Let 
+      \begin{align*}
+        B_j = \bigcap_{i = j}^{m}\nullspace{\varphi_i} 
+      \end{align*}
+      First, a lemma. Let us show that $\nullspace{\varphi_1} + B_2 = V$. Let $v \in V$ be arbitrary. Since 
+      \begin{align*}
+        \dim{\nullspace{\varphi_1}} = \dim{V} - 1
+      \end{align*}
+      This means there exists a subspace $U \subset V$ such that $\nullspace{\varphi_1} \oplus U = V$. We have that $\dim{U} = 1$ and $\dim{\nullspace{\varphi_1}} = \dim{V - 1}$. Thus let
+      $v_1, \dots v_{n - 1}$ be a basis for $\nullspace{\varphi_1}$. Let us show that $U \subset B_2$. Let $u \in U$. Then $u$ is a basis for $U$ and $v_1, \dots, v_{n - 1}, u$ is a basis
+      for $V$. Thus $\varphi_1(u) \neq 0$. Since $\varphi_1, \dots, \varphi_m$ is a linearly independent list, this implies that 
+      \begin{align*}
+        u \in \nullspace{\varphi_j} \quad j = 2, \dots, m
+      \end{align*}
+      This is because if it were not, then that implies that $\varphi_j(u) \neq 0$, and since $\dim{\nullspace{\varphi_j}} = \dim{V} - 1$, then if $w_1, \dots, w_{n - 1}$ is a basis for
+      $\nullspace{\varphi_j}$, then $w_1, \dots, w_{n - 1}, u$ is a linearly independent list that spans $V$. 
+
+      This would imply then that 
+      \begin{align*}
+        \Span(w_1, \dots, w_{n - 1}) = \Span(v_1, \dots, v_{n - 1} 
+      \end{align*}
+      or that $\nullspace{\varphi_j} = \nullspace{\varphi_1}$. Thus, for arbitrary $v \in V$, we have $\varphi_j(u) = c\varphi_1(u)$ for some $c$. By linearity, we would then get that for
+      arbitrary $v \in U$, $\varphi_j(v) = c\varphi_1(v)$. Thus we get that $\varphi_j = c\varphi_1$ (since they are equal on their respective null spaces which are the same), contradicting
+      the linear independence of the list. Thus $u \in B_2$ (since it is in each $\nullspace{\varphi_j}$). Thus 
+      \begin{align*}
+        V = \nullspace{\varphi_1} \oplus U \subset \nullspace{\varphi_1} + B_2
+      \end{align*}
+      Hence $V = \nullspace{\varphi_1} + B_2$, and so 
+      \begin{align*}
+        \dim{V} = \dim(\nullspace{\varphi_1} + B_2)
+      \end{align*}
+      Now assume the proposition holds up to $m - 1$. Then,
+      \begin{align*}
+        \dim(\bigcap_{i = 1}^{m}\nullspace{\varphi_i}) & = \dim(\nullspace{\varphi_1} \cap B_2) \\
+        & = \dim{\nullspace{\varphi_1}} + \dim{B_2} - \dim(\nullspace{\varphi_1} + B_2) \\
+        & = \dim{V} - 1 + \dim{V} - (m - 1) - \dim{V} \\
+        & = \dim{V} - m
+      \end{align*}
+      and so it holds for the case $j = m$, as desired.
+    \ii
+      Since $\varphi_1, \dots, \varphi_n$ is a linearly independent list, then there exist $v_i \in V$ for each $\varphi_i$ such that $\varphi_i(v_i) \neq 0$. This will be a proof by
+      induction. We will construct the basis iteratively. First the base case. Let $u_1 \in V$ be such that $\varphi_1(u_1) = c \neq 0$. Let $v_1 \frac{1}{c}u_1$. Then $\varphi_1(v_1) = 1$.
+      Now, suppose for up to $n - 1$, we have constructed $v_i$ such that $\varphi_i(v_i) = 1$ and $\varphi_i(v_j) = 0$ for $j \neq i$. Since $\varphi_1, \dots, \varphi_n$ is a linearly
+      independent list, then $\varphi_n(v_i) = 0$ for $i = v_1, \dots, v_{n - 1}$. This is because if it were not, then we could $\varphi_n$ is a scalar multiple of $\varphi_i$ 
+
+      This is because since $\varphi_n(v_i) \neq 0$, then $v_i \neq 0$ could be extended to a basis of $V$, and since $\dim{\nullspace{\varphi_n}} = \dim{V} - 1$, that would imply the other
+      vectors form a basis of the null space, since $v_i$ is not in it. We would then show that those vectors are also a basis for $\nullspace{\varphi_i}$, hence the null spaces are the same
+      and so they only differ by a scalar multiple on $\Span(v_i)$ by linearity).
+    \ii
+    a
+    \ii
+    a
+    \ii
+    a
+    \ii
+    a
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          Let $\varphi \in \nullspace{i^{\prime}}$. Now let $u \in U$ be arbitrary. Then,
+          \begin{align*}
+            i^{\prime}(\varphi)(u) & = (\varphi \circ i)(u) \\
+            & = \varphi(u) = 0
+          \end{align*}
+          Since $\varphi \in \nullspace{i^{\prime}}$. Thus $\varphi \in U^0$, and so $\nullspace{i^{\prime}} \subset U^0$. Conversely, let $\varphi \in U^0$. Now let $u \in U$ be arbitrary. Then
+          \begin{align*}
+            i^{\prime}(\varphi)(u) & = (\varphi \circ i)(u) \\
+            & = \varphi(u) = 0
+          \end{align*}
+          Thus $\varphi = 0$, and so $\varphi \in \nullspace{i^{\prime}}$. Thus $U^0 \subset \nullspace{i^{\prime}}$, and so $U^0 = \nullspace{i^{\prime}}$.
+        \ii 
+          Let $\varphi \in U^{\prime}$ be arbitrary. Consider $\psi \in V^{\prime}$ defined such that $\psi(v) = \varphi(v)$ if $v \in U$ and $\psi(v) = 0$ otherwise. Now, let $u \in U$ be
+          arbitrary. Then,
+          \begin{align*}
+            i^{\prime}(\psi)(u) & = (\psi \circ i)(u) \\
+            & = \psi(u) \\
+            & = \varphi(u)
+          \end{align*}
+          Thus $i^{\prime}(\psi) = \varphi$, and so $U^{\prime} \subset \ran{i^{\prime}}$. Since $\ran{i^{\prime}} \subset U^{\prime}$, we thus get that $U^{\prime} = \ran{i^{\prime}}$.
+        \ii 
+          If $T \in \CL(V, W)$, then $\tilde{T} \in \CL(V/(\nullspace{T}), W)$, with $\tilde{T}$ isomorphic to $\ran{T}$. Thus in our situation, if $T = i^{\prime}$, then $\tilde{i^{\prime}}$
+          is an isomorphism from $V/(\nullspace{i^{\prime}}) = V/U^0$ onto $\ran{i^{\prime}} = \ran{U^{\prime}}$ if $V$ is finite dimensional, as desired.
+      \end{enumerate}
+      Let us think intuitively about this problem. $i$ is the inclusion map. What is $i^{\prime}$? Well $i^{\prime}(\varphi)(u) = (\varphi \circ i)(u) = \varphi(u)$. So we can think of
+      $i^{\prime}(\varphi) \in U^{\prime}$, where $\varphi \in V^{\prime}$, as the restriction of $\varphi$ to just $U$. Now the problem flows very smoothly. 
+
+      Of course the null space of $i^{\prime}$ are all the linear functionals in $V^{\prime}$ which take the value zero on $U$, i.e. $U^0$, because those are then the zero map on $U$.
+
+      Furthermore, of course we can get every linear functional in $U^{\prime}$. Namely, given any $\varphi \in U^{\prime}$, there are in fact many linear functionals in $V^{\prime}$ which
+      may be different but are the same on $U$. Any one of these linear functionals restricted to $U$ gives us $\varphi$. Or for example, given arbitrary $\varphi \in U^{\prime}$, extend its
+      definition on $V$ by mapping all non $U$ elements to zero. 
+
+      Finally, the last part makes perfect sense. It is an extension of what we just said earlier. There are many linear functionals that can take the same value on $U$. Hence we create an
+      equivalence relation on linear functionals in $V^{\prime}$, where two linear functionals are the same if they take on the same values on $U$. That is if $\varphi - \psi \in U^0$, then
+      $\varphi$ and $\psi$ take on the same values on $U$, so we want to consider these as just one linear functional. So we are dividing out the non $U$ parts of $V$ if you will, and so of
+      course this is an isomorphism onto $U^{\prime}$.
+    \ii
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          Let $\varphi \in (V/U)^{\prime}$ be such that
+          \begin{align*}
+            \pi^{\prime}(\varphi) = \varphi \circ \pi = 0
+          \end{align*}
+          Then that means for all $v \in V$,
+          \begin{align*}
+            \pi^{\prime}(\varphi)(v) = \varphi(v + U) = 0
+          \end{align*}
+          Thus no matter the affine space $v + U$, $\varphi$ maps it to zero. Thus $\varphi = 0$. Since $\pi^{\prime}$ maps only zero to zero, then it must be injective by linearity. 
+        \ii
+          Let $\varphi \in U^0$. Then $\varphi(u) = 0$ for all $u \in U$. Consider now $\psi \in (V/U)^{\prime}$ such that 
+          \begin{align*}
+            \psi(v + U) = \varphi(v)
+          \end{align*}
+          Then notice that $\pi^{\prime}(\psi) = \varphi$, since
+          \begin{align*}
+            \pi^{\prime}(\psi)(v) = \psi(v + U) = \varphi(v)
+          \end{align*}
+          Thus $U^0 \subset \ran{\pi^{\prime}}$. Furthermore, let $\psi \in \ran{\pi^{\prime}}$ be arbitrary. Then there exist $\varphi \in (V/U)^{\prime}$ such that
+          \begin{align*}
+            \psi(v) & = \pi^{\prime}(\varphi)(v) \\
+            & = \varphi(v + U)
+          \end{align*}
+          Now notice that if $v \in U$, then 
+          \begin{align*}
+            \varphi(v + U) = \varphi(U) = \varphi(0 + U) = 0 
+          \end{align*}
+          since linear maps map zero to zero. Thus $\psi \in U^0$. Thus $\ran{\pi^{\prime}} \subset U^0$. Thus $U^0 = \ran{\pi^{\prime}}$, as desired.
+        \ii
+          Since $\pi^{\prime}$ is an injective linear map that is surjective onto $U^0$, this implies it is an isomorphism $(V/U)^{\prime}$ to $U^0$.
+      \end{enumerate}
+  \end{enumerate}
+\end{document} 
