@@ -15,7 +15,7 @@
   \begin{example}
     $\F^\infty$ over $\F$ is defined to be the set of all sequences of elements of $\F$. That is,
     \begin{align*}
-      F^{\infty} = \{(x_1, x_2, \dots): x_j \in \F for j \in \N\}
+      F^{\infty} = \{(x_1, x_2, \dots): x_j \in \F, j \in \N\}
     \end{align*}
     is a vector space when we define vector addition and scalar multiplication as follows,
     \begin{align*}
@@ -24,7 +24,7 @@
     \end{align*}
   \end{example}
   \begin{example}
-    If $S$ is a set, then $\F^S$ will denote the set of functions from $S$ to $\F$. That is, $\F^S = \{f: f: S \to \F\}$. We define sums in $\F^S$ for $f, g \in \F^S$ as follow
+    If $S$ is a set, then $\F^S$ will denote the set of functions from $S$ to $\F$. That is, $\F^S = \{f| f: S \to \F\}$. We define sums in $\F^S$ for $f, g \in \F^S$ as follow
     for all $x \in \F$,
     \begin{align*}
       (f + g)(x) = f(x) + g(x)
@@ -446,7 +446,7 @@
     What the proof below shows is that, obviously for any $w \in \ran T$, we have $w = Tv$ for some $v$. There exist some $w_1, \dots, w_k \in \ran T$ that are a basis for $\ran T$. There
     exists furthermore some $v_1, \cdots, v_k$ such that $Tv_i = w_i$. We know that $v_1, \dots, v_k$ are linearly independent (done in exercise in 2.A.4). Say we extend this to a basis of
     $V$, with vectors $u_1, \dots, u_m$. Now this MUST be the basis for $\nullspace T$ for the following reason: We already have all the vectors in $v$ whose span yields some subspace of $V$
-    which gets mapped onto $\ran T$. Another vectors we add in must get mapped to zero, else the image wouldn't be what we claimed it to be. Thus we MUST have that $Tu_1 = \dots = Tu_m = 0$.
+    which gets mapped onto $\ran T$. Other vectors we add in must get mapped to zero, else the image wouldn't be what we claimed it to be. Thus we MUST have that $Tu_1 = \dots = Tu_m = 0$.
     In a phrase, what we are saying is basically that each dimension is either preserved or gets mapped to zero. For any given linear map, we can study its behavior simply by studying how it
     behaves on the basis. If it is basis preserving, then $T$ maps each dimension (basis vector) to another dimension (basis vector). What if we map the first basis to zero? We just a lost a
     dimension in the image but we just gained one in the nullity. What if we do so with the second basis? Same thing. It is very clear that any linear combination of the first two basis
@@ -456,6 +456,10 @@
     exactly how this proof goes. Which basis is it? Well let's cheat and start with the solution! The dimensions that get mapped to zero are the nullity, and this is the basis we start out
     with. The ones that are not mapped to zero are the rest (these other dimensions certainly get preserved, else they would be in the nullity. Furthermore, their output certainly spans the
     range as by linearity all outputs are linear combinations of them, and so we get the theorem).
+
+    Why is it an all or nothing affair? Why must we either map an entire dimension to zero or map none of it to zero? In short: linearity. Imagine $v \in V$. If $Tv = 0$, then $T(\lambda v) =
+    0$ for all $\lambda \in \F$. Hence the entire dimension gets mapped to zero. If $Tv \neq 0$, then $T(\lambda v) \neq 0$ for all $\lambda \in \F$. Thus we either get an entire dimension
+    preserved, or it all gets mapped to zero.
   \end{remark}
   \begin{proof}
     Let $\CU = u_1, \dots, u_m$ be a basis for $\nullspace T$. Then $\dim\nullspace T = m$. $\CU$ can be extended to a basis of $V$, with the new basis being $u_1, \dots, u_m, v_1, \dots, v_n$.
@@ -922,7 +926,7 @@
     Suppose $V$ is finite dimensional. Then $V^\prime$ is also finite dimensional and $\dim V^\prime = \dim V$. In other words, they are isomorphic.
   \end{prop}
   \begin{proof}
-    $V^\prime = \CL(V, \F)$. Since $V$ and $\F$ are finite dimensional, then by \ref{prop:dim_space_lin_maps}, $\dim(V, \F) = \dim V\dim\F = \dim V$.
+    $V^\prime = \CL(V, \F)$. Since $V$ and $\F$ are finite dimensional, then by \ref{prop:dim_space_lin_maps}, $\dim(V, \F) = \dim V\cdot\dim\F = \dim V$.
   \end{proof}
   \begin{defn}[Dual Basis]
     If $v_1, \dots, v_n$ is a basis of $V$, then the dual basis of $v_1, \dots, v_n$ is the list $\varphi_1, \dots, \varphi_n$ of elements in $V^\prime$ where $\varphi_j$ is such that,
@@ -1007,11 +1011,11 @@
     Suppose $U \subset V$, then $U^0$ is a subspace of $V^\prime$.
   \end{prop}
   \begin{proof}
-    Clearly $0 \in U^0$ (i.e. the zero linear functional). Let $\varphi, \psi \in U^0$. Thus $\varphi, \psi \in V^{\prime}$, $a, b \in \F$. Thus,
+    Clearly $0 \in U^0$ (i.e. the zero linear functional). Let $\varphi, \psi \in U^0$. Thus $\varphi, \psi \in V^{\prime}$. Now let $a, b \in \F$. Then,
     \begin{align*}
       (a\varphi + b\psi)(u) = a\varphi(u) + b\psi(u) = 0
     \end{align*}
-    And so $a\varphi + b\psi \in U^0$. Thus $U^0$ is a subspace of $V^\prime$.
+    And so $a\varphi + b\psi \in U^0$. Thus $U^0$ is a linear space and hence a subspace of $V^\prime$.
   \end{proof}
   \begin{prop}[Dimension of the annihilator]\label{prop:dim_annihilator}
     Suppose $V$ is finite dimensional, and $U$ is a subspace of $V$. Then,
@@ -1019,7 +1023,15 @@
       \dim U + \dim U^0 = \dim V
     \end{align*}
   \end{prop}
+  Here are three proofs,
   \begin{proof}
+    Let $\dim U = m$, with $u_1, \dots, u_m$ as a basis. Then $U^\prime$ has a dual basis $\varphi_1, \dots, \varphi_m$. Extend that to a basis of $V^\prime$, say with linear functionals
+    $\psi_1, \dots, \psi_n$. $\psi_1, \dots, \psi_n$ are all identically zero on $U$ (since if not, then we can write $\psi_i$ as a linear combination of $\varphi_1, \dots, \varphi_m$ as
+    they are a basis of $U^\prime$. This would contradict the linear independence of $\varphi_1, \dots, \varphi_m, \psi_1, \dots, \psi_n$ as a basis). Thus $\psi_1, \dots, \psi_m$ is a
+    linearly independent list in $U^0$. Furthermore, they span $U^0$ since any other linear functional would have to involve some $\varphi_i$, which then would make it not in $U^0$. Thus
+    $\psi_1, \dots, \psi_m$ is a basis of $U^0$. Thus $\dim U + \dim U^0 = \dim V^\prime = \dim V$.
+  \end{proof}
+  \begin{proof} 
     Since $U$ is a subspace of $V$, and $V$ is finite dimensional, then so is $U$. Let $u_1, \dots, u_m$ be a basis for $U$. Extend $U$ to a basis of $V$ by adding vectors $v_1, \dots, v_n$.
     Consider the dual basis of $u_1, \dots, u_m, v_1, \dots, v_n$, $\varphi_1, \dots, \varphi_m, \psi_1, \dots, \psi_n$, which is a basis of $V^\prime$. Now, we only need to show that
     $\psi_1, \dots, \psi_n$ is a basis for $U^0$ and we are done. Let $\psi \in U^0$. Then there exist $\lambda_1, \dots, \lambda_m, \eta_1, \dots, \eta_n$ such that
@@ -1085,6 +1097,10 @@
   \begin{proof}
     \begin{enumerate}[label=\alph*)]
       \ii 
+      The intuition for this goes as follows: $\nullspace{T^\prime}$ is the space of all $\varphi$ in $W^\prime$ such that $\varphi \circ T = 0$. Hence no matter what $T$ outputs, $\varphi$
+      maps it to zero. Well $T$ outputs things in $\ran{T}$. Hence we want elements of $W^\prime$ that always maps $\ran{T}$ to zero, i.e. $(\ran{T})^0$. That is inclusion one way. In
+      the other way, $(\ran{T})^{0}$ is the space of all $\varphi \in W^{\prime}$ that map elements in $\ran{T}$ to zero. Well if that is the case, then $T^{\prime}(\varphi) = 0$. And so
+      $\varphi \in \nullspace{T^{\prime}}$.
         Suppose $\varphi \in \nullspace{T^{\prime}}$, then $0 = T^{\prime}(\varphi) = \varphi \circ T$. Thus,
         \begin{align*}
           0 = (\varphi \circ T)(v) = \varphi(Tv)
@@ -1109,6 +1125,9 @@
   \begin{proof}
     \begin{enumerate}[label=\alph*)]
       \ii 
+        Intuition: $T$ is surjective iff $W = \ran{T}$ iff $(\ran{T})^0 = \{0\}$ (if want $T^{\prime}(\varphi) = 0$, then we need $\varphi$ to map all of $W$ to zero. Well only $\varphi = 0$
+        can do that) iff $\nullspace{T^{\prime}} = \{0\}$ iff $T^{\prime}$ is injective. Alternatively:
+
         Assume $T$ is surjective. Then $\dim W = \dim\ran{T}$. Thus, from part (b) of the previous theorem,
         \begin{align*}
           \dim\nullspace{T^{\prime}} & = \dim W - \dim V + \dim\nullspace{T}) \\
@@ -1240,6 +1259,12 @@
     rank of $\CM(T)$. 
 
     Finally, it is obvious that $\ran{T} = \Span(Tv_1, \dots, Tv_n)$. Thus $\dim\ran{T} = $ the column rank of $\CM{T}$, as desired.
+
+
+    More simply, the function that takes $w \in \Span(Tv_1, \dots, Tv_n)$ to $\CM(w)$ is easily seen to be an isomorphism from $\Span(Tv_1, \dots, Tv_n)$ to $\Span(\CM(Tv_1), \dots,
+    \CM(Tv_n))$ (it is certainly a linear map between the two spaces, and it is certainly invertible. Hence isomorphism). The first span  is equal to $\ran{T}$. The second span is the column
+    space of $\CM(T)$. Thus $\dim\ran{T} = \dim\Span(Tv_1, \dots, Tv_n) = \dim\Span(\CM(Tv_1), \dots,
+    \CM(Tv_n)) = $ column rank of $\CM(T)$.
   \end{proof}
   \begin{prop}[Row rank equals column rank]
     Let $A \in \F^{m, n}$. Then the row rank of $A$ equals the column rank of $A$.
@@ -1247,13 +1272,13 @@
   \begin{proof}
     Let $T: \F^{n, 1} \to \F^{m, 1}$ be defined by $Tx = Ax$. Then $\CM(T) = A$, where $\CM(T)$ is computed with respect to the standard bases of $\F^{n, 1}$ and $\F^{m, 1}$. Then,
     \begin{align*}
-      \text{column rank of }A & = \text{column rank of }\CM{T} \\
+      \text{column rank of }A & = \text{column rank of }\CM(T) \\
       & = \dim\ran{T} \\
       & = \dim\ran{T^{\prime}} \\
-      & = \text{column rank of }\CM{T^{\prime}} \\
-      & = \text{column rank of }\CM{T}^T \\
-      & = \text{row rank of }\CM{T} \\
-      & = \text{row rank of }A \\
+      & = \text{column rank of }\CM(T^{\prime}) \\
+      & = \text{column rank of }\CM(T)^T \\
+      & = \text{row rank of }\CM(T) \\
+      & = \text{row rank of }A 
     \end{align*}
   \end{proof}
   Thus we can dispense with saying row rank and column rank and just say rank.
