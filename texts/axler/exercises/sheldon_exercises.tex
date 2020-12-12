@@ -7,6 +7,7 @@
 \begin{document}
 
 % TODO problem 7 chapter 2.C
+% TODO 3.F: 27 onwards again
 \author{Ali Geisa}
 \title{Linear Algebra Done Right Exercises}
 \chapter{Linear Spaces}
@@ -2233,6 +2234,21 @@
       By the next problem, $\ran{T} = \nullspace{\varphi}$. Now, $\nullspace{\varphi}$ is the space of polynomial that get sent to zero by $\varphi$. That is, $\varphi(p) = 0 = p(8)$. Hence,
       $\ran{T} = \{p \in \CP_5(\R): p(8) = 0\}$, as desired.
     \ii
+      $\nullspace{T^{\prime}} = \Span(\varphi)$ means that for any $\lambda \in \F$, $T^{\prime}(\lambda\varphi) = (\lambda\varphi)\circ T = 0$. Thus, for all $v \in V$,
+      $\lambda(\varphi(Tv)) = 0$. This implies that $\varphi(Tv) = 0$ for all $v \in V$. In other words, $\ran{T} \subset \nullspace{\varphi}$. Now,
+      \begin{align*}
+        \dim{\ran{T}} & = \dim{W} - (\dim{\ran{T}})^0 \\
+        & = \dim{W} - \dim{\nullspace{T^{\prime}}} \\
+        & = \dim{W} - \dim{\Span{\varphi}} \\
+        & = \dim{W} - 1 \\
+        & = \dim{W} - \dim{\ran{\varphi}} \\
+        & = \dim{\nullspace{\varphi}}
+      \end{align*}
+      Where the first equality is by \eqref{prop:dim_annihlator}, the second by \eqref{prop:null_dual_range_annihilator}, and the third is given in the problem statement. The fourth is since
+      the span is one dimensional, the fifth is since $\varphi$ is a linear functional and so maps to $\varphi$ (assuming $\varphi \neq 0$), and the sixth by rank nullity.
+      
+      Here is the same proof again.
+
       We know that $\nullspace{T^{\prime}} = \left( \ran{T} \right)^0$. Thus
       \begin{align*}
         \left( \ran{T} \right)^0 = \Span(\varphi)
@@ -2272,50 +2288,41 @@
       $\nullspace{\varphi} = V$, and $\ran{T^{\prime}} = \{0\}$. Thus $\dim{\ran{T}} = \dim{\ran{T^{\prime}}} = 0$. Thus $\nullspace{T} = V$. Hence $\nullspace{\varphi} =
       \nullspace{T}$. As desired.
     \ii
-      This will be a proof by induction. The base case is $m = 1$. 
-      \begin{align*}
-        \dim{\nullspace{\varphi_1}} & = \dim{V} - \dim{\ran{\varphi}} \\
-        & = \dim{V} - 1
-      \end{align*}
-      Let 
-      \begin{align*}
-        B_j = \bigcap_{i = j}^{m}\nullspace{\varphi_i} 
-      \end{align*}
-      First, a lemma. Let us show that $\nullspace{\varphi_1} + B_2 = V$. Let $v \in V$ be arbitrary. Since 
-      \begin{align*}
-        \dim{\nullspace{\varphi_1}} = \dim{V} - 1
-      \end{align*}
-      This means there exists a subspace $U \subset V$ such that $\nullspace{\varphi_1} \oplus U = V$. We have that $\dim{U} = 1$ and $\dim{\nullspace{\varphi_1}} = \dim{V - 1}$. Thus let
-      $v_1, \dots v_{n - 1}$ be a basis for $\nullspace{\varphi_1}$. Let us show that $U \subset B_2$. Let $u \in U$. Then $u$ is a basis for $U$ and $v_1, \dots, v_{n - 1}, u$ is a basis
-      for $V$. Thus $\varphi_1(u) \neq 0$. Since $\varphi_1, \dots, \varphi_m$ is a linearly independent list, this implies that 
-      \begin{align*}
-        u \in \nullspace{\varphi_j} \quad j = 2, \dots, m
-      \end{align*}
-      This is because if it were not, then that implies that $\varphi_j(u) \neq 0$, and since $\dim{\nullspace{\varphi_j}} = \dim{V} - 1$, then if $w_1, \dots, w_{n - 1}$ is a basis for
-      $\nullspace{\varphi_j}$, then $w_1, \dots, w_{n - 1}, u$ is a linearly independent list that spans $V$. 
+      Let $U = \bigcap_{i = 1}^{m}\nullspace{\varphi_i}$. What is this space? $\nullspace{\varphi_i}$ is the space of all $v \in V$ such that $\nullspace{\varphi_i}(v)
+      = 0$. Hence $U$ is the space of all $v \in V$ such that $\varphi_i(v) = 0$ for $i = 1, \dots, m$. 
 
-      This would imply then that 
-      \begin{align*}
-        \Span(w_1, \dots, w_{n - 1}) = \Span(v_1, \dots, v_{n - 1} 
-      \end{align*}
-      or that $\nullspace{\varphi_j} = \nullspace{\varphi_1}$. Thus, for arbitrary $v \in V$, we have $\varphi_j(u) = c\varphi_1(u)$ for some $c$. By linearity, we would then get that for
-      arbitrary $v \in U$, $\varphi_j(v) = c\varphi_1(v)$. Thus we get that $\varphi_j = c\varphi_1$ (since they are equal on their respective null spaces which are the same), contradicting
-      the linear independence of the list. Thus $u \in B_2$ (since it is in each $\nullspace{\varphi_j}$). Thus 
-      \begin{align*}
-        V = \nullspace{\varphi_1} \oplus U \subset \nullspace{\varphi_1} + B_2
-      \end{align*}
-      Hence $V = \nullspace{\varphi_1} + B_2$, and so 
-      \begin{align*}
-        \dim{V} = \dim(\nullspace{\varphi_1} + B_2)
-      \end{align*}
-      Now assume the proposition holds up to $m - 1$. Then,
-      \begin{align*}
-        \dim(\bigcap_{i = 1}^{m}\nullspace{\varphi_i}) & = \dim(\nullspace{\varphi_1} \cap B_2) \\
-        & = \dim{\nullspace{\varphi_1}} + \dim{B_2} - \dim(\nullspace{\varphi_1} + B_2) \\
-        & = \dim{V} - 1 + \dim{V} - (m - 1) - \dim{V} \\
-        & = \dim{V} - m
-      \end{align*}
-      and so it holds for the case $j = m$, as desired.
+      Consider the complementary space $U^c$ defined by $(V - U)\bigcup\{0\}$. That is, $U^c = \{v: v \in V, v\not\in U\}\cup\{0\}$. By definition, $U\bigcap U^c = \{0\}$ and $U + U^c = V$.
+      Thus $U + U^c$ is a direct sum. Now what is $U^c$? It is the space of all $v \in V$ such that for at least one $\varphi_i$, $\varphi_i(v) \neq 0$, $i \in \{1, \dots, m\}$ (excluding
+      zero of course). Hence $\dim{U} + \dim{U^c} = \dim{V}$. 
+
+      The final step is now showing that $\dim{U^c} = m$. Extend $\varphi_1, \dots, \varphi_m$ to a basis of $V^{\prime}$ by adding vectors $\psi_1, \dots, \psi_n$. By the next problem,
+      there exist $v_1, \dots, v_m, w_1, \dots, w_n \in V$ that are a basis for $V$ such that $\varphi_1, \dots, \varphi_m, \psi_1, \dots, \psi_n$ is the corresponding dual basis. By
+      definition of dual basis, we have that $\varphi_i(v_i) \neq 0$ for all $i = 1, \dots, m$. Thus $v_1, \dots, v_m \in U^c$. Thus by the linear independence of $v_1, \dots, v_m$,
+      $\dim{U^c} \geq m$. Furthermore, by definition of dual basis, $\varphi_i(w_j) = 0$ for $i = 1, \dots, m$, $j = 1, \dots, n$. Thus $w_1, \dots, w_n \not\in U^c$ nor any linear
+      combinations thereof. Thus any $u \in U$ cannot involve a linear combination of $w_1, \dots, w_n$ and can only involve $v_1, \dots, v_m$. Thus $\dim{U^c} \leq m$, and so $\dim{U^c} =
+      m$. Thus $\dim{U} + \dim{U^c} = \dim{U} + m = \dim{V}$, or $\dim{U} = \dim{V} - m$, as desired.
+
+      Here is a much longer proof (that I am not sure is correct).
+
+      % Let $\Span{\varphi_1, \dots, \varphi_m} = X^{\prime}$. Since $\varphi_1, \dots, \varphi_m$ are linearly independent, they are a
+      % basis for $X^{\prime}$. by the next problem, there must exist $v_1, \dots, v_m \in V$ 
+      % independent s
+      % there must exist $v_1, \dots, v_m$ such that $\varphi_i(v_i) \neq 0$.
+      % Now we want to show that $v_1, \dots, v_m$ are linearly independent. Assume this were not the case. Then for some $v_j$, we can re-write it as linear combination of the other elements,
+      % say $v_j = \sum_{i \neq j}c_iv_i$. Then 
+      % \begin{align*}
+      %   \varphi_j(v_j) = \sum_{i \neq j}c_i\varphi_j(v_i) \neq 0.
+      % \end{align*}
+      % Now $\varphi_j(v_j) \neq 0$ implies that $\varphi_j(\Span{v_j}) = \ran{\varphi_j}$ since certainly $\varphi_j(\Span{v_j}) \subset \ran{\varphi_j}$ and they have the same dimension.
+      % Now let $d_i$ be such that $\varphi_j(v_i) = d_i\varphi_i(v_i)$. Then for any $v \in \Span{v_j}$, $v = \lambda v_j$ for some $\lambda \in \F$. Thus 
+      % \begin{align*}
+      %   \varphi_j(v) & = \varphi_j(\lambda v_j) \\
+      %   & = \lambda\varphi_j(v_j) \\
+      %   & = \lambda\sum_{i \neq j}c_i\varphi_j(v_i) \\
+      %   & = \lambda\sum_{i \neq j}c_id_i\varphi_i(v_i).
+      % \end{align*}
+      % Furthermore, for all 
+      % $\varphi_i(v) \neq 0$, then $\varphi_i(\Span{v}) = \ran{\varphi_i}$. This implies that there exist $v_1, \dots, v_m$ such that $\varphi_i(\Span{v_i}) = \ran{\varphi_i}$
     \ii
       Since $\varphi_1, \dots, \varphi_n$ is a linearly independent list, then there exist $v_i \in V$ for each $\varphi_i$ such that $\varphi_i(v_i) \neq 0$. This will be a proof by
       induction. We will construct the basis iteratively. First the base case. Let $u_1 \in V$ be such that $\varphi_1(u_1) = c \neq 0$. Let $v_1 \frac{1}{c}u_1$. Then $\varphi_1(v_1) = 1$.
