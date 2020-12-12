@@ -2218,18 +2218,6 @@
       $\psi_1, \dots, \psi_k$ to basis of $S^0$, $\psi_1, \dots, \psi_n$, $n \geq k$. For the sake of contradiction, assume $n > k$. Thus $\psi_n \not\in \Gamma$. By problem 31, there exists
       a basis $s_1, \dots, s_n$ of $S$ such that $\psi_1, \dots, \psi_n$ is its dual basis. Note now that $\psi_n(s_n) = 1$, which contradicts $\psi_n \in S^0$ (i.e. annihilates $S$) as $s_n
       \in S$. Thus it must be the fact that $n = k$, and so $S^0 = \Gamma$, as desired.
-
-      % Now let us show $\Gamma = S^0$. Let $v_1, \dots, v_k$ be a basis for $S$. Expand $v_1, \dots v_k$ to a basis of $V$ $v_1, \dots, v_n$, $n \geq k$. Let $\varphi_1, \dots, \varphi_n$
-      % be the corresponding dual basis of $V^{\prime}$. We know that $S^0$ has basis $\varphi_{k + 1}, \dots, \varphi_n$ (since $\varphi_j(v_j) = 1$ for $j \in [k]$). We want to show that
-      % $\varphi_{k + 1}, \dots, \varphi_n$ spans $\Gamma$. Let $\varphi \in \Gamma$. Assume for the sake of contradiction that $\varphi$ is not in the span of $\varphi_{k + 1}, \dots,
-      % \varphi_n$. Then, 
-      % \begin{align*}
-      %   \varphi = \sum_{i = 1}^{n}\lambda_i\varphi_i
-      % \end{align*}
-      % And for some $j \in [k]$, $\lambda_j \neq 0$. This implies that $\varphi(v_j) = \lambda_j \neq 0$. However, for all $\psi \in \Gamma$, we have $\psi(v) = 0$ for all $v \in S$ by
-      % definition of $S$. In particular, $v_j \in S$ (recall that $j \in [k]$). Thus, by definition of dual basis, $\psi(v_j) = 0$. This implies then that $\varphi \not\in \Gamma$. A
-      % contradiction. Thus $\varphi$ must be in the span of $\varphi_{k + 1}, \dots, \varphi_n$, and so $\varphi_{k + 1}, \dots, \varphi_n$ spans $\Gamma$. Thus $\Gamma \subset S^0$. Thus
-      % $\dim{\Gamma} \leq n - k$.
     \ii
       By the next problem, $\ran{T} = \nullspace{\varphi}$. Now, $\nullspace{\varphi}$ is the space of polynomial that get sent to zero by $\varphi$. That is, $\varphi(p) = 0 = p(8)$. Hence,
       $\ran{T} = \{p \in \CP_5(\R): p(8) = 0\}$, as desired.
@@ -2301,37 +2289,60 @@
       $\dim{U^c} \geq m$. Furthermore, by definition of dual basis, $\varphi_i(w_j) = 0$ for $i = 1, \dots, m$, $j = 1, \dots, n$. Thus $w_1, \dots, w_n \not\in U^c$ nor any linear
       combinations thereof. Thus any $u \in U$ cannot involve a linear combination of $w_1, \dots, w_n$ and can only involve $v_1, \dots, v_m$. Thus $\dim{U^c} \leq m$, and so $\dim{U^c} =
       m$. Thus $\dim{U} + \dim{U^c} = \dim{U} + m = \dim{V}$, or $\dim{U} = \dim{V} - m$, as desired.
-
-      Here is a much longer proof (that I am not sure is correct).
-
-      % Let $\Span{\varphi_1, \dots, \varphi_m} = X^{\prime}$. Since $\varphi_1, \dots, \varphi_m$ are linearly independent, they are a
-      % basis for $X^{\prime}$. by the next problem, there must exist $v_1, \dots, v_m \in V$ 
-      % independent s
-      % there must exist $v_1, \dots, v_m$ such that $\varphi_i(v_i) \neq 0$.
-      % Now we want to show that $v_1, \dots, v_m$ are linearly independent. Assume this were not the case. Then for some $v_j$, we can re-write it as linear combination of the other elements,
-      % say $v_j = \sum_{i \neq j}c_iv_i$. Then 
-      % \begin{align*}
-      %   \varphi_j(v_j) = \sum_{i \neq j}c_i\varphi_j(v_i) \neq 0.
-      % \end{align*}
-      % Now $\varphi_j(v_j) \neq 0$ implies that $\varphi_j(\Span{v_j}) = \ran{\varphi_j}$ since certainly $\varphi_j(\Span{v_j}) \subset \ran{\varphi_j}$ and they have the same dimension.
-      % Now let $d_i$ be such that $\varphi_j(v_i) = d_i\varphi_i(v_i)$. Then for any $v \in \Span{v_j}$, $v = \lambda v_j$ for some $\lambda \in \F$. Thus 
-      % \begin{align*}
-      %   \varphi_j(v) & = \varphi_j(\lambda v_j) \\
-      %   & = \lambda\varphi_j(v_j) \\
-      %   & = \lambda\sum_{i \neq j}c_i\varphi_j(v_i) \\
-      %   & = \lambda\sum_{i \neq j}c_id_i\varphi_i(v_i).
-      % \end{align*}
-      % Furthermore, for all 
-      % $\varphi_i(v) \neq 0$, then $\varphi_i(\Span{v}) = \ran{\varphi_i}$. This implies that there exist $v_1, \dots, v_m$ such that $\varphi_i(\Span{v_i}) = \ran{\varphi_i}$
     \ii
-      Since $\varphi_1, \dots, \varphi_n$ is a linearly independent list, then there exist $v_i \in V$ for each $\varphi_i$ such that $\varphi_i(v_i) \neq 0$. This will be a proof by
-      induction. We will construct the basis iteratively. First the base case. Let $u_1 \in V$ be such that $\varphi_1(u_1) = c \neq 0$. Let $v_1 \frac{1}{c}u_1$. Then $\varphi_1(v_1) = 1$.
-      Now, suppose for up to $n - 1$, we have constructed $v_i$ such that $\varphi_i(v_i) = 1$ and $\varphi_i(v_j) = 0$ for $j \neq i$. Since $\varphi_1, \dots, \varphi_n$ is a linearly
-      independent list, then $\varphi_n(v_i) = 0$ for $i = v_1, \dots, v_{n - 1}$. This is because if it were not, then we could $\varphi_n$ is a scalar multiple of $\varphi_i$ 
+      Let $v_1, \dots, v_n$ be a basis of $V$ and let $\psi_1, \dots, \psi_n$ be the corresponding dual basis of $V^{\prime}$. Then we can re-write $\varphi_i$ as $\varphi_i = \sum_{j =
+      1}^{n}a_{ij}\psi_j$ for $i = 1, \dots, n$. Now, consider the linear map $T: \F^n \to \F^n$ such that 
+      \begin{align*}
+        T(b_{1k}, \dots, b_{nk}) = (\sum_{i = 1}^{n}a_{i1}b_{ik}, \dots, \sum_{i = 1}^{n}a_{in}b_{ik}) 
+      \end{align*}
+      The corresponding matrix to $T$ is
+      \begin{align*}
+        \CM(T) = \begin{bmatrix}
+          a_{11} & a_{12} & \dots & a_{1n} \\
+          a_{21} & a_{22} & \dots & a_{2n} \\
+          \vdots & \vdots & \ddots & \vdots \\
+          a_{n1} & a_{n2} & \dots & a_{nn}
+        \end{bmatrix}.
+      \end{align*}
+      We also have that the vectors in $\F^n$ formed by $a_1, \dots, a_n$, where $a_i = (a_{i1}, \dots, a_{in})$ are linearly independent. If this were not the case, then this would
+      contradict $\varphi_1, \dots,\varphi_n$ being linearly independent. How? Assume $a_i = \sum_{j \neq i}c_ja_j$. Then, 
+      \begin{align*}
+        \varphi_i & = \sum_{k = 1}^{n}a_{ik}\psi_k \\
+        & = \sum_{k = 1}^{n}(\sum_{j \neq i}c_ja_{jk})\psi_k \\
+        & = \sum_{j \neq i}c_j(\sum_{k = 1}^{n}a_{jk}\psi_k) \\
+        & = \sum_{j \neq i}c_j\varphi_j,
+      \end{align*}
+      which is a contradiction.
 
-      This is because since $\varphi_n(v_i) \neq 0$, then $v_i \neq 0$ could be extended to a basis of $V$, and since $\dim{\nullspace{\varphi_n}} = \dim{V} - 1$, that would imply the other
-      vectors form a basis of the null space, since $v_i$ is not in it. We would then show that those vectors are also a basis for $\nullspace{\varphi_i}$, hence the null spaces are the same
-      and so they only differ by a scalar multiple on $\Span(v_i)$ by linearity).
+      Hence this implies the rank of $\CM(T)$ is $n$, which implies that $\dim{\ran{T}} = n = \dim{V}$ (since $T$ is surjective which implies bijectivity by the fundamental theorem of linear
+      maps), and so $T$ is invertible. Thus we can find $b_1, \dots, b_n$ such that $\CM(T)\CM(b_i) = e_i$, where $e_i$ is the $i$th standard basis vector.
+
+      Now let $u_i = \sum_{j = 1}^{n}b_{ij}v_j$ for $i = 1, \dots, n$. $u_1, \dots, u_n$ is a linearly independent list. If it were not, then for some $u_i$, there is a non-trivial linear
+      combination $u_i = \sum_{j \neq i}c_ju_j$. That is,
+      \begin{align*}
+        u_i & = \sum_{k = 1}^{n}b_{ik}v_k \\
+        & = \sum_{j \neq i}c_ju_j \\
+        & = \sum_{j \neq i}c_j\sum_{k = 1}^{n}b_{jk}v_k \\
+        & = \sum_{k = 1}^{n}(\sum_{j \neq i}c_jb_{jk})v_k.
+      \end{align*}
+      % Since $u_i \neq 0$ since it is a non-trivial linear combination of $v_1, \dots, v_n$, (because $\CM(T)$ with rank $n$ implies only $0$ gets mapped by $\CM(T)$ to $0$ and so to map
+      % $\CM(b_i)$ to $e_i$ implies $b_i \neq 0$ since $\CM$ is a bijection), which implies that $b_i \neq 0$
+      % and that $v_1, \dots, v_n$ is a basis, 
+      Since $v_1, \dots, v_n$ is a basis of $V$, we must have that $b_{ik} = \sum_{j \neq i}c_jb_{jk}$. That is, $b_i = \sum_{j \neq i}c_jb_j$. Thus,
+      \begin{align*}
+        e_i & = \CM(T)\CM(b_i) \\
+        & = \CM(T)(\sum_{j \neq i}c_jb_j) \\
+        & = \sum_{j \neq i}c_je_j,
+      \end{align*}
+      which is impossible since $e_1, \dots, e_n$ is a linearly independent. And so $u_1, \dots, u_n$ is linearly independent as claimed. This implies that $u_1, \dots, u_n$ is a basis for
+      $V$ (since $V$ has dimension $n$). Hence,
+      \begin{align*}
+        \varphi_i(u_j) & = \sum_{k = 1}^{n}a_{ik}\psi_j(\sum_{r = 1}^{n}b_{jr}v_r) \\
+        & = \sum_{k = 1}^{n}a_{ij}b_{jk} \\
+        & = \CM(T)_{i\cdot}b_j.
+      \end{align*}
+      In other words, $\varphi_i(u_j)$ reduces to the entrywise product then sum of the $i$th row of $\CM(T)$ with $b_j$. Now by definition of $b_1, \dots, b_n$, we have that
+      $\CM(T)_{i\cdot}b_j = 1$ if $i = j$ and $0$ if $i \neq j$. In other words, $\varphi_1, \dots, \varphi_n$ is the dual basis for $u_1, \dots, u_n$. As desired.
     \ii
     a
     \ii
