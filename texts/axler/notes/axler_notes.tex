@@ -1085,7 +1085,7 @@
     \end{align*}
     As desired.
   \end{proof}
-  \begin{prop}[Null space of $T^{\prime}$]
+  \begin{prop}[Null space of $T^{\prime}$]\label{prop:null_dual_range_annihilator}
     Suppose $V$, $W$ are finite dimensional $T \in \CL(V, W)$. Then,
     \begin{enumerate}[label=\alph*)]
         \ii 
@@ -1150,7 +1150,7 @@
         Thus $\dim W = \dim\ran{T}$, and so $T$ is surjective.
     \end{enumerate}
   \end{proof}
-  \begin{prop}[Range of $T^{\prime}$]
+  \begin{prop}[Range of $T^{\prime}$]\label{prop:range_dual_null_annihilator}
     Suppose $V$, $W$ are finite dimensional $T \in \CL(V, W)$. Then,
     \begin{enumerate}[label=\alph*)]
         \ii 
@@ -1285,4 +1285,207 @@
   \begin{prop}[rank]
     The rank of a matrix $A \in \F^{m, n}$ is the column rank of $A$.
   \end{prop}
+\section{Polynomials}
+\subsection{Uniqueness of Coefficients of Polynomials}
+\begin{prop}[If a polynomial is the zero function, then all coefficients are $0$]\label{prop:zero_polynomial}
+  Suppose $a_0, \dots, a_m \in \F$. If
+  \begin{align*}
+    a_0 + a_1z + \cdots + a_mz^m = 0,
+  \end{align*}
+  for all $z \in \F$, then $a_0 = \cdots = a_m = 0$.
+\end{prop}
+\begin{proof}
+  Assume that not all the coefficients are zero. Without loss of generality, assume $a_m \neq 0$ (take the largest index coefficient that is nonzero, make that $a_m$, and drop the bigger
+  index coefficients as they are all zero. Basically change $m$ appropriately). Now let 
+  \begin{align*}
+    z = \frac{\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m - 1}}}{\abs{a_m}} + 1.
+  \end{align*}
+  Note that $\abs{z} \geq 1$. Hence $z^j \leq z^{m - 1}$ for $j = 0, 1, \dots, m - 1$. By the triangle inequality,
+  \begin{align*}
+    \abs{a_0 + a_1z + \cdots + a_{m - 1}z^{m - 1}} & \leq \abs{a_0} + \abs{a_1}\abs{z} + \cdots + \abs{a_{m - 1}}\abs{z^{m - 1}} \\
+    & = \abs{a_0}\abs{z^{m - 1}} + \abs{a_1}\abs{z^{m - 1}} + \cdots + \abs{a_{m - 1}}\abs{z^{m - 1}} \\
+    & = (\abs{a_0} + \cdots + \abs{a_{m - 1}})\abs{z^{m - 1}} \\
+    & < \abs{z^ma_m},
+  \end{align*}
+  where the last inequality is by
+  \begin{align*}
+    z & = \frac{\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m - 1}}}{\abs{a_m}} + 1 \\
+    z & > \frac{\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m - 1}}}{\abs{a_m}} \\
+    z\abs{a_m} & > \abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m - 1}} \\
+    \abs{z^{m}}\abs{a_m} & > (\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m - 1}})\abs{z^{m - 1}} \\
+    \abs{z^{m}a_m} & > (\abs{a_0} + \abs{a_1} + \cdots + \abs{a_{m - 1}})\abs{z^{m - 1}}. \\
+  \end{align*}
+  Thus $a_0 + a_1z + \cdots + a_{m - 1}z^{m - 1} \neq -a_mz^{m}$, which is a contradiction. Hence all coefficients must be zero.
+\end{proof}
+The result above implies that the coefficients of a polynomial are uniquely determined (because if a polynomial had two different sets of coefficients, then subtracting the two
+representations of the polynomial would give a contradiction to the result above). 
+\subsection{The Division Algorithm for Polynomials}
+Recall that $\CP(\R)$ is the linear space of all polynomials with coefficients in $\F$, and $\CP_m(\F)$ is the subspace of $\CP(\F)$ with polynomials of degree at most $m$.
+\begin{prop}[Division Algorithm for Polynomials]\label{prop:divison_algo}
+  Suppose $p, s \in \CP(\F)$ with $s \neq 0$. Then there exist unique polynomials $q, r$ such that $p = sq + r$, with $\deg{r} < \deg{s}$.
+\end{prop}
+\begin{proof}
+  Let $n = \deg{p}$ and $m = \deg{s}$. If $n < m$, take $q = 0$ and $r = p$ and we are done. Otherwise, assume $n \geq m$. Define
+  \begin{align*}
+    T: \CP_{n - m}(\F)\times\CP_{m - 1}(\F) \to \CP_n(\F)
+    T: (q, r) \mapsto sq + r.
+  \end{align*}
+  It is easy to verify that $T$ is a linear map. Now, if $(q, r) \in \nullspace{T}$, then $sq + r = 0$, or $sq = -r$. This implies that $q = r = 0$, since otherwise $\deg{sq} \geq m$ and so
+  $sq$ can't equal $-r$ which has degree at most $m - 1$. Thus $\dim{\nullspace{T}} = 0$ (this proves the uniqueness part of the result - since is thus $T$ injective).
+
+  Now we also have that
+  \begin{align*}
+    \dim{\CP_{n - m}(\F)\times\CP_{m - 1}(\F)} = (n - m + 1) + (m - 1 + 1) = n + 1 = \dim{\CP_n(\F)}.
+  \end{align*}
+  Since $\dim{\nullspace{T}} = 0$, we get that $\dim{\ran{T}} = n + 1$ and so $\ran{T} = \CP_n(\F)$. Hence for arbitrary $p$ with degree $n$, there exist $q \in \CP_{n - m}(\F)$ and $r \in
+  \CP_{m - 1}(\F)$ such that $p = sq + r$, as desired.
+\end{proof}
+\subsection{Zeros of Polynomials}
+\begin{defn}[zero of a polynomial]
+  A number $\lambda \in \F$ is called a \textbf{zero} or \textbf{root} of a polynomial $p \in \CP(\F)$ if $p(\lambda) = 0$.
+\end{defn}
+\begin{defn}
+  A polynomial $s \in \CP(\F)$ is a called a \textbf{factor} of $p \in \CP(\F)$ if there exists another polynomial $q \in \CP(\F)$ such that $p = sq$.
+\end{defn}
+The first result is that $\lambda$ is zero of $p$ iff $(z - \lambda)$ is a factor of $p$.
+\begin{prop}[Each zero of a polynomial corresponds to a degree-1 factor]\label{prop:zero_equals_one_degree_factor}
+  Suppose $p \in \CP(\F)$ and $\lambda \in \F$. Then $p(\lambda) = 0$ iff there is a polynomial $q \in \CP(\F)$ such that $p(z) = (z - \lambda)q(z)$ for all $z \in \F$.
+\end{prop}
+\begin{proof}
+  Suppose there is a polynomial $q \in \CP(\F)$ such that $p(z) = (z - \lambda)q(z)$ for all $z \in \F$ for some $\lambda \in \F$. Then $p(\lambda) = 0$. Conversely, assume $p(\lambda) = 0$
+  for some $\lambda \in \F$. The polynomial $z - \lambda$ has degree $1$ and so by \eqref{prop:divison_algo}, we can write $p(z) = (z - \lambda)q + r$ for some $q \in \CP(\F)$ and constant
+  $r \in \F$ (since degree $< 1$ implies being a constant function). Note that 
+  \begin{align*}
+    p(\lambda) = (\lambda - \lambda)q(\lambda) + r = 0
+  \end{align*}
+  by assumption. Thus $r = 0$, and so $p(z) = (z - \lambda)q(z)$ for all $z \in \F$, as desired.
+\end{proof}
+Now we prove that polynomials can't have too many zeros.
+\begin{prop}[A polynomial has at most as many zeros as its degree]
+  Suppose $p \in \CP(\F)$ is a polynomial with degree $m \geq 0$. Then $p$ has at most $m$ distinct zeros in $\F$.
+\end{prop}
+\begin{proof}
+  If $m = 0$, then $p(z) = a_0 \neq 0$ and so $p$ has no zeros (recall that only the zero polynomial has degree $-\infty$ and degree zero polynomial are just nonzero constant functions). 
+
+  If $m = 1$, then $p(z) = a_0 + a_1z$ with $a_1 \neq 0$, and so $p$ has exactly one root $\lambda = -\frac{a_0}{a_1}$.
+
+  For $m > 1$, we do a proof by induction. Assume that for every polynomial with degree $m - 1$ has at most $m - 1$ distinct zeros. If $p$ has no zeros in $\F$, we are done. If $p$ has a
+  zero $\lambda \in \F$, then by \eqref{prop:zero_equals_one_degree_factor}, there exists $q \in \CP(\F)$ such that
+  \begin{align*}
+    p(z) = (z - \lambda)q(z), \qquad z \in \F.
+  \end{align*}
+  Clearly $\deg{q} = m - 1$ (so that we can multiply it by $z$ and get a degree $m$ polynomial to equal $p$). If $p(z) = 0$, then either $z = \lambda$ or $q(z) = 0$. Hence the zeros of $p$
+  are $\lambda$ and the zeros of $q$. By the induction hypothesis, $q$ has at most $m - 1$ unique zeros, and so $p$ has at most $m$ unique zeros.
+\end{proof}
+\begin{thm}[Fundamental Theorem of Algebra]
+  Every nonconstant polynomial with complex coefficients has a zero.
+\end{thm}
+The next result tells us that a polynomial of degree $m$ has exactly $m$ zeros and that it can be factorized into 1-degree factors involving those zeros. What this tells us then is that
+these are the only possible zeros.
+\begin{prop}[Factorization of a polynomial over $\C$]\label{prop:polynomial_factorization}
+  If $p \in \CP(\C)$ is a nonconstant polynomial, then $p$ has a unique factorization (up to the order of the factors) of the form
+  \begin{align*}
+    p(z) = c(z - \lambda_1)\cdots(z - \lambda_m),
+  \end{align*}
+  where $c, \lambda_1, \dots, \lambda_m \in \C$.
+\end{prop}
+\begin{proof}
+  Let $p \in \CP(\C)$ and let $m = \deg{p}$. We will induce on $m$. If $m = 1$, then the factorization exists and is unique. Hence assume $m > 1$ and that the result holds for polynomials
+  with degree $m - 1$. First existence. By the fundamental theorem of linear algebra, there exists at least one zero $\lambda \in \F$ for $p$. Hence by
+  \eqref{prop:zero_equals_one_degree_factor}, we can rewrite $p$ as $p(z) = (z - \lambda)q(z)$ for all $z \in \F$. $q$ has degree $m - 1$ and so by the induction hypothesis it has the
+  desired factorization into $m - 1$ factors. Substituting in that factorization, we get that $p$ has the desired factorization into $m$ factors. 
+
+  Now for uniqueness. $c$ is uniquely determined as the coefficient of $z^m$ in $p$. Thus as for the remaining terms, we want to show that, except for the order, there is only one way to
+  choose $\lambda_1, \dots, \lambda_m$. Assume
+  \begin{align*}
+    (z - \lambda_1)\cdots(z - \lambda_m) = (z - \tau_1)\cdots(z - \tau_m)
+  \end{align*}
+  for all $z \in \C$. Then the left hand side equals zero if $z = \lambda_1$. This implies that some $\tau$ on the right hand side equals $\lambda_1$ (as this is the only way we can get
+  zero). We relabel and assume $\lambda_1 = \tau_1$. If $z \neq \lambda_1$, we divide both sides by $z - \lambda_1$, getting
+  \begin{align*}
+    (z - \lambda_2)\cdots(z - \lambda_m) = (z - \tau_2)\cdots(z - \tau_m)
+  \end{align*}
+  for all $z \in \C$, except possibly $z = \lambda_1$. The equation also holds for $z = \lambda_1$ since otherwise we can subtract the two sides from one another and get a nonzero polynomial
+  (because they are not equal on $\lambda_1$) which has an infinite number of zeros (because they are equal on all $z \neq \lambda_1$), which contradicts the maximum number of zeros being
+  limited. Now, the right hand and left hand sides are polynomials with degree at most $m - 1$. By the induction hypothesis, this implies that the factorization is unique. This implies that
+  except for the order, the $\lambda$'s are the same as the $\tau$'s. This proves uniqueness.
+\end{proof}
+
+\subsection{Factorization of Polynomials over $\R$}
+\begin{prop}[Polynomials with real coefficients have zeros in pairs]\label{prop:conjugate_zeros}
+  Suppose $p \in \CP(\C)$ is a polynomial with real coefficients. If $\lambda \in \C$ is a zero of $p$, then so is $\bar{\lambda}$.
+\end{prop}
+\begin{proof}
+  Let
+  \begin{align*}
+    p(z) = a_0 + a_1z + \cdots + a_mz^m,
+  \end{align*}
+  where $a_0, \dots, a_m$ are real numbers. Suppose $\lambda \in \C$ is a zero of $p$. Then,
+  \begin{align*}
+    a_0 + a_1\lambda + \cdots + a_m\lambda^m = 0.
+  \end{align*}
+  Taking the complex conjugates of both sides to get
+  \begin{align*}
+    a_0 + a_1\bar{\lambda} + \cdots + a_m\bar{\lambda}^m = 0,
+  \end{align*}
+  where we used the properties of complex conjugation. Thus $\bar{\lambda}$ is also a zero of $p$, as desired.
+\end{proof}
+\begin{prop}[Factorization of a quadratic polynomial]
+  Suppose $b, c \in \R$. Then there is a polynomial factorization of the form
+  \begin{align*}
+    x^2 + bx + c = (x - \lambda_1)(x - \lambda_2),
+  \end{align*}
+  with $\lambda_1, \lambda_2 \in \R$ if and only if $b^2 \geq 4ac$.
+\end{prop}
+\begin{proof}
+  We have that 
+  \begin{align*}
+    x^2 + bx + c = (x + \frac{b}{2})^2 + (c - \frac{b^2}{2}).
+  \end{align*}
+  If $b^2 < c$, then the right hand side is positive for every $x \in \R$ and thus the quadratic has no real zeros and cannot be factored in the desired form. Conversely, assume $b^2 \geq
+  4c$. Then there is a real $d$ such that $d^2 = \frac{b^2}{4} - c$. This gives us,
+  \begin{align*}
+    x^2 + bx + c & = (x + \frac{b}{2})^2 - d^2 \\
+    & = (x + \frac{b}{2} + d)(x + \frac{b}{2} - d),
+  \end{align*}
+  which is the desired factorization. (What we have just done above is completing the square).
+\end{proof}
+\begin{prop}
+  Suppose $p \in \CP(\R)$ is a nonconstant polynomial. Then $p$ has a unique factorization (except for the order of the factors) of the form
+  \begin{align*}
+    p(x) = c(x - \lambda_1)\cdots(x - \lambda_m)(x^2 + b_1x + c_1)\cdots(x^2 + b_Mx + c_M),
+  \end{align*}
+  where $c, \lambda_1, \dots, \lambda_m, b_1, \dots, b_M, c_1, \dots, c_M \in \R$, with $b_j^2 < 4c_j$ for $j \in [M]$. $\lambda_1, \dots, \lambda_m$ here are the real zeros of $p$, and
+  $b_j^2 < 4c_j$ implies that the quadratic terms all have nonreal, complex conjugate zeros. Both $m, M$ nonnegative integers (i.e. they can be zero).
+\end{prop}
+\begin{proof}
+  Think of $p$ as an element of $\CP(\C)$. If all the (complex) zeros of $p$ are real, then by \eqref{prop:polynomial_factorization} we are done. Else suppose $p$ has a zero $\lambda \in \C$
+  with $\lambda \not\in \R$. Then by \eqref{prop:conjugate_zeros}, $\bar{\lambda}$ is a zero of $p$ also. Thus we can factor $p$ as
+  \begin{align*}
+    p(x) & = (x - \lambda)(x - \bar{\lambda})q(x) \\
+    & = \left(x^2 - 2(\Re{\lambda})x + \abs{\lambda}^2\right)q(x),
+  \end{align*}
+  for some polynomial $q \in \CP(\C)$ with degree two less than the degree of $p$ (factor the two zeros we know exist, $\lambda$ and $\lambda^{\prime}$. Then we know $q$ must have $\deg{p} -
+  2$ so that $p$ has $\deg{p}$). If we can prove that $q$ has real coefficients, then by using induction on the degree of $p$ (i.e. keep factoring as in the above fashion until the base
+  polynomial is one with degree 1 or 2), we can conclude that $(x - \lambda)$ appears in the factorization of $p$ exactly as many times as $(x - \bar{\lambda})$. 
+
+  We solve the equation above for $q$ to get 
+  \begin{align*}
+    q(x) = \frac{p(x)}{x^2 - 2(\Real{\lambda})x + \abs{\lambda}^2}
+  \end{align*}
+  for all $x \in \R$. The above equation above implies that $q(x) \in \R$ for all $x \in \R$. Writing
+  \begin{align*}
+    q(x) = a_0 + a_1x + \cdots + a_{n - 2}x^{n - 2},
+  \end{align*}
+  where $n = \deg{p}$ and $a_0, a_1, \dots, a_{n - 2} \in \C$. We thus have
+  \begin{align*}
+    0 = \Imaginary{q(x)} = (\Imaginary{a_0}) + (\Imaginary{a_1})x + \cdots + (\Imaginary{a_{n - 2}})x^{n - 2}
+  \end{align*}
+  for all $x \in \R$. By \eqref{prop:zero_polynomial}, this implies that $\Imaginary{a_0} = \Imaginary{a_1} = \cdots = \Imaginary{a_{n - 2}} = 0$. Thus all the coefficients of $q$ are real, and hence the desired
+  factorization.
+  
+  As for the uniqueness of the factorization, a factor of $p$ of the form $x^2 + b_jx + c_j$ where $b_j^2 < 4c_j$ can be uniquely written as $(x - \lambda_j)(x - \bar{\lambda}_j)$ with
+  $\lambda_j \in \C$. This implies that if $p$ had two different factorizations as an element of $\CP(\R)$ would lead to two different factorizations of $p$ as an element of $\CP(\C)$,
+  contradicting \eqref{prop:polynomial_factorization}.
+\end{proof}
 \end{document}

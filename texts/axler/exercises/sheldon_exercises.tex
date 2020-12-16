@@ -7,7 +7,6 @@
 \begin{document}
 
 % TODO problem 7 chapter 2.C
-% TODO 3.F: 27 onwards again
 \author{Ali Geisa}
 \title{Linear Algebra Done Right Exercises}
 \chapter{Linear Spaces}
@@ -2344,13 +2343,118 @@
       In other words, $\varphi_i(u_j)$ reduces to the entrywise product then sum of the $i$th row of $\CM(T)$ with $b_j$. Now by definition of $b_1, \dots, b_n$, we have that
       $\CM(T)_{i\cdot}b_j = 1$ if $i = j$ and $0$ if $i \neq j$. In other words, $\varphi_1, \dots, \varphi_n$ is the dual basis for $u_1, \dots, u_n$. As desired.
     \ii
-    a
+      \begin{enumerate}[label=\alph*)]
+        \ii $(a \to b)$. $T$ invertible implies $T$ is surjective which implies $\ran{T} = V$ which implies $\dim{\ran{T}} = n = $ column rank of $\CM(T)$. The column rank of $\CM(T)$ being $n$
+        implies that the $n$ columns of $\CM(T)$ form an $n$ dimensional subspace of $\F^{n, 1}$, which implies they are linearly independent. If they were not linearly independent, then the
+        dimension would have to be strictly less than $n$ as we have only $n$ columns, which is a contradiction.
+        \ii $(b \to c)$. Having $n$ linearly independent vectors in an $n$-dimensional space $(\F^{n, 1})$ means those vectors span the space (a linearly independent list of the right length
+        is a basis and of course spans the space).
+        \ii $(c \to d)$. Column rank equals row rank. Thus the $n$ rows of $\CM(T)$ must also be linearly independent in $\F^{1, n}$ by the same argument as part a.
+        \ii $(d \to e)$. Basically same argument as part c.
+      \end{enumerate}
     \ii
-    a
+      Let $T: \F^{m, n} \to \F^{n, m}$ be defined by $T(A) = A^T$. Let us show that $T$ is a linear map. Let $\lambda, \gamma \in \F$. Then,
+      \begin{align*}
+        T(\lambda A + \gamma B) & = (\lambda A + \gamma B)^T \\
+        & = (\lambda A)^T + (\gamma B)^T \\
+        & = \lambda A^T + \gamma B^T \\
+        & = \lambda T(A) + \gamma T(B).
+      \end{align*}
+      Thus $T$ is linear. Furthermore, only $0 \in \F^{m, n}$ is such that $T(A) = 0$. Thus $\nullspace{T} = \{0\}$ and so $T$ is injective. Finally, for arbitrary $A \in \F^{n, m}$, $T(A^T)
+      = A$. Thus $T$ is surjective. Thus $T$ is invertible, as desired.
     \ii
-    a
+      \begin{enumerate}[label=\alph*)]
+        \ii 
+          Let $u, v  \in V$, $a, b \in \F$. Then, for arbitrary $\varphi \in V^{\prime}$,
+          \begin{align*}
+            \Lambda(au + bv)(\varphi) & = \varphi(au + bv) \\
+            & = a\varphi(u) + b\varphi(v) \\
+            & = a\Lambda(u)(\varphi) + b\Lambda(v)(\varphi)
+          \end{align*}
+          Thus $\Lambda(au + bv) = a\Lambda(u) + b\Lambda(v)$. Thus $\Lambda$ is a linear map.
+        \ii
+          Let $T^{\prime\prime}$ be the dual map of $T^{\prime}$. Since $T \in \CL(V)$ and $\Lambda \in \CL(V, V^{\prime\prime})$, then $\Lambda\circ T \in \CL(V, V^{\prime\prime})$. Likewise,
+          since $T^{\prime\prime} \in \CL(V^{\prime\prime})$ and $\Lambda \in \CL(V, V^{\prime\prime})$, $T^{\prime\prime}\circ\Lambda\in \CL(V, V^{\prime\prime})$. Let $v \in V$ and
+          $\varphi \in V^{\prime}$ be arbitrary. Then,
+          \begin{align*}
+            (\Lambda\circ T)(v)(\varphi) & = (\Lambda(Tv))(\varphi) \\
+            & = \varphi(Tv)
+          \end{align*}
+          Likewise 
+          \begin{align*}
+            (T^{\prime\prime}\circ\Lambda)(v)(\varphi) & = (T^{\prime\prime}(\Lambda(v)))(\varphi) \\
+            & = (\Lambda(v) \circ T^{\prime})(\varphi) \\
+            & = \Lambda(v)(T^{\prime}(\varphi)) \\
+            & = \Lambda(v)(\varphi \circ T) \\
+            & = (\varphi \circ T)(v) \\
+            & = \varphi(Tv)
+          \end{align*}
+          And so $T^{\prime\prime} \circ \Lambda = \Lambda \circ T$, as desired.
+        \ii
+          We know that $V$ and $V^{\prime}$ have the dimension Then $V^{\prime}$ and $V^{\prime\prime}$, and hence $V$ and $V^{\prime\prime}$, have the same dimension. $\Lambda$ is a linear
+          map. Thus if we can show that it is either injective or surjective, then $\Lambda$ is invertible, and hence an isomorphism, by the fundamental theorem of linear maps. Let us show
+          injectivity. 
+
+          Let $v \in V$ be such that $\Lambda(v) = 0$. Then for arbitrary $\varphi \in V^{\prime}$, $\Lambda(v)(\varphi) = \varphi(v) = 0$. That is, for all $\varphi \in V^{\prime}$,
+          $\varphi(v) = 0$. This can only happen if $v = 0$ (how? if $v \neq 0$, then extend $v$ to a basis of $V$. Then in the dual basis, the corresponding dual linear functional is
+          nonzero on $v$). Thus $\nullspace{\Lambda} = \{0\}$, which implies it is injective, and so it is invertible. Thus $\Lambda$ is an isomorphism.
+      \end{enumerate}
     \ii
-    a
+    Consider the basis $(x^n)_{n = 0}^{\infty}$ for $\CP(\R)$ . We first note that $\R^\infty$ and $\CP(\R)$ are isomorphic through the isomorphism,
+    \begin{align*}
+      T: a_0 + a_1x + a_2x^2 + \dots \mapsto (a_0, a_1, a_2, \dots)
+    \end{align*}
+    This map is linear,
+    \begin{align*}
+      T\left(\lambda\sum_{n = 0}^{\infty}a_nx^n + \gamma\sum_{n = 0}^{\infty}b_nx^n\right) & = T\left(\sum_{n = 0}^{\infty}(\lambda a_n + \gamma b_n)x^n\right) \\
+      & = (\lambda a_0 + \gamma b_0, \lambda a_1 + \gamma b_1, \cdots) \\
+      & = \lambda(a_0, a_1, \cdots) + \gamma(b_0, b_1, \cdots) \\
+      & = \lambda T(a_0 + a_1x + a_2x^2) + \gamma T(b_0 + b_1x + b_2x^2).
+    \end{align*}
+    Furthermore, this map is obviously invertible and hence the spaces are isomorphic as claimed. Next, consider the dual basis $(\varphi_n)_{n = 0}^{\infty}$ defined as
+    \begin{align*}
+      \varphi_i(x^j) = 
+        \begin{cases}
+          1 \qquad i = j \\
+          0 \qquad i \neq j 
+        \end{cases}.
+    \end{align*}
+    For $i, j \in \{0, 1, 2, \cdots\}$. This sequence is certainly linearly independent since,
+    \begin{align*}
+      \sum_{n = 0}^{\infty}a_n\varphi_n(x^j) = a_j
+    \end{align*}
+    And so to have that linear combination always be zero, we must have $a_j = 0$. Doing this for all $j$, we get the linear combination equals zero iff $a_j = 0$ for all $j$. Next this list
+    spans $(\CP(\R))^{\prime}$ since for arbitrary $\varphi \in (\CP(\R))^{\prime}$, we can evaluate $\varphi(x^j) = a_j$ for all $j$. Then this implies that
+    \begin{align*}
+      \varphi = \sum_{n = 0}^{\infty}a_n\varphi_n
+    \end{align*}
+    Since for an arbitrary polynomial $b_0 + b_1x + \cdots$,
+    \begin{align*}
+      \varphi(b_0x^0 + b_1x + \cdots) & = b_0\varphi(x^0) + b_1\varphi(x) + \cdots \\
+      & = b_0a_0 + b_1a_1 + \cdots \\
+      & = \sum_{n = 0}^{\infty}a_nb_n,
+    \end{align*}
+    and
+    \begin{align*}
+      \sum_{n = 0}^{\infty}a_n\varphi_n(b_0x^0 + b_1x + \cdots) & = \sum_{n = 0}^{\infty}a_nb_n\varphi_n(x^n) \\
+      & = \sum_{n = 0}^{\infty}a_nb_n,
+    \end{align*}
+    as desired. Consider now the map $S$
+    \begin{align*}
+      S: \CP(\R) \to (\CP(\R))^{\prime},
+    \end{align*}
+    defined by $S(a_0 + a_1x + \cdots) = a_0\varphi_0 + a_1\varphi_1 + \cdots$. This map is obviously linear. It is also injective. Let $v \in \CP(\R)$ be such that $Sv = 0$. Then 
+    \begin{align*}
+      \sum_{n = 0}^{\infty}a_n\varphi_n = 0.
+    \end{align*}
+    Since $(\varphi_n)_{n = 0}^{\infty}$ is a linearly independent list, this implies that $a_n = 0$ for all $n$. Thus $v = 0$. Hence $S$ is injective since only zero is sent to zero
+    (implying $\nullspace{S} = \{0\}$). Furthermore, $S$ is surjective. Since $(\varphi_n)_{n = 0}^{\infty}$ is a basis for $(\CP(\R))^{\prime}$, then for arbitrary $\varphi$ we can write 
+    \begin{align*}
+      \varphi = \sum_{n = 0}^{\infty}a_n\varphi_n,
+    \end{align*}
+    for some $(a_n)_{n = 0}^\infty$. Given this, note then that $S(\sum_{n = 0}^{\varphi}a_nx^n) = \sum_{n = 0}^{\infty}a_n\varphi_n = \varphi$, and so $S$ is surjective. Thus $S$ is
+    invertible and hence an isomorphism. Since isomorphism is an equivalence relation on linear spaces, we have then that $\R^\varphi$ and $(\CP(\R))^{\prime}$ are isomorphic with
+    isomorphism $S \cdot T$, as desired.
     \ii
       \begin{enumerate}[label=\alph*)]
         \ii 
@@ -2381,7 +2485,7 @@
       Let us think intuitively about this problem. $i$ is the inclusion map. What is $i^{\prime}$? Well $i^{\prime}(\varphi)(u) = (\varphi \circ i)(u) = \varphi(u)$. So we can think of
       $i^{\prime}(\varphi) \in U^{\prime}$, where $\varphi \in V^{\prime}$, as the restriction of $\varphi$ to just $U$. Now the problem flows very smoothly. 
 
-      Of course the null space of $i^{\prime}$ are all the linear functionals in $V^{\prime}$ which take the value zero on $U$, i.e. $U^0$, because those are then the zero map on $U$.
+      Of course the null space of $i^{\prime}$ are all the linear functionals in $V^{\prime}$ which take the value zero on $U$, i.e. $U^0$, because those are then the zero map on $U$. 
 
       Furthermore, of course we can get every linear functional in $U^{\prime}$. Namely, given any $\varphi \in U^{\prime}$, there are in fact many linear functionals in $V^{\prime}$ which
       may be different but are the same on $U$. Any one of these linear functionals restricted to $U$ gives us $\varphi$. Or for example, given arbitrary $\varphi \in U^{\prime}$, extend its
@@ -2404,7 +2508,10 @@
           \end{align*}
           Thus no matter the affine space $v + U$, $\varphi$ maps it to zero. Thus $\varphi = 0$. Since $\pi^{\prime}$ maps only zero to zero, then it must be injective by linearity. 
         \ii
-          Let $\varphi \in U^0$. Then $\varphi(u) = 0$ for all $u \in U$. Consider now $\psi \in (V/U)^{\prime}$ such that 
+        By $\eqref{prop:range_dual_null_annihilator}$, we know that $\ran{\pi^{\prime}} = (\nullspace{\pi})^0$. What is $\nullspace{\pi}$? If $v \in \nullspace{\pi}$, then $\pi(v) = 0 + U =
+        U$. So what are all the $v \in V$ such that $\pi(v) = U$? Simply $U$! Thus $\nullspace{\pi} = U$. Thus $\ran{\pi^{\prime}} = U^0$.
+
+        Alternatively, let $\varphi \in U^0$. Then $\varphi(u) = 0$ for all $u \in U$. Consider now $\psi \in (V/U)^{\prime}$ such that 
           \begin{align*}
             \psi(v + U) = \varphi(v)
           \end{align*}
@@ -2426,4 +2533,44 @@
           Since $\pi^{\prime}$ is an injective linear map that is surjective onto $U^0$, this implies it is an isomorphism $(V/U)^{\prime}$ to $U^0$.
       \end{enumerate}
   \end{enumerate}
+\chapter{Polynomials}
+\begin{enumerate}
+  \ii 
+  \ii 
+    No. Take $m = 2$. Take $p(x) = x^2 + 5x$ and $q(x) = x^2 + 4x$. $p, q \in \CP_2(\F)$. $p(x) - q(x) = x \not\in \CP_2(\F)$.
+  \ii 
+    No. Take $m = 2$. Take $p(x) = x^2 + 5x$ and $q(x) = x^2 + 4x$. $p, q \in \CP_2(\F)$. $p(x) - q(x) = x \in \CP_1(\F)$, which is not even degree.
+  \ii 
+    $p(x) = (x - \lambda_1)^{n - m + 1}(x - \lambda_2)\cdots(x - \lambda_m)$. $p$ has only $\lambda_1, \dots, \lambda_m$ as zeros, and it has degree $n$.
+  \ii
+    Consider the matrix and vector
+    \begin{align*}
+      Z & = 
+        \begin{bmatrix}
+          1 & z_1 & z_1^2 & \dots & z_{1}^{m} \\
+          1 & z_2 & z_2^2 & \dots & z_{2}^{m} \\
+          \vdots & \vdots & \vdots & \ddots & \vdots \\
+          1 & z_{m + 1} & z_{m + 1}^2 & \dots & z_{m + 1}^{m} 
+        \end{bmatrix} \in \F^{m + 1, m + 1} \\
+      w & = 
+        \begin{bmatrix}
+          w_1 \\
+          w_2 \\
+          \vdots \\
+          w_{m + 1}
+        \end{bmatrix}
+    \end{align*}
+    The problem can then be restated as, find the vector $a$ such that $Za = w$. Because then the polynomial whose coefficients are formed from the elements of $a$, $p(x) = a_0 + a_1x +
+    \cdots + a_mx^{m}$, satisfies the requirements of $p(z_j) = w_j$ for $j \in [m + 1]$. 
+
+    Consider now the linear map $T$, $T: \F^{m + 1} \to \F^{m + 1}$, such that $Tv = Zv$. Thus what we would like to do is find $v$ such that $Tv = w$. If we can show that $T$ is invertible,
+    then we are done. $T \in \CL(\F^{m + 1})$, so it sufficies to show either injectivity or surjectivity. Let us show injectivity. 
+
+    Consider $Tv = 0$. The coefficients of $v$ then form a polynomial of degree at most $m$ with zeros being $z_1, \dots, z_{m + 1}$. However, we know that a nonconstant polynomial of degree
+    at most $m$ can have at most $m$ distinct zeros, and since $z_1, \dots, z_{m + 1}$ being all distinct would imply otherwise. 
+
+    Thus $v$ must be the vector of zeros, and the coefficients thus form the zero polynomial as that is the only constant polynomial with zeros. Thus $\nullspace{T} = \{0\}$, and thus $T$ is
+    injective. Thus by the fundamental theorem of linear map, $T$ is also surjective and hence invertible. Hence we take $a = T^{-1}w$, and by the injectivity of $T$, this is the only
+    coefficients of a polynomial $p$ such that $p(z_j) = w_j$ for $j \in [m + 1]$.
+\end{enumerate}
 \end{document} 
